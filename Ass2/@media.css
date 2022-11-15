@@ -1,27 +1,66 @@
-@media only screen and (max-width:768px) {
-    nav #menu {
-        display: block;
-        position: absolute;
-        top: 18px;
-        right: 32px;
-    }
+@media only screen and (max-width: 768px) {
+  * {
+    font-size: 55%;
+  }
+  .row {
+    flex-direction: column;
+  }
+  nav #menu {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 32px;
+  }
 
-    nav {
-        flex-direction: column;
-        position: relative;
-    }
-    
-    nav ul {
-        display: none;
-        background-color: whitesmoke;
+  nav {
+    flex-direction: column;
+    position: relative;
+  }
 
-    }
-    nav ul li {
-        display: block;
-        padding: 2% 0;
-    }
-    nav ul li a{
-            color: #222;
+  nav ul {
+    display: none;
+    background-color: whitesmoke;
+  }
+  nav ul li {
+    display: block;
+    padding: 2% 0;
+  }
+  nav ul li a {
+    color: #222;
+  }
+  .contant {
+    width: 100%;
+    top: 14%;
+    left: 0;
+    text-align: center;
+    padding: 0 8px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="submit"] {
+    width: 80%;
+    margin: 1.2rem auto;
+  }
 
-    }
+  .pro-bar {
+    display: none;
+  }
+  .pro-cont {
+    margin-top: 20px;
+  }
+  .box1,
+  .box2,
+  .box3 {
+    text-align: center;
+  }
+
+  /* Testimony */
+  .Testimony .test {
+    margin: 1.6rem 0;
+  }
+
+  .contact form input,
+  .contact textarea {
+    width: 100%;
+  }
 }
