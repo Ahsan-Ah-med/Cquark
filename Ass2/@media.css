@@ -1,0 +1,27 @@
+@media only screen and (max-width:768px) {
+    nav #menu {
+        display: block;
+        position: absolute;
+        top: 18px;
+        right: 32px;
+    }
+
+    nav {
+        flex-direction: column;
+        position: relative;
+    }
+    
+    nav ul {
+        display: none;
+        background-color: whitesmoke;
+
+    }
+    nav ul li {
+        display: block;
+        padding: 2% 0;
+    }
+    nav ul li a{
+            color: #222;
+
+    }
+}
