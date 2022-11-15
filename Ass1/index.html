@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./@media.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo"><img src="./pngegg.png" alt=""></div>
+        <div class="nav">
+            <ul class="navUl">
+                <li id="home"><a href="">Home</a></li>
+                <li><a href="">Our Story</a></li>
+                <li><a href="">Mene</a></li>
+                <li><a href="">Galleries</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="">HTML Styles</a></li>
+            </ul>
+        </div>
+        <div class="navilogo"><img src="./hamburger.png" alt="" onclick="openNav()"></div>
+    </div>
+    <section class="picture">
+        <img src="./kelly-visel-zXn-amUiMJ4-unsplash (1) (1).jpg" alt="">
+        <!-- <div class="overtext">
+            Seasame Salad
+        </div> -->
+    </section>
+    <div class="dis">
+        <div class="left">
+            <h1>A Unique Dining Experience</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+        <div class="right">
+            <img src="./Bottle.jfif" alt="" id="p1">
+            <img src="./dining-room.jpg" alt="" id="p2">
+            <img src="./patio.jfif" alt="" id="p3">
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            // document.querySelector(".navUl").style.display = "block"
+            // toggle function use for navigation bar
+            document.querySelector(".navUl").classList.toggle("active")
+        }
+        // function closeNav() {
+        //     document.querySelector("navUl").style.display = "none";
+        // }
+    </script>
+</body>
+
+</html>
