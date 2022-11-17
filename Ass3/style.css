@@ -83,6 +83,7 @@ nav ul li a:hover {
   font-weight: 600;
   border-radius: 10px;
   padding: 1rem 4rem;
+  cursor: pointer;
 }
 nav ul {
   list-style: none;
