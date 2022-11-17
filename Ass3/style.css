@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+a {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: whitesmoke;
+}
+h1 {
+  font-weight: 800;
+  font-size: 3.6rem;
+  margin: 1.6rem 0;
+}
+h2 {
+  font-weight: 800;
+  font-size: 2.4rem;
+  margin: 1.6rem 0;
+}
+p {
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin: 1.6rem 0;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  margin: auto;
+  color: black;
+}
+section {
+  padding: 100px 0;
+}
+
+header img {
+  /* height: 100vh; */
+  width: 50%;
+  /* top: 10%; */
+  /* left: 50%; */
+  text-align: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: whitesmoke;
+}
+nav {
+  display: flex;
+  padding: 2% 8%;
+  justify-content: space-between;
+}
+
+nav ul li a {
+  color: rgba(34, 34, 34, 0.692);
+}
+nav ul li {
+  display: inline-block;
+  margin-left: 2.4rem;
+}
+nav ul li a:hover {
+  color: #222;
+}
+.btn {
+  color: whitesmoke;
+  background-color: rgb(18, 79, 247);
+  /* width: 100px; */
+  height: 100%;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 1rem 4rem;
+}
+nav ul {
+  list-style: none;
+  margin: 1.3rem;
+}
+.logo h1 {
+  margin: 0;
+  font-weight: 600;
+}
+.logo h1 span {
+  color: orange;
+}
+.main {
+  width: 100%;
+  height: 100%;
+  padding-top: 6rem;
+  padding-bottom: 7rem;
+}
+.main .row {
+  width: 100%;
+  padding-left: 10rem;
+  padding-right: 8rem;
+}
+.cont h1,
+h2 {
+  font-family: Trebuchet, sans-serif;
+  font-weight: 700;
+}
+.cont h1 {
+  font-size: 7rem;
+}
+.row .contimg {
+  width: 100%;
+}
+.cont h2 {
+  color: rgb(211, 95, 134);
+  position: relative;
+  left: 11%;
+}
+.cont div {
+  position: relative;
+}
+.cont div span {
+  width: 10%;
+  height: 2px;
+  background-color: #222;
+  margin: auto;
+  position: absolute;
+  top: 13px;
+}
+.card-cont {
+  width: 80%;
+  margin: 1rem auto;
+  background-color: rgba(222, 222, 224, 0.692);
+  border-radius: 10px;
+  margin-bottom: 8rem;
+  padding: 20px 0;
+  display: flex;
+}
+.card {
+  width: 220px;
+  height: 200px;
+  /* background-color: gray; */
+  padding: 10px;
+}
+.card h2 {
+  font-size: 1.8rem;
+  font-weight: 100;
+}
+.card img {
+  width: 50px;
+  height: 50px;
+}
+.card p {
+  font-size: 1.2rem;
+  color: rgba(34, 34, 34, 0.918);
+}
+.card a {
+  background-color: whitesmoke;
+  padding: 3px 10px;
+  border-radius: 10px;
+  color: black;
+}
+.card p a {
+  font-size: 1.5rem;
+  background-color: rgb(196, 128, 3);
+  padding: 3px 10px;
+  border-radius: 10px;
+  color: whitesmoke;
+}
+.card:hover {
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+.card a:hover {
+  background-color: rgba(222, 222, 224, 0.692);
+  color: black;
+}
+.card p a:hover {
+  background-color: rgb(1, 160, 1);
+  color: whitesmoke;
+}
+.row2 {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  margin: auto;
+  color: black;
+}
+.show {
+  display: block;
+}
+.menu {
+  display: none !important;
+  font-size: 5rem;
+}
+/* .card {
+  background-color: rgba(184, 180, 180, 0.295);
+  border-radius: 10px;
+  margin-left: 10px;
+} */
+
+/* side nav */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .card {
+    width: 33%;
+  }
+  .row2 {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  * {
+    font-size: 55%;
+  }
+}
+@media only screen and (max-width: 900px) {
+  * {
+    font-size: 50%;
+  }
+  .cont div span {
+    top: 10px;
+  }
+  .card {
+    width: 50%;
+  }
+  .row2 {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 768px) {
+  * {
+    font-size: 55%;
+    text-align: center;
+  }
+  .menu {
+    display: block !important;
+  }
+  .row {
+    flex-direction: column;
+  }
+  nav ul {
+    display: none;
+  }
+  .cont div span {
+    left: 20rem;
+    display: none;
+  }
+  .cont h2 {
+    left: 0;
+  }
+  .cont {
+    padding-bottom: 3rem;
+  }
+  .card {
+    width: 50%;
+  }
+  .row2 {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  * {
+    font-size: 48%;
+  }
+}
+@media only screen and (max-width: 510px) {
+  .card {
+    width: 100%;
+  }
+  .row2 {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 425px) {
+  * {
+    font-size: 46%;
+  }
+  .card {
+    width: 100%;
+  }
+  .row2 {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 510px) {
+  .card {
+    width: 100%;
+  }
+  .row2 {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+}
