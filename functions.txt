@@ -1,0 +1,28 @@
+//   document.querySelector('.h2 p').addEventListener('click', ()=>{
+//     document.querySelector('#minus').classList.toggle('show')
+// })
+//    document.querySelector('.h2 p').addEventListener('click', ()=>{
+//     document.querySelector('#plus').classList.toggle('plus')
+// })
+//   function myFunction() {
+//   var x = document.getElementById("plus");
+//   if (x.style.display === "none") {
+//     x.style.display = "block";
+//   } else {
+//     x.style.display = "none";
+//   }
+// }
+
+
+
+
+
+
+document.querySelectorAll('.h2 p').forEach((para, index) => {
+    para.addEventListener( 'click' , () => {
+        document.querySelectorAll('.ans').forEach((ans) => {
+            ans.classList.remove("show")
+        })
+        document.querySelectorAll('.ans')[index].classList.add('show')
+    })
+})

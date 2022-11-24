@@ -1,0 +1,434 @@
+{% comment %} <div> <h1 class="h1">{{ section.settings.faq_heading }}</h1></div> {% endcomment %}
+<section>
+<div class="mainsec">
+        <h1 class="mainhead">{{ section.settings.faq_heading }}</h1>
+        <span></span>
+    </div>
+  <div class="que">
+      <h2 class="h2">{{ section.settings.Heading }}</h2>
+    <h3 class="ans">{{ section.settings.para }}</h3>
+    <img src="{{ section.settings.image | img_url: 'master' }}" id="plus" class="active">
+    <img src="{{ section.settings.image_m | img_url: 'master' }}" id="minus" class="active2">
+  </div>
+<!--   Question 2 -->
+   <div class="que">
+      <h2 class="h2">{{ section.settings.Q2 }}</h2>
+    <h3 class="ans">{{ section.settings.para2 }}</h3>
+    <img src="{{ section.settings.image | img_url: 'master' }}" id="plus" class="active" >
+    <img src="{{ section.settings.image_m | img_url: 'master' }}" id="minus" class="active2">
+  </div>
+
+  <!--   Question 3 -->
+   <div class="que">
+      <h2 class="h2">{{ section.settings.Q3 }}</h2>
+    <h3 class="ans">{{ section.settings.para3 }}</h3>
+    <img src="{{ section.settings.image | img_url: 'master' }}" id="plus"class="active" >
+    <img src="{{ section.settings.image_m | img_url: 'master' }}" id="minus" class="active2">
+  </div>
+  
+   <!--   Question 4 -->
+   <div class="que">
+      <h2 class="h2">{{ section.settings.Q4 }}</h2>
+    <h3 class="ans">{{ section.settings.para4 }}</h3>
+    <img src="{{ section.settings.image | img_url: 'master' }}" id="plus" class="active">
+    <img src="{{ section.settings.image_m | img_url: 'master' }}" id="minus" class="active2">
+  </div>
+
+   <!--   Question 5 -->
+   <div class="que">
+      <h2 class="h2">{{ section.settings.Q5 }}</h2>
+    <h3 class="ans">{{ section.settings.para5 }}</h3>
+    <img src="{{ section.settings.image | img_url: 'master' }}" id="plus" class="active">
+    <img src="{{ section.settings.image_m | img_url: 'master' }}" id="minus" class="active2">
+  </div>
+</section>
+
+
+<style>
+/*   *{
+  padding: 0;
+  margin: 0;
+  } */
+  #minus{
+    display:block;
+  }
+  .ans{
+    display: none;
+    font-size:{{ section.settings.Ans_font_size }}px;
+    color:{{ section.settings.Ans_font_color }};
+  }
+  #plus{
+/*    cursor: pointer; */
+    display: block;
+  }
+  img{
+    width: 18px;
+    position: absolute;
+    top:17% ;
+    right: 20px;
+  }
+  .que {
+  width: 80%;
+  text-align: left;
+/*   padding-left:10%; */
+  margin: 0 auto;
+  position: relative;
+  border-bottom: 1px solid {{ section.settings.CO }};
+  background-color:{{ section.settings.que_bg_color }};
+  box-shadow: 0pc 2px 10px -3px;
+}
+.h2{
+  font-size:{{ section.settings.Qus_font_size }}px;
+  color:{{ section.settings.Que_font_color }};
+/*   margin: 0 !important; */
+  padding: 10px 0px;
+}
+
+  section{
+/*     padding-bottom:50px; */
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    background-color: {{ section.settings.sec_bg_color }};
+    padding:{{ section.settings.sec_padd }}px {{ section.settings.sec_padd2}}px ;
+  }
+  .mainsec {
+  padding: 0 10%;
+  width: 80%;
+  justify-content: center;
+  text-align: center;
+  display: block;
+  position: relative;
+    margin: auto;
+}
+.mainsec h1 {
+  font-size:{{ section.settings.FAQ_font_size }}px;  
+  font-weight:{{ section.settings.FAQ_font_weight }};
+  color:{{ section.settings.FAQ_font_color }};
+}
+.mainsec span {
+  width: 80px;
+  padding: 1px;
+/*   display: block; */
+  background-color: {{ section.settings.CO }};
+  position: absolute;
+  left: 45%;
+  top: 100%;
+  border-radius: 10px;
+}
+  .h1{
+    color: #000
+  }
+  .show{
+    display: block;
+  }
+  .active{
+    display:block !important;
+  }
+  .plus{
+    display:none !important;
+  }
+ .h2 p{
+   padding: 10px 15px;
+   margin: 0;
+ }
+.ans p{
+  padding: 0px 15px;
+}  
+  @media only screen and (max-width:1024px){
+    .mainsec span{
+      left: 43%;
+    }
+  @media only screen and (max-width:768px){
+   .mainsec h1{
+     font-size:{{ section.settings.mr_faq }}px;
+   }
+    .mainsec span{
+      left: 41%;
+      width:70px;
+    }
+    .h2 p{
+      font-size: {{ section.settings.mr_que }}px;
+    }
+    .ans p{
+      font-size: {{ section.settings.mr_ans }}px;
+    }
+    .que{
+      width:100%;
+    }
+    .h2{
+      width:90%;
+    }
+    .ans{
+      width:95%;
+    }
+  }
+  @media only screen and (max-width:425px){
+    .mainsec span{
+      left: 33%;
+    }
+  }
+   @media only screen and (max-width:375px){
+    .mainsec span{
+      left: 30%;
+    }
+  }
+   @media only screen and (max-width:325px){
+    .mainsec span{
+      left: 27%;
+    }
+  }
+</style>
+<script>
+  
+  document.querySelectorAll('.h2 p').forEach((para, index) => {
+    para.addEventListener( 'click' , () => {
+        document.querySelectorAll('.ans').forEach((ans) => {
+            ans.classList.remove("show")
+        })
+        document.querySelectorAll('.ans')[index].classList.add('show')
+    })
+})
+  
+  document.querySelectorAll('.h2 p').forEach((j, i) =>{
+    j.addEventListener('click', () =>{
+      document.querySelectorAll('.active').forEach((x) =>{
+        x.classList.remove("plus")  
+      })
+      document.querySelectorAll('.active')[i].classList.add('plus')
+    })
+  })
+
+  // document.querySelectorAll('.h2 p').forEach((j, i) =>{
+  //   j.addEventListener('click', () =>{
+  //     document.querySelectorAll('.active2').forEach((x) =>{
+  //       x.classList.remove("active")  
+  //     })
+  //     document.querySelectorAll('.active2')[i].classList.add('active')
+  //   })
+  // })
+//   document.querySelector('.h2 p').addEventListener('click', ()=>{
+//     document.querySelector('.active').classList.toggle('plus')
+// })
+  
+// document.querySelector('.h2 p').addEventListener('click', ()=>{
+//     document.querySelector('.active2').classList.toggle('active')
+// })
+
+</script>
+{% schema %}
+  {
+    "name": "Slider",
+    "settings": [
+      {
+  "type": "text",
+  "id": "faq_heading",
+  "label": "Heading",
+  "default": "Quick links"
+},
+      {
+  "type": "image_picker",
+  "id": "image",
+  "label": "Image 1"
+},
+{
+  "type": "image_picker",
+  "id": "image_m",
+  "label": "Image"
+},
+      {
+  "type": "richtext",
+  "id": "Heading",
+  "label": "Question 1"
+},
+      {
+  "type": "richtext",
+  "id": "para",
+  "label": "Answer 1"
+},
+{
+  "type": "richtext",
+  "id": "Q2",
+  "label": "Question 2"
+},
+      {
+  "type": "richtext",
+  "id": "para2",
+  "label": "Answer 2"
+},
+      {
+  "type": "richtext",
+  "id": "Q3",
+  "label": "Question 3"
+},
+      {
+  "type": "richtext",
+  "id": "para3",
+  "label": "Answer 3"
+},
+       {
+  "type": "richtext",
+  "id": "Q4",
+  "label": "Question 4"
+},
+      {
+  "type": "richtext",
+  "id": "para4",
+  "label": "Answer 4"
+},
+       {
+  "type": "richtext",
+  "id": "Q5",
+  "label": "Question 5"
+},
+      {
+  "type": "richtext",
+  "id": "para5",
+  "label": "Answer 5"
+},
+      
+{
+  "type": "color",
+  "id": "CO",
+  "label": "FAQ Line",
+  "default": "#ffa500"
+},
+{
+  "type": "range",
+  "id": "FAQ_font_size",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "FAQs Font size",
+  "default": 40
+},
+{
+  "type": "range",
+  "id": "FAQ_font_weight",
+  "min": 200,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "FAQs Font Weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "FAQ_font_color",
+  "label": "FAQ Text",
+  "default": "#000000"
+},
+
+{
+  "type": "range",
+  "id": "Qus_font_size",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Questions Font size",
+  "default": 24
+},
+{
+  "type": "color",
+  "id": "Que_font_color",
+  "label": "Questions Text",
+  "default": "#000000"
+},
+
+
+      {
+  "type": "range",
+  "id": "Ans_font_size",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Awnser Font size",
+  "default": 16
+},
+{
+  "type": "color",
+  "id": "Ans_font_color",
+  "label": "Awnser Text",
+  "default": "#000000"
+},
+      
+      {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Section Background",
+  "default": "#f9f6f6"
+},
+          {
+  "type": "color",
+  "id": "que_bg_color",
+  "label": "Questions Background",
+  "default": "#e9e9e9"
+},
+      {
+  "type": "range",
+  "id": "sec_padd",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Section Padding TB",
+  "default": 16
+},
+      {
+  "type": "range",
+  "id": "sec_padd2",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Section Padding LR",
+  "default": 16
+},
+      {
+  "type": "range",
+  "id": "mr_faq",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "FAQ Font size",
+  "default": 40
+},
+         {
+  "type": "range",
+  "id": "mr_que",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": " Questions Font size",
+  "default": 16
+},
+         {
+  "type": "range",
+  "id": "mr_ans",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Awnser Font size",
+  "default": 12
+}
+
+
+      
+      
+    ],
+    "presets": [
+    {
+      "name": "Slider"
+      
+    }
+  ]
+    
+  }
+{% endschema %}
