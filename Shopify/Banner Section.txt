@@ -1,0 +1,454 @@
+
+<section class="mainsec">
+  <div class="left">
+    <div><span></span><p>{{ section.settings.office_space }}</p></div>
+    <h1>{{ section.settings.main_heading }}</h1>
+    <h3>{{ section.settings.para_heading }}</h3>
+    <div class="btn_div">
+    <button class="btn-Left">{{ section.settings.btn1_heading }}</button>
+    <button class="btn-right">{{ section.settings.btn2_heading }}</button>
+      <img class="icon_img" src="{{ section.settings.icon_img | img_url: "master" }}" >
+      </div>
+  </div>
+  <div class="right">
+    <img class="right_img" src="{{ section.settings.right_img | img_url: "master" }}" >
+    <div class="circle"><div><img class="cir_img" src="{{ section.settings.magni_img | img_url: "master" }}"></div> <h4 class="cirtex">Find Amazing Venue...</h4></div>
+  </div>
+</section>
+
+<style>
+  .mainsec{
+    display:flex;
+    padding: 60px 60px;
+    background-image:linear-gradient(to right, #bee0ec , #f3fcff);;
+  }
+  .left{
+    width:50%;
+    position:relative;
+    padding:40px;
+  }
+  .left h1{
+    color:{{ section.settings.main_color }};
+    font-size: {{ section.settings.main_font_size }}px;
+    font-weight: {{ section.settings.main_weight }};
+  }
+  .left h3{
+    color:{{ section.settings.para_color }};
+    font-size: {{ section.settings.para_font_size }}px;
+    font-weight: {{ section.settings.para_weight }};
+  }
+  
+  .right_img{
+    width:80%;
+    height:100%;
+  }
+  .left span {
+  width: 40px;
+  padding: 1px;
+  display: block;
+  background-color: #000036;
+  position: absolute;
+  left: 8%;
+  top: 14%;
+  border-radius: 10px;
+}
+  .left p{
+  padding-left: 60px;
+  color:{{ section.settings.office_text }};
+  font-size: {{ section.settings.office_font_size }}px;
+  font-weight: {{ section.settings.office_weight }};
+  }
+  .btn-Left{
+    border: none;
+    width: 120px;
+    padding: {{ section.settings.btn1_tb_padding }}px {{ section.settings.btn1_LR_padding }}px;
+    background-color: {{ section.settings.btn1_color }};
+    color: {{ section.settings.btn1_tex_color }};
+    font-weight: {{ section.settings.btn1_weight }};
+    font-size:{{ section.settings.btn1_font_size }}px;
+  }
+  .btn-Left:hover{
+    background-color: {{ section.settings.btn1_hover_color }};
+    color: {{ section.settings.btn1_hover_tex_color }};
+  }
+  .btn-right{
+    border: none;
+    width: 120px;
+    padding: {{ section.settings.btn2_tb_padding }}px {{ section.settings.btn2_LR_padding }}px;
+    background-color: {{ section.settings.btn2_color }};
+    color: {{ section.settings.btn2_tex_color }};
+    font-weight: {{ section.settings.btn2_weight }};
+    font-size:{{ section.settings.btn2_font_size }}px;
+  }
+  .btn-right:hover{
+    background-color: {{ section.settings.btn2_hover_color }};
+    color: {{ section.settings.btn2_hover_tex_color }};
+  }
+  .btn_div{
+    justify-content: left;
+    align-items: center;
+    display:flex;
+  }
+  .icon_img{
+    width:25px;
+  }
+  .right{
+    width:50%;
+    position: relative;
+    padding-right: 60px;
+  }
+  .circle{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    top: 10%;
+    right: 0;
+    opacity:0.8;
+  }
+  .circle:hover{
+    width:300px;
+    border-radius: 25px;
+  }
+  .circle div{
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    position:absolute;
+    right:0;
+  }
+  .cirtex{
+    position: absolute;
+    left: 0px;
+    display:none;
+    padding: 0px 30px;
+    font-weight: 600;
+  }
+  .circle:hover .cirtex{
+    display:block;
+  }
+  .cir_img{
+    width:50%;
+    height:50%;
+    margin-top:12px;
+    margin-right:12px;
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+       {
+  "type": "header",
+  "content": "Left Section"
+},
+      {
+  "type": "text",
+  "id": "office_space",
+  "label": "Change Text Office Space",
+  "default": "Office Space"
+},
+ {
+  "type": "range",
+  "id": "office_font_size",
+  "min": 12,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Change Font size",
+  "default": 18
+},
+ {
+  "type": "range",
+  "id": "office_weight",
+  "min": 100,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "Change Font size",
+  "default": 200
+},
+{
+  "type": "color",
+  "id": "office_text",
+  "label": "Change Color",
+  "default": "#000036"
+},
+ {
+  "type": "header",
+  "content": "Main Heading Settings"
+},
+{
+  "type": "text",
+  "id": "main_heading",
+  "label": "Change Text Main Heading",
+  "default": "The New Way To Discover."
+},
+ {
+  "type": "range",
+  "id": "main_font_size",
+  "min": 36,
+  "max": 80,
+  "step": 1,
+  "unit": "px",
+  "label": "Change Font size",
+  "default": 60
+},
+ {
+  "type": "range",
+  "id": "main_weight",
+  "min": 100,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "Change Font Weight",
+  "default": 800
+},
+{
+  "type": "color",
+  "id": "main_color",
+  "label": "Text Color",
+  "default": "#000036"
+},
+
+       {
+  "type": "header",
+  "content": "Paragraph Settings"
+},
+{
+  "type": "text",
+  "id": "para_heading",
+  "label": "Change Text Paragraph",
+  "default": "Booking Wide-Company Saving, Invocing And Reporting Docs"
+},
+ {
+  "type": "range",
+  "id": "para_font_size",
+  "min": 12,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Change Font size",
+  "default": 22
+},
+ {
+  "type": "range",
+  "id": "para_weight",
+  "min": 100,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "Change Font Weight",
+  "default": 200
+},
+{
+  "type": "color",
+  "id": "para_color",
+  "label": "Text Color",
+  "default": "#000036"
+},
+
+{
+  "type": "header",
+  "content": "Buttons Settings"
+},
+      {
+  "type": "header",
+  "content": "Button One Settings"
+},
+      {
+  "type": "text",
+  "id": "btn1_heading",
+  "label": "Change Text Button",
+  "default": "Book Demo"
+},
+ {
+  "type": "range",
+  "id": "btn1_font_size",
+  "min": 10,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Change Font size",
+  "default": 13
+},
+      {
+  "type": "range",
+  "id": "btn1_weight",
+  "min": 100,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "Change Font Weight",
+  "default": 600
+},
+       {
+  "type": "range",
+  "id": "btn1_tb_padding",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 10
+},
+       {
+  "type": "range",
+  "id": "btn1_LR_padding",
+  "min": 0,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 0
+},
+{
+  "type": "color",
+  "id": "btn1_color",
+  "label": "Backgroung Color",
+  "default": "#000036"
+},
+      {
+  "type": "color",
+  "id": "btn1_tex_color",
+  "label": "Text Color",
+  "default": "#f5f5f5"
+},
+ {
+  "type": "header",
+  "content": "Button Two Settings"
+},
+      {
+  "type": "text",
+  "id": "btn2_heading",
+  "label": "Change Text Button",
+  "default": "Our Showreel"
+},
+ {
+  "type": "range",
+  "id": "btn2_font_size",
+  "min": 10,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Change Font size",
+  "default": 13
+},
+      {
+  "type": "range",
+  "id": "btn2_weight",
+  "min": 100,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "Change Font Weight",
+  "default": 600
+},
+       {
+  "type": "range",
+  "id": "btn2_tb_padding",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 10
+},
+       {
+  "type": "range",
+  "id": "btn2_LR_padding",
+  "min": 0,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 0
+},
+{
+  "type": "color",
+  "id": "btn2_color",
+  "label": "Backgroung Color",
+  "default": "transparent"
+},
+      {
+  "type": "color",
+  "id": "btn2_tex_color",
+  "label": "Text Color",
+  "default": "#000036"
+},
+{
+  "type": "header",
+  "content": "Buttons Hover Effect"
+},
+      {
+  "type": "header",
+  "content": "Button One"
+},
+{
+  "type": "color",
+  "id": "btn1_hover_color",
+  "label": "Backgroung Color",
+  "default": "transparent"
+},
+      {
+  "type": "color",
+  "id": "btn1_hover_tex_color",
+  "label": "Text Color",
+  "default": "#000036"
+},
+       {
+  "type": "header",
+  "content": "Button Two"
+},
+{
+  "type": "color",
+  "id": "btn2_hover_color",
+  "label": "Backgroung Color",
+  "default": "#000036"
+},
+      {
+  "type": "color",
+  "id": "btn2_hover_tex_color",
+  "label": "Text Color",
+  "default": "#f5f5f5"
+},
+
+      
+      {
+  "type": "image_picker",
+  "id": "icon_img",
+  "label": "Icon Button Image"
+},
+      
+   {
+  "type": "header",
+  "content": "Right Section"
+},
+
+      {
+  "type": "image_picker",
+  "id": "right_img",
+  "label": "Right Image"
+},
+       {
+  "type": "image_picker",
+  "id": "magni_img",
+  "label": "Right Image"
+}
+    ],
+  
+  
+  
+    "presets": [
+    {
+      "name": "New-Banner"
+      
+    }
+    ]
+  }
+{% endschema %}
+
