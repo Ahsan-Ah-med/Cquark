@@ -1,0 +1,10 @@
+<div class="star-rating-review">
+       {% for i in (1..block.settings.ratting) %}
+        {% if i > block.settings.ratting %}
+        {% break %}
+        {% else %}
+         
+        <img src="{{ 'icons8-star-48.png' | asset_img_url: '25x25' }}" />
+        {% endif %}
+        {% endfor %}
+     </div>

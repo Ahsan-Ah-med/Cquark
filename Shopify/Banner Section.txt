@@ -31,6 +31,7 @@
     color:{{ section.settings.main_color }};
     font-size: {{ section.settings.main_font_size }}px;
     font-weight: {{ section.settings.main_weight }};
+    margin:auto;
   }
   .left h3{
     color:{{ section.settings.para_color }};
@@ -60,8 +61,7 @@
   }
   .btn-Left{
     border: none;
-    width: 120px;
-    padding: {{ section.settings.btn1_tb_padding }}px {{ section.settings.btn1_LR_padding }}px;
+    padding: {{ section.settings.btn1_tb_padding }}px {{ section.settings.btn1_LR_padding }}px; 
     background-color: {{ section.settings.btn1_color }};
     color: {{ section.settings.btn1_tex_color }};
     font-weight: {{ section.settings.btn1_weight }};
@@ -73,7 +73,6 @@
   }
   .btn-right{
     border: none;
-    width: 120px;
     padding: {{ section.settings.btn2_tb_padding }}px {{ section.settings.btn2_LR_padding }}px;
     background-color: {{ section.settings.btn2_color }};
     color: {{ section.settings.btn2_tex_color }};
@@ -123,8 +122,9 @@
     position: absolute;
     left: 0px;
     display:none;
-    padding: 0px 30px;
+    padding: 15px 30px;
     font-weight: 600;
+    margin:auto;
   }
   .circle:hover .cirtex{
     display:block;
@@ -135,6 +135,116 @@
     margin-top:12px;
     margin-right:12px;
   }
+
+
+
+/*   @media Query Start */
+  @media only screen and (max-width: 2560px) {
+    .left span{
+      left:4%;
+      top:8%;
+    }
+  }
+  @media only screen and (max-width: 1440px) {
+    .left span{
+      left:8%;
+      top:15%;
+    }
+  }
+   @media only screen and (max-width: 1024px) {
+    .left span{
+      left:12%;
+      top:13%;
+    }
+  }
+   @media only screen and (max-width: 768px) {
+    .left span{
+      left:40%;
+      top:34.5%;
+    }
+      .mainsec{
+      flex-direction: column;
+      padding: 10px 10px;
+      text-align: center;
+  }
+      .left{
+      width:100%;
+      padding:{{ section.settings.mb_p_TB }}px {{ section.settings.mb_p_LR }}px;
+      
+      }
+      .left h1{
+      font-size:{{ section.settings.mb_mh }}px;
+      }
+      .left h3{
+      font-size:{{ section.settings.mb_mp }}px;
+      }
+      .left p{
+      font-size:{{ section.settings.mb_p_fz }}px;
+      }
+     .btn-left{
+      padding:{{ section.settings.mb_btn1_tb_padding }}px {{ section.settings.mb_btn1_LR_padding }}px;
+      font-size:{{ section.settings.mb_btn1_fz }}px;
+     }
+     .btn-right{
+      padding:{{ section.settings.mb_btn2_tb_padding }}px {{ section.settings.mb_btn2_LR_padding }}px;
+      font-size:{{ section.settings.mb_btn2_fz }}px;
+     }
+      .btn_div{
+      justify-content: center;
+      }
+      .right{
+      width:100%;
+     padding-right: 50px;
+      }
+      .right_img{
+      width:90%;
+      }
+      .circle{
+      width:30px;
+      height:30px;
+      right:3%;
+      }
+      
+      .circle:hover{
+      width:200px;
+      height:30px;
+      }
+      .circle div {
+      width: 30px;
+      height: 30px;
+      }
+      .cirtex{
+      font-size:12px;
+      padding: 8px 10px;
+      }
+      .cir_img{
+      margin-top: 8px;
+      margin-right: 8px;
+      }
+      
+   @media only screen and (max-width: 425px) {
+    .left span{
+      left:30%;
+      top:30%;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .left span{
+      left:29%;
+      top:30%;
+    }
+  }
+@media only screen and (max-width: 320px) {
+    .left span{
+      left:25%;
+      top:30%;
+    }
+  }
+
+
+
+
+    
 </style>
 
 
@@ -290,21 +400,21 @@
   "type": "range",
   "id": "btn1_tb_padding",
   "min": 1,
-  "max": 60,
+  "max": 40,
   "step": 1,
   "unit": "px",
   "label": "Padding Top-Bottom",
   "default": 10
 },
-       {
+      {
   "type": "range",
   "id": "btn1_LR_padding",
-  "min": 0,
-  "max": 60,
+  "min": 1,
+  "max": 40,
   "step": 1,
   "unit": "px",
   "label": "Padding Left-Right",
-  "default": 0
+  "default": 15
 },
 {
   "type": "color",
@@ -352,7 +462,7 @@
   "type": "range",
   "id": "btn2_tb_padding",
   "min": 1,
-  "max": 60,
+  "max": 40,
   "step": 1,
   "unit": "px",
   "label": "Padding Top-Bottom",
@@ -361,12 +471,12 @@
        {
   "type": "range",
   "id": "btn2_LR_padding",
-  "min": 0,
-  "max": 60,
+  "min": 1,
+  "max": 40,
   "step": 1,
   "unit": "px",
   "label": "Padding Left-Right",
-  "default": 0
+  "default": 15
 },
 {
   "type": "color",
@@ -437,8 +547,158 @@
        {
   "type": "image_picker",
   "id": "magni_img",
-  "label": "Right Image"
+  "label": "Search Image"
+},
+
+
+      {
+  "type": "header",
+  "content": "Mobile Responsive Settings"
+},
+      {
+  "type": "header",
+  "content": "Main Section Padding"
+},
+      
+      {
+  "type": "range",
+  "id": "mb_p_TB",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 100
+},
+      {
+  "type": "range",
+  "id": "mb_p_LR",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding LEFT-RIGHT",
+  "default": 1
+},
+       {
+  "type": "header",
+  "content": "Office Space Text"
+},
+      {
+  "type": "range",
+  "id": "mb_p_fz",
+  "min": 6,
+  "max": 30,
+  "step": 1,
+  "unit": "px",
+  "label": "Office Space Font Size",
+  "default": 18
+},
+       {
+  "type": "header",
+  "content": "Main Heading Text"
+},
+      {
+  "type": "range",
+  "id": "mb_mh",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font Size",
+  "default": 30
+},
+      {
+  "type": "header",
+  "content": "Main Paragraph Text"
+},
+      {
+  "type": "range",
+  "id": "mb_mp",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font Size",
+  "default": 14
+},
+      {
+  "type": "header",
+  "content": "Buttons Settings"
+},
+      {
+  "type": "header",
+  "content": "Button One Settings"
+},
+       {
+  "type": "range",
+  "id": "mb_btn1_tb_padding",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 10
+},
+       {
+  "type": "range",
+  "id": "mb_btn1_LR_padding",
+  "min": 0,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 15
+},
+     
+       {
+  "type": "range",
+  "id": "mb_btn1_fz",
+  "min": 1,
+  "max": 30,
+  "step": 1,
+  "unit": "px",
+  "label": "Botton Font Size",
+  "default": 13
+},
+       {
+  "type": "header",
+  "content": "Button Two Settings"
+},
+       {
+  "type": "range",
+  "id": "mb_btn2_tb_padding",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 10
+},
+       {
+  "type": "range",
+  "id": "mb_btn2_LR_padding",
+  "min": 0,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 15
+},
+       {
+  "type": "range",
+  "id": "mb_btn2_fz",
+  "min": 1,
+  "max": 30,
+  "step": 1,
+  "unit": "px",
+  "label": "Botton Font Size",
+  "default": 13
 }
+     
+      
+
+      
     ],
   
   

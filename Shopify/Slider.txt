@@ -1,0 +1,596 @@
+
+<div class="main_div">
+  <div class="left_cont">
+    <h1>
+      {{ section.settings.main_head_text }}
+    </h1>
+  </div>
+
+  <div class="carousel">
+  {% for blocks in section.blocks %}
+    <div class="carousel-cell" >
+      <div class="card">
+        <div class="img_div">
+          <img src="{{ blocks.settings.slider_image | img_url: "master" }}">
+        </div>
+        <div class="cont_div">
+              <div class="para">
+                  <P>{{ blocks.settings.em_dis }}</P>
+              </div>
+          <div class="star-rating-review">
+       {% for i in (1..blocks.settings.ratting) %}
+        {% if i > blocks.settings.ratting %}
+        {% break %}
+        {% else %}
+         
+        <img src="{{ blocks.settings.rating_img | img_url: 'master' }}" />
+        {% endif %}
+        {% endfor %}
+     </div>
+              <div class="name">
+                <h2>{{ blocks.settings.em_name }}</h2>
+              </div>
+              <div class="company">
+                <h3>{{ blocks.settings.em_dep }}</h3>
+              </div>
+        </div>
+      </div>
+      
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .star-rating-review{
+    width:150px;
+    height:25px;
+    display: flex;
+  }
+  .star-rating-review img{
+    width:25px;
+    heigth:25px;
+  }
+  .cont_div{
+    height:250px;
+    padding: 0px 5px;
+  }
+  .para, .name, .company{
+    width:100%;
+    color:white;
+  }
+  .para{
+    height:150px;
+  }
+  .para p{
+    color:{{ section.settings.dis_color }};
+    font-size:{{ section.settings.dis_fz }}px;
+    margin:0;
+  }
+  .name h2{
+    margin:0;
+    color:{{ section.settings.name_color }};
+    font-size:{{ section.settings.name_fz }}px;
+    font-weight:{{ section.settings.name_fw }};
+  }
+  .name h2 p{
+    margin:0;
+  }
+  .company h3{
+    margin:0;
+    color:{{ section.settings.com_color }};
+    font-size:{{ section.settings.com_fz }}px;
+  }
+  .img_div{
+    width:100%;
+    height:150px;
+  }
+  .img_div img{
+    width:100%;
+    height:100%;
+    border-radius: 5px 5px 0 0;
+
+  }
+  .card{
+    width:100%;
+    height:auto;
+    display:block;
+/*     padding:0 10px; */
+    border-radius:5px;
+    background-color:#dbdbdb;
+  }
+  .carousel {
+    width:70%;
+    display: block;
+    padding:0 50px;
+}
+
+.carousel-cell {
+  width: 33.33%;
+  counter-increment: carousel-cell;
+  padding:0 10px;
+}
+
+  .left_cont{
+    width:30%;
+    padding: 0 60px
+  }
+  .left_cont h1{
+    color: {{ section.settings.main_color }};
+    font-size:{{ section.settings.main_fz }}px;
+    font-weight:{{ section.settings.main_fw }};
+  }
+  .main_div{
+    background-color:{{ section.settings.sec_color }};
+    width:100%;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    padding:{{ section.settings.sec_pd_tb }}px {{ section.settings.sec_pd_lr }}px;
+  }
+
+
+  .flickity-prev-next-button.next {
+    /* right: 10px; */
+    left: 15%;
+}
+  .flickity-prev-next-button.previous {
+    left: 10%;
+}
+.flickity-prev-next-button {
+    top: 110%;
+/*     bottom: -5%; */
+    width: 30px;
+    height: 30px;
+    border-radius: 0;
+    transform: translateY(-50%);
+
+}
+  .flickity-page-dots{
+    right:10%;
+    bottom:-10%;
+    text-align:right;
+  }
+  .flickity-page-dots .dot{
+    background-color:{{ section.settings.dot_bg_color }};
+  }
+  .flickity-button{
+    color:{{ section.settings.Arr_color }};
+    background-color:{{ section.settings.Arr_bg_color }};
+  }
+  .flickity-page-dots .dot:hover{
+    background-color:{{ section.settings.dot_hover_bg_color }};
+  }
+  .flickity-button:hover{
+    color:{{ section.settings.Arr_hover_color }};
+    background-color:{{ section.settings.Arr_hover_bg_color }};
+  }
+  @media only screen and (max-width: 1024px) {
+    .carousel-cell {
+  width: 50%;
+    }
+    .left_cont{
+/*        padding: 0 30px; */
+       width:40%;
+     }
+    .flickity-prev-next-button.next {
+    left: 18%;
+}
+  }
+  @media only screen and (max-width: 990px) {
+    .carousel{
+      width:60%;
+    }
+  }
+   @media only screen and (max-width: 768px) {
+    .carousel-cell {
+  width: 100%;
+    }
+     .left_cont{
+       padding: 0 30px;
+       width:40%;
+     }
+     .left_cont h1{
+       font-size:{{ section.settings.mb_fz_main }}px;
+     }
+     .carousel{
+      width:60%;
+      padding:{{ section.settings.card_tb_pad }}px {{ section.settings.card_lr_pad }}px;
+    }
+     .para p{
+       font-size:{{ section.settings.mb_fz_dis }}px;
+     }
+     .para {
+       height:130px;
+     }
+     .name h2{
+       font-size:{{ section.settings.mb_fz_name }}px;
+     }
+     .company h3{
+       font-size:{{ section.settings.mb_fz_com }}px;
+     }
+     .flickity-prev-next-button.next {
+    left: 30%;
+}
+     .flickity-prev-next-button.previous {
+    left: 18%;
+}
+      .flickity-page-dots{
+    right:15%;
+      }
+  }
+  @media only screen and (max-width: 670px) {
+    .main_div{
+      flex-direction: column;
+    }
+    .carousel{
+      width:100%;
+    }
+    .left_cont{
+      width:80%;
+      padding: 30px 0;
+      text-align:center;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .main_div{
+      height:120vh;
+    }
+    .flickity-prev-next-button.next {
+    left: 35%;
+}
+     .flickity-prev-next-button.previous {
+    left: 23%;
+}
+    .flickity-prev-next-button{
+      width:25px;
+      height:25px;
+    }
+    .flickity-page-dots{
+    right:20%;
+      width:50%;
+  }
+     .flickity-page-dots .dot{
+       width:8px;
+       height:8px;
+  }
+    
+  }
+  
+</style>
+
+
+<script>
+var elem = document.querySelector('.carousel');
+var flkty = new Flickity( elem, {
+  // options
+  cellAlign: 'center',
+  prevNextButtons: true,
+  autoPlay: true,
+  pageDots: true,
+  draggable: true,
+  contain: true
+});
+  
+</script>
+{% schema %}
+  {
+    "name": "New Slider",
+    "settings": [
+      
+      {
+  "type": "header",
+  "content": "Main Section Settings"
+},
+      {
+  "type": "range",
+  "id": "sec_pd_tb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding TOP-Bottom",
+  "default": 1
+},
+      {
+  "type": "range",
+  "id": "sec_pd_lr",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding LEFT-RIGHT",
+  "default": 1
+},
+      {
+  "type": "color",
+  "id": "sec_color",
+  "label": "Backgroung Color",
+  "default": "#002464"
+},
+       {
+  "type": "header",
+  "content": "Main Heading Settings"
+},
+      {
+  "type": "text",
+  "id": "main_head_text",
+  "label": "Main Heading",
+  "default": "Connect With Other Members"
+},
+      {
+  "type": "range",
+  "id": "main_fz",
+  "min": 8,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 40
+},
+{
+  "type": "range",
+  "id": "main_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+      {
+  "type": "color",
+  "id": "main_color",
+  "label": "Font Color",
+  "default": "#ffffff"
+},
+
+      
+      {
+  "type": "header",
+  "content": "Discriptions Settings"
+},
+      {
+  "type": "range",
+  "id": "dis_fz",
+  "min": 8,
+  "max": 30,
+  "step": 1,
+  "unit": "px",
+  "label": "Discription Font size",
+  "default": 13
+},
+      {
+  "type": "color",
+  "id": "dis_color",
+  "label": "Discription Text Color",
+  "default": "#ffffff"
+},
+    {
+  "type": "header",
+  "content": "Names Settings"
+},
+      {
+  "type": "range",
+  "id": "name_fz",
+  "min": 8,
+  "max": 36,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 24
+},
+       {
+  "type": "range",
+  "id": "name_fw",
+  "min": 100,
+  "max": 800,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+      {
+  "type": "color",
+  "id": "name_color",
+  "label": "Text Color",
+  "default": "#ffffff"
+},
+      {
+  "type": "header",
+  "content": "Inc Settings"
+},
+      {
+  "type": "range",
+  "id": "com_fz",
+  "min": 8,
+  "max": 36,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 13
+},
+      {
+  "type": "color",
+  "id": "com_color",
+  "label": "Text Color",
+  "default": "#ffffff"
+},
+       {
+  "type": "header",
+  "content": "Slider Settings"
+},
+      {
+  "type": "color",
+  "id": "Arr_bg_color",
+  "label": "Arrow Background Color",
+  "default": "#ffff00"
+},
+      {
+  "type": "color",
+  "id": "Arr_color",
+  "label": "Arrow Color",
+  "default": "#0000ff"
+},
+      {
+  "type": "color",
+  "id": "Arr_hover_bg_color",
+  "label": "Arrow Hover Color",
+  "default": "#0000ff"
+},
+      {
+  "type": "color",
+  "id": "Arr_hover_color",
+  "label": "Arrow Hover Background Color",
+  "default": "#ffff00"
+},
+      {
+  "type": "color",
+  "id": "dot_bg_color",
+  "label": "Dots Color",
+  "default": "#ffff00"
+},
+      {
+  "type": "color",
+  "id": "dot_hover_bg_color",
+  "label": "Dots Hover Color",
+  "default": "#0000FF"
+},
+
+        {
+  "type": "header",
+  "content": "Mobile Responsive Settings"
+},
+        {
+  "type": "range",
+  "id": "mb_fz_main",
+  "min": 6,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Main Heading Font size",
+  "default": 30
+},
+        {
+  "type": "range",
+  "id": "mb_fz_dis",
+  "min": 6,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Discription Font size",
+  "default": 11
+},
+         {
+  "type": "range",
+  "id": "mb_fz_name",
+  "min": 6,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Name Font size",
+  "default": 24
+},
+         {
+  "type": "range",
+  "id": "mb_fz_com",
+  "min": 6,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "INC Font size",
+  "default": 13
+},
+       {
+  "type": "header",
+  "content": "Slider Padding"
+},
+      {
+  "type": "range",
+  "id": "card_tb_pad",
+  "min": 0,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding TOP-BOTTOM",
+  "default": 0
+},
+      {
+  "type": "range",
+  "id": "card_lr_pad",
+  "min": 0,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding TOP-BOTTOM",
+  "default": 20
+}
+
+
+      
+    ],
+    "blocks":[
+      {
+        "name": "slider",
+      "type": "block",
+      "settings":[
+        {
+  "type": "header",
+  "content": "Members Infomations"
+},
+        {
+  "type": "richtext",
+  "id": "em_dis",
+  "label": "Employee Discription"
+},
+{
+  "type": "richtext",
+  "id": "em_name",
+  "label": "Employee Name"
+},
+        {
+  "type": "richtext",
+  "id": "em_dep",
+  "label": "Employee Dempartment"
+},
+        {
+  "type": "image_picker",
+  "id": "slider_image",
+  "label": "Image"
+        },
+              {
+  "type": "header",
+  "content": "Review Rating Stars"
+},
+        {
+  "type": "range",
+  "id": "ratting",
+  "min": 0,
+  "max": 5,
+  "step": 1,
+  "unit": "px",
+  "label": "How many star you want",
+  "default": 3
+},
+
+        {
+  "type": "image_picker",
+  "id": "rating_img",
+  "label": "Image"
+}
+        
+      
+      ]
+      }
+      
+    ],
+    "presets": [
+    {
+      "name": "New-Slider"
+      
+    }
+    ]
+    
+  }
+{% endschema %}
+
