@@ -1,0 +1,37 @@
+// Pricing Card Scrolling
+                    var scroll = window.requestAnimationFrame;
+            var elementsToShow = document.querySelectorAll('.show-on-scroll');
+
+            function loop() {
+                Array.prototype.forEach.call(elementsToShow, function(element){
+                    if (isElementInViewport(element)) {
+                        element.classList.add('visible')
+                    } else {
+                        element.classList.remove('visible')
+                    }
+                });
+                scroll(loop)
+            }
+            loop()
+
+            function isElementInViewport(element) {
+                var rectangle = element.getBoundingClientRect();
+                var height = window.innerHeight || document.documentElement.clientHeight;
+                var top = rectangle.top;
+                var bottom = rectangle.bottom;
+
+                return (top <= 0 && bottom >= 0) ||
+                    (bottom >= height && top <= height) ||
+                    (top >= 0 && bottom <= height);
+            }
+
+
+.card_anim{
+       opacity: 0;
+       transition: transform 1.5s ease;
+       transform: translateY(20%);
+     }
+    .card_anim.visible{
+       opacity: 1;
+       transform: translateY(0);
+    }
