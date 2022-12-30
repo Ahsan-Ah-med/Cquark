@@ -1,0 +1,433 @@
+<section>
+  <div class="case-cont">
+    <div class="case_heading">
+      <h5>{{ section.settings.blog }}</h5>
+      <h1>{{ section.settings.heading }}</h1>
+    </div>
+    <div class="case_div">
+      {% assign incre = 0 %}
+      <div class="case_1 case-{%  increment incre %}">
+        <div class="case_div_img1">
+          <img src="{{ section.settings.case_img1 | img_url: 'master' }}">
+        </div>
+        <div class="text_div1">
+          <h1>{{ section.settings.case_text1 }}</h1>
+          <h5>{{ section.settings.case_para1 }}</h5>
+
+          <div class="btn_div_case">
+            <a href="{{ section.settings.case_btn_link1 }}">
+              <button class="new_btn">
+                {{ section.settings.case_btn_text1 }}
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="case_1 case-{%  increment incre %}">
+        <div class="case_div_img2">
+          <img src="{{ section.settings.case_img2 | img_url: 'master' }}">
+        </div>
+        <div class="text_div2">
+          <h1>{{ section.settings.case_text2 }}</h1>
+          <h5>{{ section.settings.case_para2 }}</h5>
+
+          <div class="btn_div_case">
+            <a href="{{ section.settings.case_btn_link2 }}">
+              <button class="new_btn">
+                {{ section.settings.case_btn_text2 }}
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+      .case-cont{
+        max-width: 1000px;
+        margin:auto;
+      }
+      .case_heading{
+        width:100%;
+        text-align:center;
+      }
+      .case_heading h5{
+        font-size:{{ section.settings.sub_head_fz }}px;
+        font-weight:{{ section.settings.sub_head_fw }};
+        color:{{ section.settings.sub_head_color }};
+        padding-bottom:20px;
+        letter-spacing: 2px;
+      }
+      .case_heading h1{
+        font-size:{{ section.settings.head_fz }}px;
+        font-weight:{{ section.settings.head_fw }};
+        color:{{ section.settings.head_color }};
+        padding-bottom:30px;
+      }
+      .text_div2{
+        padding:0 10px;
+      }
+      .text_div1{
+        padding:0 10px;
+      }
+      .btn_div_case{
+
+      }
+      .case_1 h1{
+        font-size:{{ section.settings.case_head_fz }}px;
+        font-weight: {{ section.settings.case_head_fw }};
+        color:{{ section.settings.case_head_color }};
+        padding-bottom: 20px;
+        border-bottom: {{ section.settings.case_bor_lgn }}px solid {{ section.settings.case_bor_color }};
+      }
+      .case_1 h5{
+        font-size:{{ section.settings.case_para_fz }}px;
+        font-weight: {{ section.settings.case_para_fw }};
+        color:{{ section.settings.case_para_color }};
+  /*       padding-bottom: 20px; */
+        padding-top: 20px;
+      }
+      .case_div_img1{
+        width: 100%;
+        padding-bottom: 20px;
+      }
+      .case_div_img2{
+        width: 100%;
+        padding-bottom: 20px;
+      }
+      .case_div{
+        display:flex;
+        width:100%;
+        justify-content: space-between;
+        text-align: center;
+        align-items: flex-end;
+      }
+      .case_1{
+        width:48%;
+        box-shadow: 4px 4px 30px 0 lightgrey;
+        padding-bottom: 20px;
+      }
+      .case-1 h1{
+        padding: 15px 0px 38px 0px
+      }
+      .case_heading h5 p:before {
+        content: "";
+        width: 50px;
+        height: 3px;
+        position: absolute;
+        background: #FCA311;
+        bottom: 18px;
+        border-radius: 50px;
+    }
+      .case_heading h5{
+        position:relative;
+      }
+      @media only screen and (max-width:767px){
+        .case_heading h5{
+          font-size:{{ section.settings.sub_head_fz_mb }}px;
+        }
+        .case_heading h1{
+          font-size:{{ section.settings.head_fz_mb }}px;
+        }
+        .case_1 h1{
+          font-size:{{ section.settings.case_head_fz_mb }}px;
+        }
+        .case_1 h5{
+          font-size:{{ section.settings.case_para_fz_mb }}px;
+        }
+      }
+      @media only screen and (max-width:600px){
+        .case_div{
+          flex-direction: column;
+        }
+        .case_1 {
+        width: 100%;
+        padding-bottom: 20px;
+        }
+        .case_div_img1{
+          padding-right: 0;
+        }
+        .text_div1 {
+          padding-right: 0;
+        }
+        .case_div_img2{
+          padding-left: 0;
+        }
+        .text_div2 {
+          padding-left: 0;
+        }
+      }
+      @media only screen and (max-width:425px){
+        .case_div_img1{
+        height: 300px;
+        }
+        .case_div_img2{
+        height: 300px;
+        }
+      }
+</style>
+{% schema %}
+{
+  "name": "Case",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Header Settings"
+},
+    {
+  "type": "richtext",
+  "id": "blog",
+  "label": "Sub Heading"
+},
+    {
+  "type": "range",
+  "id": "sub_head_fz",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+{
+  "type": "range",
+  "id": "sub_head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "sub_head_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+{
+  "type": "richtext",
+  "id": "heading",
+  "label": "Heading"
+},
+     {
+  "type": "range",
+  "id": "head_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+{
+  "type": "range",
+  "id": "head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "head_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Case 1 Settings"
+},
+    {
+  "type": "image_picker",
+  "id": "case_img1",
+  "label": "Case Image"
+},
+    {
+  "type": "richtext",
+  "id": "case_text1",
+  "label": "Heading"
+},
+    {
+  "type": "richtext",
+  "id": "case_para1",
+  "label": "Paragraph"
+},
+    {
+  "type": "header",
+  "content": "Case 2 Settings"
+},
+    {
+  "type": "image_picker",
+  "id": "case_img2",
+  "label": "Case Image"
+},
+    {
+  "type": "richtext",
+  "id": "case_text2",
+  "label": "Heading"
+},
+    {
+  "type": "richtext",
+  "id": "case_para2",
+  "label": "Paragraph"
+},
+    {
+  "type": "header",
+  "content": "Case Border Settings"
+},
+    {
+  "type": "range",
+  "id": "case_bor_lgn",
+  "min": 1,
+  "max": 10,
+  "step": 1,
+  "unit": "px",
+  "label": "Border-lenght",
+  "default": 1
+},
+    {
+  "type": "color",
+  "id": "case_bor_color",
+  "label": "Border Color",
+  "default": "#fca311"
+},
+    {
+  "type": "header",
+  "content": "Case Heading Settings"
+},
+    {
+  "type": "range",
+  "id": "case_head_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 24
+},
+{
+  "type": "range",
+  "id": "case_head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "case_head_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Case Paragraph Settings"
+},
+    {
+  "type": "range",
+  "id": "case_para_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 14
+},
+{
+  "type": "range",
+  "id": "case_para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "case_para_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "richtext",
+  "id": "case_btn_text1",
+  "label": "Button Text"
+},
+    {
+  "type": "url",
+  "id": "case_btn_link1",
+  "label": "Button link"
+},
+    {
+  "type": "richtext",
+  "id": "case_btn_text2",
+  "label": "Button Text"
+},
+    {
+  "type": "url",
+  "id": "case_btn_link2",
+  "label": "Button link"
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "sub_head_fz_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Sub-Heading Font size",
+  "default": 15
+},
+ {
+  "type": "range",
+  "id": "head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font size",
+  "default": 40
+},
+   {
+  "type": "range",
+  "id": "case_head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Case Heading Font size",
+  "default": 20
+},
+{
+  "type": "range",
+  "id": "case_para_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Case Para Font size",
+  "default": 12
+}
+
+
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

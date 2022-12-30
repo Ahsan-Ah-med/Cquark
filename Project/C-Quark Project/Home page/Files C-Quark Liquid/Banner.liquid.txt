@@ -1,0 +1,451 @@
+<section class="section_bg_color_1">
+  <div class="main_section">
+    <div class="main_div">
+      <div class="left_div">
+        <h1 class="h1">
+          {{ section.settings.main_heading }}
+        </h1>
+        <div class="para">
+          <p>
+            {{ section.settings.main_para }}
+          </p>
+        </div>
+        <div class="btn_div">
+          <a href="{{ section.settings.btn_link }}">
+            <button class="new_btn">
+              {{ section.settings.btn_text }}
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="right_div">
+        <div>
+          <img class="first_img img" src="{{ section.settings.first_image | img_url: 'master' }}">
+        </div>
+      </div>
+    </div>
+    <!-- <div class="slider"> -->
+    <div
+      class="carousel"
+      data-flickity='
+        { "cellAlign": "left", "pageDots": {{ section.settings.Dot }}, "prevNextButtons": {{ section.settings.arrow }},  "autoPlay": {{ section.settings.auto_time }}, "draggable": true,
+        "contain": true, "wrapAround": true  }
+      '
+    >
+      {% for blocks in section.blocks %}
+        <div class="carousel-cell">
+          <div class="img_div">
+            <img src="{{ blocks.settings.slide_image | img_url: 'master' }}">
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <!-- </div> -->
+  </div>
+</section>
+
+<style>
+        .section_bg_color_1{
+          background-color:{{ section.settings.sec_bg_color }};
+        }
+        .carousel .flickity-slider{
+          display: flex;
+          align-items: center;
+        }
+        /*       .flickity-prev-next-button{
+                display:none;
+              } */
+          /*     .flickity-page-dots {
+                display: none;
+              } */
+      .carousel {
+        width:100%;
+        display: block;
+        padding:0 0px;
+        margin:0px auto;
+      }
+
+      .carousel-cell {
+         width: 17%;
+    counter-increment: carousel-cell;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      }
+        .carousel-cell img{
+          height:100%;
+          width:100%;
+          max-width:190px;
+        }
+        .right_div{
+          width: 50%;
+          padding:{{ section.settings.R_pad_tb }}px {{ section.settings.R_pad_lr }}px;
+        }
+        .right_div div{
+          width:100%;
+          height:100%;
+        }
+        .img{
+          width:100%;
+          height:100%;
+        }
+          .btn_div{
+            display:flex;
+
+          }
+          .tra_new_btn{
+            background-color:transparent;
+          }
+  {% comment %}         .new_btn{
+            font-size:{{ settings.btn_fz }}px;
+            font-weight:{{ settings.btn_fw }};
+            color:{{ settings.btn_color }};
+            padding: {{ settings.btn_pad_tb }}px {{ settings.btn_pad_lr }}px;
+            background-color: {{ settings.btn_bg_color }};
+            border: {{ settings.btn_border_thickness }}px solid {{ settings.btn_border_color }};
+            border-radius:{{ settings.btn_border_radius }}px;
+            cursor: pointer;
+            margin-top: 30px;
+          }
+          .new_btn:hover{
+            background-color:{{ settings.btn_bg_hover_color }};
+            color:{{ settings.btn_hover_color }};
+          } {% endcomment %}
+     .new_btn{
+     background-color: #14213d;
+      padding: 12px 60px;
+      color: #fff;
+      font-weight: 500;
+      font-family: var(--font-stack-body);
+      font-size: 18px;
+      box-shadow: 3px 5px #fcab25;
+      border:none;
+      cursor: pointer;
+       margin-top: 30px;
+    }
+
+     .new_btn:hover{
+      background-color: #fcab25;
+      color: #fff;
+      box-shadow: 3px 5px #14213d;
+    }
+          .left_div{
+            width:50%;
+          }
+          .para p{
+            color:{{ section.settings.para_color }};
+            font-size:{{ section.settings.para_fz }}px;
+            font-weight:{{ section.settings.para_fw }};
+            margin:0;
+          }
+          .h1{
+            color:{{ section.settings.heading_color }};
+            font-size:{{ section.settings.heading_fz }}px;
+            font-weight:{{ section.settings.heading_fw }};
+            margin:0;
+            padding-bottom:20px;
+          }
+
+          .h1 p{
+            margin:0;
+          }
+            strong{
+              color:#fcab25;
+            }
+            section{
+                background-color: {{ settings.bg_sec_color }};
+            }
+              .main_section{
+                width: 100%;
+              }
+              .main_div{
+                width: 100%;
+                margin: auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              }
+              section{
+                    font-family: 'Mulish', sans-serif;
+                    background-color: {{ settings.bg_sec_color }};
+                    width: 100%;
+                    padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+                }
+
+        @media only screen and (max-width: 767px) {
+          section{
+              padding: {{ settings.padding_tb_mb }}px {{ settings.padding_lr_mb }}px !important;
+          }
+          .main_div{
+              flex-direction: column-reverse;
+          }
+          .left_div{
+              width: 100%;
+              text-align: center;
+          }
+        .btn_div{
+            justify-content: center;
+        }
+    /*       Mobile Responsive CSS */
+        .new_btn{
+            font-size:{{ settings.btn_fz_mb }}px;
+            font-weight:{{ settings.btn_fw_mb }};
+            padding: {{ settings.btn_pad_tb_mb }}px {{ settings.btn_pad_lr_mb }}px;
+        }
+        .right_div{
+           width:{{ section.settings.right_img_mb }}%;
+         }
+        .h1{
+           font-size:{{ section.settings.heading_fz_mb }}px;
+         }
+        .para p{
+           font-size:{{ section.settings.para_fz_mb }}px;
+         }
+      }
+      @media only screen and (max-width: 425px) {
+        .carousel-cell{
+          width:33%;
+        }
+      }
+</style>
+<!--
+  <script>
+    var elem = document.querySelector('.carousel');
+    var flkty = new Flickity( elem, {
+      // options
+      cellAlign: 'center',
+      // prevNextButtons: false,
+      autoPlay: 1000,
+      // pageDots: false,
+      draggable: true,
+      contain: true
+    });
+  </script>
+-->
+{% schema %}
+{
+  "name": "Banner",
+  "settings": [
+     {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "header",
+  "content": "Heading Settings"
+},
+    {
+  "type": "richtext",
+  "id": "main_heading",
+  "label": "Main Heading"
+},
+    {
+  "type": "range",
+  "id": "heading_fz",
+  "min": 12,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font Size",
+  "default": 64
+},
+{
+  "type": "range",
+  "id": "heading_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Heading Font Weight",
+  "default": 700
+},
+    {
+  "type": "color",
+  "id": "heading_color",
+  "label": "Heading Color",
+  "default": "#E5E5E5"
+},
+    {
+  "type": "header",
+  "content": "Paragraph Settings"
+},
+     {
+  "type": "richtext",
+  "id": "main_para",
+  "label": "Main Paragraph"
+},
+    {
+  "type": "range",
+  "id": "para_fz",
+  "min": 10,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font Size",
+  "default": 18
+},
+{
+  "type": "range",
+  "id": "para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Paragraph Font Weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "para_color",
+  "label": "Paragraph Color",
+  "default": "#E5E5E5"
+},
+    {
+        "type": "header",
+        "content": "Button Settings"
+      },
+    {
+  "type": "text",
+  "id": "btn_text",
+  "label": "Button Text",
+  "default": "Get Started"
+},
+    {
+  "type": "url",
+  "id": "btn_link",
+  "label": "Button link"
+},
+    {
+  "type": "header",
+  "content": "Image Settings"
+},
+    {
+  "type": "image_picker",
+  "id": "first_image",
+  "label": "Banner Image"
+},
+    {
+  "type": "range",
+  "id": "R_pad_tb",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 0
+},
+    {
+  "type": "range",
+  "id": "R_pad_lr",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 0
+},
+    {
+  "type": "header",
+  "content": "Slider Settings"
+},
+    {
+  "type": "checkbox",
+  "id": "Dot",
+  "label": "Show Dots",
+  "default": true
+},
+    {
+  "type": "checkbox",
+  "id": "arrow",
+  "label": "Show Arrow",
+  "default": true
+},
+    {
+  "type": "range",
+  "id": "auto_time",
+  "min": 500,
+  "max": 9000,
+  "step": 500,
+  "unit": "px",
+  "label": "AutoPlay",
+  "default": 1000
+},
+
+
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "right_img_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "%",
+  "label": "Image Size",
+  "default": 50
+},
+{
+  "type": "range",
+  "id": "heading_fz_mb",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font-size",
+  "default": 40
+},
+{
+  "type": "range",
+  "id": "para_fz_mb",
+  "min": 1,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font-size",
+  "default": 15
+}
+
+
+  ],
+  "blocks":[
+    {
+        "name": "slider",
+      "type": "block",
+      "settings":[
+        {
+  "type": "header",
+  "content": "Experties Slider"
+},
+        {
+  "type": "image_picker",
+  "id": "slide_image",
+  "label": "Image"
+}
+
+
+      ]
+    }
+  ],
+
+  "presets": [
+  {
+    "name": "New Banner"
+  }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

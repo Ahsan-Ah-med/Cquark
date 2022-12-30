@@ -1,0 +1,408 @@
+<section>
+  <div class="faq_cont">
+    <h1>{{ section.settings.faq_head }}</h1>
+    <h5>{{ section.settings.faq_para }}</h5>
+    <div class="faq_box">
+      {% for block in section.blocks %}
+        <details class="faq_det">
+          <summary class="que_head">
+            {{ block.settings.faq_que }}
+            <div class="faq-logo-plus faq-plus">
+              <img src="{{ section.settings.plus_sg | img_url: 'master' }}">
+            </div>
+            <div class="faq-logo-minus faq-minus">
+              <img src="{{ section.settings.minus_sg | img_url: 'master' }}">
+            </div>
+          </summary>
+          <div class="ans_head">
+            <p>{{ block.settings.faq_ans }}</p>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<style>
+  .faq_cont h1{
+    font-size:{{ section.settings.faq_head_fz }}px;
+    font-weight:{{ section.settings.faq_head_fw }};
+    color:{{ section.settings.faq_head_color }};
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .faq_cont h5{
+    font-size:{{ section.settings.faq_para_fz }}px;
+    font-weight:{{ section.settings.faq_para_fw }};
+    color:{{ section.settings.faq_para_color }};
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .faq_box{
+    width:100%;
+    margin:auto;
+    box-shadow: 4px 4px 30px 0 lightgrey;
+    padding: 10px;
+    background-color:{{ section.settings.faq_back_color }}
+  }
+  .faq_det:last-child{
+    border:none;
+  }
+    .faq-plus{
+      display: block;
+      }
+    .faq-minus{
+    display: none
+    }
+  .faq-plus,.faq-minus{
+      left:10px;
+      top:10px;
+      width:25px;
+  }
+  .faq_det[open] .faq-plus{
+    display: none
+  }
+    .faq_det[open] .faq-minus{
+    display: block
+    }
+  .faq_det{
+    border-bottom: {{ section.settings.faq_bor_fz }}px solid {{ section.settings.faq_bor_color }};
+    background-color:{{ section.settings.det_color }};
+    margin-bottom: 10px;
+  }
+  .faq_det summary p{
+    font-size: {{ section.settings.faq_que_fz }}px;
+    font-weight: {{ section.settings.faq_que_fw }};
+    color: {{ section.settings.faq_que_color }};
+  }
+  .faq_det p{
+    font-size: {{ section.settings.faq_ans_fz }}px;
+    font-weight: {{ section.settings.faq_ans_fw }};
+    color: {{ section.settings.faq_ans_color }};
+  }
+  .que_head{
+    padding: 20px 20px 20px 40px;
+  }
+  .faq_det[open] .que_head{
+    background-color:{{ section.settings.sum_color }};
+    color:#E5E5E5;
+  }
+  .faq_det[open] .ans_head{
+    color:#E5E5E5;
+    padding: 20px 20px 20px 40px;
+  }
+  .show{
+    display:none;
+  }
+  @media only screen and (max-width:767px){
+    .faq_det summary p{
+        font-size: {{ section.settings.faq_que_fz_mb }}px;
+        }
+    .faq_det p{
+        font-size: {{ section.settings.faq_ans_fz_mb }}px;
+        }
+    .faq_cont h1{
+        font-size:{{ section.settings.faq_head_fz_mb }}px;
+    }
+    .faq_cont h5{
+    font-size:{{ section.settings.faq_para_fz_mb }}px;
+    }
+    .que_head{
+    padding: 10px 10px 10px 40px;
+  }
+    .faq_det[open] .ans_head{
+    padding: 10px 10px 10px 40px;
+  }
+  }
+</style>
+<script>
+      //   document.querySelectorAll('.faq_det').forEach((s, i) =>{
+      //     s.addEventListener('click', ()=>{
+      //       document.querySelectorAll('.faq-logo-plus').forEach((j) => {
+      //       j.classList.remove('show')
+      //       })
+      //       document.querySelectorAll('.faq-logo-plus')[i].classList.add('show')
+      // })
+      //   })
+  // document.querySelectorAll('.faq_det').forEach((para, index) => {
+  //     para.addEventListener( 'click' , () => {
+  //         document.querySelectorAll('.faq-logo-plus').forEach((ans) => {
+  //             ans.classList.remove("show")
+  //         })
+  //         document.querySelectorAll('.faq-logo-plus')[index].classList.add('show')
+  //     })
+  // })
+      const accordionItems = document.querySelectorAll(".faq_det");
+      // var minus = document.querySelectorAll('.faq-logo-minus')
+      // var plus = document.querySelectorAll('.faq-logo-plus')
+      const siblings = (el) => {
+        if (el.parentNode === null) return [];
+        return Array.prototype.filter.call(el.parentNode.children, function (child) {
+          return child !== el;
+        });
+      };
+
+      for(let i = 0; i < accordionItems.length; i++){
+            accordionItems[i].addEventListener('click', () => {
+            const others = siblings(accordionItems[i]);
+             others.forEach((sibling) => {
+          sibling.removeAttribute("open");
+        });
+        })
+    }
+</script>
+{% schema %}
+{
+  "name": "faq",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Details Settings"
+},
+    {
+  "type": "color",
+  "id": "det_color",
+  "label": "Details Background Color",
+  "default": "#14213d"
+},
+    {
+  "type": "color",
+  "id": "sum_color",
+  "label": "Summary Background Color",
+  "default": "#FCA311"
+},
+    {
+  "type": "color",
+  "id": "faq_back_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "image_picker",
+  "id": "plus_sg",
+  "label": "Plus Sign"
+},
+{
+  "type": "image_picker",
+  "id": "minus_sg",
+  "label": "Minus Sign"
+},
+    {
+  "type": "header",
+  "content": "Header Settings"
+},
+{
+  "type": "richtext",
+  "id": "faq_head",
+  "label": "FAQ's Heading"
+},
+    {
+  "type": "range",
+  "id": "faq_head_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font size",
+  "default": 48
+},
+{
+  "type": "range",
+  "id": "faq_head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Heading Font Weight",
+  "default": 800
+},
+{
+  "type": "color",
+  "id": "faq_head_color",
+  "label": "Heading Color",
+  "default": "#14213D"
+},
+{
+  "type": "richtext",
+  "id": "faq_para",
+  "label": "FAQ's Paragraph"
+},
+    {
+  "type": "range",
+  "id": "faq_para_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "faq_para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Paragraph Font Weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "faq_para_color",
+  "label": "Paragraph Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Questions Settings"
+},
+    {
+  "type": "range",
+  "id": "faq_que_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Question Font size",
+  "default": 17
+},
+{
+  "type": "range",
+  "id": "faq_que_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Question Font Weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "faq_que_color",
+  "label": "Question Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Anwser Settings"
+},
+    {
+  "type": "range",
+  "id": "faq_ans_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Anwser Font size",
+  "default": 13
+},
+{
+  "type": "range",
+  "id": "faq_ans_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Anwser Font Weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "faq_ans_color",
+  "label": "Anwser Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Border Settings"
+},
+    {
+  "type": "range",
+  "id": "faq_bor_fz",
+  "min": 1,
+  "max": 10,
+  "step": 1,
+  "unit": "px",
+  "label": "Border Thickness",
+  "default": 1
+},
+    {
+  "type": "color",
+  "id": "faq_bor_color",
+  "label": "Border Color",
+  "default": "#FCA311"
+},
+  {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "faq_head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font size",
+  "default": 48
+},
+    {
+  "type": "range",
+  "id": "faq_para_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font size",
+  "default": 12
+},
+    {
+  "type": "range",
+  "id": "faq_que_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Question Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "faq_ans_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Anwser Font size",
+  "default": 13
+}
+
+
+  ],
+  "blocks":[
+    {
+        "name": "faq",
+      "type": "block",
+      "settings":[
+        {
+  "type": "richtext",
+  "id": "faq_que",
+  "label": "Question"
+},
+        {
+  "type": "richtext",
+  "id": "faq_ans",
+  "label": "Anwser"
+}
+
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,30 @@
+{
+        "type": "header",
+        "content": "Section Settings"
+      },
+      {
+        "type": "color",
+        "id": "bg_sec_color",
+        "label": "Background Color",
+        "default": "#eaf4f4"
+      },
+      {
+        "type": "range",
+        "id": "padding_tb",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top-Bottom",
+        "default": 30
+      },
+      {
+        "type": "range",
+        "id": "padding_lr",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Left_Right",
+        "default": 0
+      },

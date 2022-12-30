@@ -1,0 +1,261 @@
+<section class="form_bg_color">
+  <div class="main_form_div">
+    <div class="form_head">
+      <h1>{{ section.settings.form_heading }}</h1>
+      <h5>{{ section.settings.form_para }}</h5>
+    </div>
+    <div>
+      <form>
+        <input type="text" placeholder="First Name">
+        <input type="text" placeholder="Last Name">
+        <input type="email" placeholder="Email Address">
+        <div class="form_btn_div">
+          <a href="{{ section.settings.btn_link }}">
+            <button class="new_btn form_btn" type="submit">
+              <!-- {{ section.settings.btn_text }} -->
+              SIGN UP
+            </button>
+          </a>
+        </div>
+      </form>
+    </div>
+    <h6>{{ section.settings.form_para_1 }}</h6>
+  </div>
+</section>
+<style>
+  .main_form_div h6{
+    font-size:{{ section.settings.para_1_fz }}px;
+    font-weight:{{ section.settings.para_1_fw }};
+    color: {{ section.settings.text_color }};
+    padding-top: 10px;
+  }
+  .main_form_div{
+    box-shadow: 4px 4px 30px 0 lightgrey;
+    padding: 20px;
+    background-color:{{ section.settings.form_bg }};
+  }
+  .form_head{
+    padding-bottom: 20px;
+  }
+  .form_head h1{
+    font-size:{{ section.settings.head_fz }}px;
+    font-weight:{{ section.settings.head_fw }};
+    color:{{ section.settings.text_color }};
+  }
+  .form_head h5{
+    font-size:{{ section.settings.para_fz }}px;
+    font-weight:{{ section.settings.para_fw }};
+    color:{{ section.settings.text_color }};
+  }
+  .form_btn_div{
+    width:49%;
+  }
+  .form_btn{
+    width: 100%;
+    margin-top: 0px;
+    padding: 14px 60px;
+  }
+  form{
+    display:flex;
+    width: 100%;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  input{
+    width:49%
+  }
+  input[type="text"],input[type="email"]{
+    border: 1px solid #14213d;
+    background: #EAF4F4;
+    padding: 15px 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color:#14213d;
+  }
+  input::placeholder{
+    color:{{ section.settings.text_color }};
+  }
+  .form_bg_color{
+    background-color:{{ section.settings.form_bg_sec }};
+  }
+
+  @media only screen and (max-width:767px){
+    .main_form_div h6{
+      font-size:{{ section.settings.para_1_fz_mb }}px;
+    }
+    .form_head h1{
+      font-size:{{ section.settings.head_fz_mb }}px;
+    }
+    .form_head h5{
+      font-size:{{ section.settings.para_fz_mb }}px;
+    }
+      input {
+      width: 100%;
+    }
+    .form_btn_div {
+      width: 100%;
+    }
+    input[type="text"], input[type="email"]{
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Form",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "form_bg_sec",
+  "label": "Section Backgroung Color",
+  "default": "#EAF4F4"
+},
+    {
+  "type": "color",
+  "id": "form_bg",
+  "label": "Form Backgroung Color",
+  "default": "#EAF4F4"
+},
+    {
+  "type": "richtext",
+  "id": "form_heading",
+  "label": "Heading"
+},
+{
+  "type": "richtext",
+  "id": "form_para",
+  "label": "Text"
+},
+{
+  "type": "richtext",
+  "id": "form_para_1",
+  "label": "Text"
+},
+    {
+  "type": "color",
+  "id": "text_color",
+  "label": "Text Color",
+  "default": "#14213d"
+},
+    {
+  "type": "header",
+  "content": "Heading Settings"
+},
+    {
+  "type": "range",
+  "id": "head_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+    {
+  "type": "range",
+  "id": "head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+    {
+  "type": "header",
+  "content": "Paragraph Settings"
+},
+    {
+  "type": "range",
+  "id": "para_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+    {
+  "type": "header",
+  "content": "Paragraph 2 Settings"
+},
+    {
+  "type": "range",
+  "id": "para_1_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 13
+},
+    {
+  "type": "range",
+  "id": "para_1_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 400
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+{
+  "type": "range",
+  "id": "para_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "para_1_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 13
+}
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

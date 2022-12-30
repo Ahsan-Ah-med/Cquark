@@ -1,0 +1,308 @@
+<section class="section_bg_color_6">
+  {% comment %}
+    <div class="client_header">
+      <h1>{{ section.settings.client_head }}</h1>
+    </div>
+
+    <div class="client_box">
+      <div
+        class="carousel"
+        data-flickity='{ "cellAlign": "center", "pageDots": false, "prevNextButtons": false,  "autoPlay": 1500, "draggable": true, "contain": true, "wrapAround": true  }'
+      >
+        {% for blocks in section.blocks %}
+          <div class="carousel-cell">
+            <div class="client_logo">
+              <img src="{{ blocks.settings.logo_image | img_url: 'master'}}">
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endcomment %}
+  <div class="main_container">
+    <div class="client_container">
+      <h1>{{ section.settings.client_head }}</h1>
+      <h5>{{ section.settings.client_para }}</h5>
+      <div class="parent">
+        {% for blocks in section.blocks %}
+          <div class="client_img_container">
+            <img src="{{ blocks.settings.logo_image | img_url: 'master' }}">
+          </div>
+        {% endfor %}
+      </div>
+      <div class="btn_div client_btn">
+        <a href="{{ section.settings.btn_link }}">
+          <button class="new_btn">
+            {{ section.settings.btn_text }}
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .client_btn{
+    display:flex;
+    justify-content: center;
+  }
+  .parent{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .main_container{
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+  }
+  .client_container{
+    width:70%;
+    text-align:center;
+  }
+  .client_img_container{
+    width: 25%;
+    padding: 29px;
+    max-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .client_header{
+    text-align:center;
+    padding-bottom: 30px;
+  }
+  .client_container h1 p{
+    font-size:{{ section.settings.client_head_fz }}px;
+    font-weight:{{ section.settings.client_head_fw }};
+    color:{{ section.settings.client_head_color }};
+  }
+  .client_container h5{
+    font-size:{{ section.settings.client_para_fz }}px;
+    font-weight:{{ section.settings.client_para_fw }};
+    color:{{ section.settings.client_para_color }};
+  }
+  section{
+      background-color: {{ settings.bg_sec_color }};
+      width: 100%;
+      padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+  }
+  .section_bg_color_6{
+    background-color:{{ section.settings.sec_bg_color }};
+  }
+  .client_box{
+    display: flex;
+    padding: 60px 0;
+
+  }
+      .client_logo{
+        background: {{ section.settings.logo_color }};
+    /*     width: 25%; */
+        padding: 15px 10px;
+        margin: 0px 0px;
+        display: block;
+        text-align: center;
+        transition: ease-in 0.1s;
+  /*       box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px; */
+      }
+    /*   .client_logo:hover{
+        background: {{ section.settings.logo_hover_color }};
+        box-shadow: 2px 2px 8px 3px #928c8c;
+        transform: scale(1.05);
+      } */
+      .client_logo img{
+        margin: 0 auto;
+        width: 125px;
+        cursor: pointer;
+      }
+      @media only screen and (max-width: 767px) {
+        .client_logo{
+          width: 33%
+        }
+          .client_container h1 p{
+            font-size:{{ section.settings.client_head_fz_mb }}px;
+          }
+        .client_container h5{
+            font-size:{{ section.settings.client_para_fz_mb }}px;
+          }
+        .client_img_container{
+          padding:10px 10px 0 10px;
+          width: 26%;
+        }
+        .client_container{
+          width: 100%;
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .client_logo{
+          width: 50%
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        .client_logo{
+          width: 100%
+        }
+      }
+</style>
+{% schema %}
+{
+  "name": "Client",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+{
+  "type": "color",
+  "id": "logo_color",
+  "label": "Background",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "color",
+  "id": "logo_hover_color",
+  "label": "Background Hover",
+  "default": "#fca311"
+},
+    {
+  "type": "header",
+  "content": "Heading Settings"
+},
+    {
+  "type": "richtext",
+  "id": "client_head",
+  "label": "Heading"
+},
+    {
+  "type": "range",
+  "id": "client_head_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+    {
+  "type": "range",
+  "id": "client_head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "client_head_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Paragraph Settings"
+},
+    {
+  "type": "richtext",
+  "id": "client_para",
+  "label": "Paragraph"
+},
+    {
+  "type": "range",
+  "id": "client_para_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "client_para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "client_para_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Button Settings"
+},
+    {
+  "type": "richtext",
+  "id": "btn_text",
+  "label": "Button Text"
+},
+    {
+  "type": "url",
+  "id": "btn_link",
+  "label": "Button link"
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "client_head_fz_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font size",
+  "default": 24
+},
+    {
+  "type": "range",
+  "id": "client_para_fz_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font size",
+  "default": 12
+}
+
+
+
+
+
+  ],
+  "blocks":[
+    {
+        "name": "slider",
+      "type": "block",
+      "settings":[
+        {
+  "type": "header",
+  "content": "Logo Images"
+},
+        {
+  "type": "image_picker",
+  "id": "logo_image",
+  "label": "Image"
+}
+
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<!-- Here are just a few of our forward thinking clients we have worked with over the years -->

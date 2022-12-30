@@ -1,0 +1,463 @@
+<section class="section_bg_color_2">
+  <div class="main-container">
+    <div class="Left-container">
+      <h5 class="main_text">{{ section.settings.first_text }}</h5>
+      <h1 class="main_heading">{{ section.settings.second_text }}</h1>
+      <h5 class="main_para">
+        {{ section.settings.third_text }}
+      </h5>
+      <div class="categories">
+        {% for block in section.blocks %}
+          <div class="dot-box">
+            <div class="dot_img"><img src="{{ block.settings.cate_image | img_url: 'master' }}"></div>
+            <h5 class="h5">
+              {{ block.settings.cate_text -}}
+              <!-- <span></span> -->
+            </h5>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="btn_div">
+        <a href="{{ section.settings.cate_btn_link }}">
+          <button class="new_btn">
+            {{ section.settings.cate_btn_text }}
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="Right-container">
+      <img src="{{ section.settings.second_img | img_url: 'master' }}">
+    </div>
+  </div>
+</section>
+
+<style>
+  .dot-box{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    padding-bottom: 20px;
+    text-align: left;
+  }
+  .dot_img{
+       display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  .dot_img img{
+    width:10px;
+  }
+  .categories span{
+    width:50px;
+    height:3px;
+    background-color:#14213D;
+    border-radius:50px;
+    position: absolute;
+  }
+      .main_text{
+        padding-bottom:20px;
+        margin:0;
+        position: relative;
+      }
+    .section_bg_color_2{
+      background-color:{{ section.settings.sec_bg_color }};
+    }
+    .main_para{
+      font-size:{{ section.settings.para_fz }}px;
+      font-weight:{{ section.settings.para_fw }};
+      color:{{ section.settings.para_color }};
+      margin:0;
+      padding-bottom:20px
+    }
+    .main_para p{
+      margin:0;
+    }
+    .main_text p{
+      font-size:{{ section.settings.first_text_fz }}px;
+      font-weight:{{ section.settings.first_text_fw }};
+      color:{{ section.settings.first-text-color }};
+      letter-spacing: 2px;
+      margin:0;
+    }
+    .main_heading{
+      font-size:{{ section.settings.heading_fz }}px;
+      font-weight:{{ section.settings.heading_fw }};
+      color:{{ section.settings.heading_color }};
+      margin:0;
+      padding-bottom: 20px;
+    }
+    .main_heading p{
+      margin:0;
+    }
+    .categories{
+      display:flex;
+      flex-wrap: wrap;
+      width: 100%;
+      align-items: flex-end;
+    }
+    .h5{
+      width:100%;
+      font-size:{{ section.settings.cate_fz }}px;
+      font-weight:{{ section.settings.cate_fw }};
+      color:{{ section.settings.cate_color }};
+      margin:0;
+
+    }
+    .h5 p strong{
+      font-weight:600;
+    }
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    section{
+        background-color: {{ settings.bg_sec_color }};
+        width: 100%;
+        padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+    }
+
+    body{
+        font-family: 'Mulish', sans-serif;
+    }
+    .main-container{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .Left-container{
+      width:50%;
+      height:100%;
+      padding-right: 100px;
+    }
+    .Right-container{
+      width:50%;
+      height:100%;
+      padding:{{ section.settings.R-C_pad_tb }}px {{ section.settings.R-C_pad_lr }}px;
+    }
+    .main_text p:before {
+      content: "";
+      width: 50px;
+      height: 3px;
+      position: absolute;
+      background: #FCA311;
+      bottom: 18px;
+      border-radius: 50px;
+  }
+
+   .dot-box:last-child{
+    padding:0;
+  }
+  @media only screen and (max-width: 768px) {
+      .main-container{
+          flex-direction: column-reverse;
+      }
+    .Left-container{
+          width: 100%;
+          text-align: center;
+          padding-right: 0;
+      }
+  }
+    @media only screen and (max-width: 767px) {
+      section{
+          padding: {{ settings.padding_tb_mb }}px {{ settings.padding_lr_mb }}px !important;
+      }
+      .main-container{
+          flex-direction: column-reverse;
+      }
+      .Left-container{
+          width: 100%;
+          text-align: center;
+          padding-right: 0;
+      }
+    .btn_div{
+        justify-content: center;
+    }
+
+    .Right-container{
+        width:{{ section.settings.right_img_mb }}%;
+    }
+    .main_text p{
+        font-size:{{ section.settings.sub_fz_mb }}px;
+    }
+    .main_heading{
+        font-size:{{ section.settings.heading_fz_mb }}px;
+    }
+    .main_para{
+        font-size:{{ section.settings.para_fz_mb }}px;
+    }
+    .h5{
+        font-size:{{ section.settings.ser_fz_mb }}px;
+    }
+</style>
+{% schema %}
+{
+  "name": "STRUCTURE",
+  "settings": [
+     {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "header",
+  "content": "Texts Settings"
+},
+    {
+  "type": "richtext",
+  "id": "first_text",
+  "label": "First Heading"
+},
+    {
+  "type": "range",
+  "id": "first_text_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "first_text_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 700
+},
+    {
+  "type": "color",
+  "id": "first-text-color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "richtext",
+  "id": "second_text",
+  "label": "Main Heading"
+},
+    {
+  "type": "range",
+  "id": "heading_fz",
+  "min": 8,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+    {
+  "type": "range",
+  "id": "heading_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "heading_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+
+    {
+  "type": "richtext",
+  "id": "third_text",
+  "label": "Main Paragraph"
+},
+    {
+  "type": "range",
+  "id": "para_fz",
+  "min": 8,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+    {
+  "type": "color",
+  "id": "para_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+
+    {
+  "type": "header",
+  "content": "Categories Settings"
+},
+    {
+  "type": "range",
+  "id": "cate_fz",
+  "min": 8,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "cate_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "cate_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+     {
+  "type": "header",
+  "content": "Button Settings"
+},
+  {
+  "type": "text",
+  "id": "cate_btn_text",
+  "label": "Button Text",
+  "default": "All categories"
+},
+    {
+  "type": "url",
+  "id": "cate_btn_link",
+  "label": "Button Link"
+},
+{
+  "type": "header",
+  "content": "Right Container Settings"
+},
+    {
+  "type": "image_picker",
+  "id": "second_img",
+  "label": "Image"
+},
+    {
+  "type": "range",
+  "id": "R-C_pad_tb",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 0
+},
+    {
+  "type": "range",
+  "id": "R-C_pad_lr",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 0
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "right_img_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "%",
+  "label": "Image Size",
+  "default": 50
+},
+    {
+  "type": "range",
+  "id": "sub_fz_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Sub Heading Font-size",
+  "default": 15
+},
+    {
+  "type": "range",
+  "id": "heading_fz_mb",
+  "min": 1,
+  "max": 80,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font-size",
+  "default": 40
+},
+    {
+  "type": "range",
+  "id": "para_fz_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font-size",
+  "default": 14
+},
+    {
+  "type": "range",
+  "id": "ser_fz_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Services Font-size",
+  "default": 14
+}
+  ],
+  "blocks":[
+    {
+        "name": "Categories",
+      "type": "block",
+      "settings":[
+        {
+  "type": "richtext",
+  "id": "cate_text",
+  "label": "categories"
+},
+        {
+  "type": "image_picker",
+  "id": "cate_image",
+  "label": "Image"
+}
+
+      ]
+    }
+  ]
+
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

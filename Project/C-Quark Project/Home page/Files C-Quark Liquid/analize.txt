@@ -1,0 +1,582 @@
+<section class="section_bg_color_4">
+  <div class="container">
+    <div class="left-cont">
+      <div class="box1">a</div>
+      <div class="box2">a</div>
+      <div class="left_img">
+        <img src="{{ section.settings.left_img | img_url: 'master' }}">
+      </div>
+    </div>
+    <div class="right-cont">
+      <div class="main_text_1">{{ section.settings.first_text }}</div>
+      <div class="main_heading_1">{{ section.settings.main_heading }}</div>
+      <div class="main_para_1">{{ section.settings.main_para }}</div>
+      <div class="AB_cont">
+        <div class="AB_text">
+          <h5>
+            {{ section.settings.ab1 }}
+          </h5>
+        </div>
+        <div class="AB_pro">
+          <div class="div_img">
+            <img src="{{ section.settings.ab2_img | img_url: 'master' }}">
+          </div>
+          <div class="AB_name">
+            <h2>{{ section.settings.ab2 }}</h2>
+            <h3>{{ section.settings.ab3 }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+      section{
+          background-color: {{ settings.bg_sec_color }};
+          width: 100%;
+          padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+      }
+      .section_bg_color_4{
+        background-color:{{ section.settings.sec_bg_color }};
+      }
+      .AB_text{
+        padding-bottom: 20px;
+        margin:0;
+      }
+      .AB_text h5{
+        font-size: {{ section.settings.ab1_fz }}px;
+        font-weight:{{ section.settings.ab1_fw }};
+        color:{{ section.settings.ab1_color }};
+        margin:0;
+      }
+      .AB_text h5 p{
+        margin:0;
+      }
+      .div_img{
+        width: 60px;
+        height: 60px;
+      }
+      .AB_cont{
+        padding-left: 30px;
+        border-left: {{ section.settings.ab_border }}px solid {{ section.settings.ab_border_color }};
+      }
+      .AB_pro{
+        display: flex;
+        width: 100%;
+        margin: auto;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .AB_name{
+        width: 80%;
+        padding-top: 10px;
+      }
+      .AB_name h2{
+        font-size: {{ section.settings.ab2_fz }}px;
+        font-weight: {{ section.settings.ab2_fw }};
+        color:{{ section.settings.ab2__color }};
+        margin: 0;
+      }
+      .AB_name h2 p {
+        margin:0;
+      }
+      .AB_name h3 p {
+        margin:0;
+      }
+      .AB_name h3{
+        font-size: {{ section.settings.ab3_fz }}px;
+        font-weight: {{ section.settings.ab3_fw }};
+        color:{{ section.settings.ab3__color }};
+        margin: 0;
+      }
+      .main_text_1 p{
+        font-size:{{ section.settings.FH_fz }}px;
+        font-weight:{{ section.settings.FH_fw }};
+        color:{{ section.settings.FH_color }};
+        letter-spacing: 2px;
+        margin:0;
+      }
+      .main_text_1{
+        padding-bottom: 20px;
+        position: relative;
+      }
+      .main_heading_1{
+        font-size:{{ section.settings.H_fz }}px;
+        font-weight:{{ section.settings.H_fw }};
+        color:{{ section.settings.H_color }};
+        margin: 0;
+        line-height: 1;
+        padding-bottom: 20px;
+      }
+      .main_heading_1 p{
+        margin: 0;
+      }
+      .main_para_1{
+        font-size:{{ section.settings.P_fz }}px;
+        font-weight:{{ section.settings.P_fw }};
+        color:{{ section.settings.P_color }};
+        margin: 0;
+        padding-bottom: 20px;
+      }
+      .main_para_1 p{
+        margin:0;
+        line-height: 1.3;
+      }
+      .container{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .left-cont{
+        width:50%;
+      }
+      .right-cont{
+        width:50%;
+        padding-left:100px;
+      }
+      .left_img{
+        width:100%;
+        padding:{{ section.settings.padd_img_tb }}px {{ section.settings.padd_img_lr }}px;
+      }
+      .left_img img{
+        width:100%;
+        padding-right:50px;
+      }
+      *{
+       font-family: 'Mulish', sans-serif;
+      }
+      .main_text_1 p:before {
+          content: "";
+          width: 50px;
+          height: 3px;
+          position: absolute;
+          background: #FCA311;
+          bottom: 20px;
+          border-radius: 50px;
+      }
+
+      .left-cont {
+        width: 50%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+            .box1{
+            width: 30%;
+            height: 50%;
+            background: #14213d;
+          color:#14213d;
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            right: 0;
+            }
+            .box2{
+           width: 30%;
+            height: 50%;
+            background: #fcab25;
+           color: #fcab25;
+            z-index: 1;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            }
+          .left_img {
+      width: 100%;
+      padding: 0px 0px;
+      z-index: 2;
+  }
+       @media only screen and (max-width: 768px) {
+        .main_heading_1{
+        font-size:44px;
+       }
+       @media only screen and (max-width: 767px) {
+        section{
+            padding: {{ settings.padding_tb_mb }}px {{ settings.padding_lr_mb }}px !important;
+        }
+        .container{
+            flex-direction: column;
+        }
+        .right-cont{
+            width: 100%;
+            text-align: left;
+            padding-left: 0;
+        }
+         .main_text_1{
+            text-align: center;
+         }
+          .main_heading_1{
+            text-align: center;
+          }
+          .AB_pro {
+            justify-content: flex-start;
+            align-items: flex-start;
+              }
+         .left-cont{
+           width:{{ section.settings.image_size }}%;
+         }
+         .main_text_1 p{
+           font-size:{{ section.settings.sub_head_mb }}px;
+         }
+         .main_heading_1{
+           font-size:{{ section.settings.head_mb }}px;
+         }
+         .main_para_1{
+           font-size:{{ section.settings.para_mb }}px;
+         }
+         .AB_text h5{
+           font-size:{{ section.settings.sub_para_mb }}px;
+         }
+         .AB_name h2{
+           font-size:{{ section.settings.name_mb }}px;
+         }
+         .AB_name h3{
+           font-size:{{ section.settings.dis_mb }}px;
+         }
+      }
+</style>
+{% schema %}
+{
+  "name": "ANALIZE",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "header",
+  "content": "Left Settings"
+},
+    {
+  "type": "image_picker",
+  "id": "left_img",
+  "label": "Image"
+},
+    {
+  "type": "range",
+  "id": "padd_img_tb",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 0
+},
+    {
+  "type": "range",
+  "id": "padd_img_lr",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 0
+},
+    {
+  "type": "header",
+  "content": "Right Settings"
+},
+{
+  "type": "richtext",
+  "id": "first_text",
+  "label": "First Heading"
+},
+    {
+  "type": "range",
+  "id": "FH_fz",
+  "min": 8,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "FH_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 700
+},
+    {
+  "type": "color",
+  "id": "FH_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "richtext",
+  "id": "main_heading",
+  "label": "Heading"
+},
+    {
+  "type": "range",
+  "id": "H_fz",
+  "min": 8,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+    {
+  "type": "range",
+  "id": "H_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "H_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "richtext",
+  "id": "main_para",
+  "label": "Paragraph"
+},
+{
+  "type": "range",
+  "id": "P_fz",
+  "min": 8,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "P_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+    {
+  "type": "color",
+  "id": "P_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Right Bottom Settings"
+},
+    {
+  "type": "richtext",
+  "id": "ab1",
+  "label": "Paragraph"
+},
+    {
+  "type": "range",
+  "id": "ab1_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "ab1_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "ab1_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "image_picker",
+  "id": "ab2_img",
+  "label": "Image"
+},
+{
+  "type": "richtext",
+  "id": "ab2",
+  "label": "Paragraph"
+},
+    {
+  "type": "range",
+  "id": "ab2_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "ab2_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "ab2__color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "richtext",
+  "id": "ab3",
+  "label": "Paragraph"
+},
+    {
+  "type": "range",
+  "id": "ab3_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 13
+},
+    {
+  "type": "range",
+  "id": "ab3_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "ab3__color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "range",
+  "id": "ab_border",
+  "min": 1,
+  "max": 10,
+  "step": 1,
+  "unit": "px",
+  "label": "Border Thickness",
+  "default": 1
+},
+    {
+  "type": "color",
+  "id": "ab_border_color",
+  "label": "Color",
+  "default": "#FCA311"
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "image_size",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "%",
+  "label": "Image Size",
+  "default": 50
+},
+    {
+  "type": "range",
+  "id": "sub_head_mb",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Sub Heading Font-size",
+  "default": 15
+},
+    {
+  "type": "range",
+  "id": "head_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font-size",
+  "default": 40
+},
+    {
+  "type": "range",
+  "id": "para_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font-size",
+  "default": 15
+},
+    {
+  "type": "range",
+  "id": "sub_para_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Sub Para Font-size",
+  "default": 14
+},
+    {
+  "type": "range",
+  "id": "name_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Name Head",
+  "default": 13
+},
+    {
+  "type": "range",
+  "id": "dis_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Discription",
+  "default": 11
+}
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

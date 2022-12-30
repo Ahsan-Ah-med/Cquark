@@ -1,0 +1,18 @@
+const accordionItems = document.querySelectorAll("[data-accordion] > details");
+  var minus = document.querySelectorAll('.faq-logo-minus')
+  var plus = document.querySelectorAll('.faq-logo-plus')
+  const siblings = (el) => {
+    if (el.parentNode === null) return [];
+    return Array.prototype.filter.call(el.parentNode.children, function (child) {
+      return child !== el;
+    });
+  };
+  
+  for(let i = 0; i < accordionItems.length; i++){
+        accordionItems[i].addEventListener('click', () => {
+        const others = siblings(accordionItems[i]);
+         others.forEach((sibling) => {
+      sibling.removeAttribute("open");
+    });   
+    })
+}

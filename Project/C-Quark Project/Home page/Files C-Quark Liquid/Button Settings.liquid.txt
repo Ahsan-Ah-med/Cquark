@@ -1,0 +1,98 @@
+{
+        "type": "header",
+        "content": "Button Settings"
+      },
+      {
+        "type": "range",
+        "id": "btn_fz",
+        "min": 8,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Button Font size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "btn_fw",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "unit": "px",
+        "label": "Button Font Weight",
+        "default": 600
+      },
+      {
+        "type": "range",
+        "id": "btn_pad_tb",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top-Bottom",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "btn_pad_lr",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Left-Right",
+        "default": 70
+      },
+      {
+        "type": "color",
+        "id": "btn_color",
+        "label": "Text Color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "btn_bg_color",
+        "label": "Background Color",
+        "default": "#eaf4f4"
+      },
+      {
+        "type": "range",
+        "id": "btn_border_thickness",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border Thickness",
+        "default": 1
+      },
+      {
+        "type": "color",
+        "id": "btn_border_color",
+        "label": "Border Color",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "btn_border_radius",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border Radius",
+        "default": 2
+      },
+      {
+        "type": "header",
+        "content": "Hover Settings"
+      },
+      {
+        "type": "color",
+        "id": "btn_hover_color",
+        "label": "Text Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "btn_bg_hover_color",
+        "label": "Background Color",
+        "default": "#000000"
+      }

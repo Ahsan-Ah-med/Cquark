@@ -1,0 +1,5 @@
+Day(1)
+	Complete Banner Section.
+Day(2)
+	working 100% complete end of day (DONE)
+	Complete Card section

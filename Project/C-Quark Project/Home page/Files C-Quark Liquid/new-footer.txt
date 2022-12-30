@@ -1,0 +1,524 @@
+<section class="foo_color">
+  <div class="foo_main">
+    <div class="foo_left">
+      <div class="logo_div">
+        <div class="logo">
+          <img src="{{ section.settings.Logo_img | img_url: 'master' }}">
+        </div>
+        <div class="social">
+          {% for block in section.blocks %}
+            <div class="social_cont">
+              <img src="{{ block.settings.social_icon | img_url: 'master' }}" class="social_img">
+              <h3>{{ block.settings.social_name }}</h3>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="foo_right">
+      <!-- First Link -->
+
+      {% if section.settings.menu == blank %}
+        <div class="list_div" style="display:none">
+          <h4>{{ section.settings.foo_header_1 }}</h4>
+          {%- if section.settings.menu != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% else %}
+        <div class="list_div">
+          <h4>{{ section.settings.foo_header_1 }}</h4>
+          {%- if section.settings.menu != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% endif %}
+      <!-- Second Link -->
+      {% if section.settings.menu2 == blank %}
+        <div class="list_div" style="display:none">
+          <h4>{{ section.settings.foo_header_2 }}</h4>
+          {%- if section.settings.menu2 != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu2.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% else %}
+        <div class="list_div">
+          <h4>{{ section.settings.foo_header_2 }}</h4>
+          {%- if section.settings.menu2 != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu2.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% endif %}
+      <!-- Third Link -->
+      {% if section.settings.menu3 == blank %}
+        <div class="list_div" style="display:none">
+          <h4>{{ section.settings.foo_header_3 }}</h4>
+          {%- if section.settings.menu3 != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu3.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% else %}
+        <div class="list_div">
+          <h4>{{ section.settings.foo_header_3 }}</h4>
+          {%- if section.settings.menu3 != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu3.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% endif %}
+      <!-- Forth Link -->
+      {% if section.settings.menu4 == blank %}
+        <div class="list_div" style="display: none">
+          <h4>{{ section.settings.foo_header_4 }}</h4>
+          {%- if section.settings.menu4 != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu4.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% else %}
+        <div class="list_div">
+          <h4>{{ section.settings.foo_header_4 }}</h4>
+          {%- if section.settings.menu4 != blank -%}
+            <ul class="">
+              {%- for link in section.settings.menu4.links -%}
+                <li>
+                  <a
+                    href="{{ link.url }}"
+                    class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                  >
+                    {{ link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<style>
+    .list_div ul li a{
+      font-weight: {{ section.settings.list_text_w }};
+      font-size: {{ section.settings.list_text }}px;
+      color: {{ section.settings.list_color }};
+      padding:0;
+    }
+    .list_div ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .list_div ul li{
+      padding-bottom:10px
+    }
+    .list_div h4{
+      font-weight: {{ section.settings.head_text_w }};
+      font-size: {{ section.settings.head_text }}px;
+      color: {{ section.settings.head_color }};
+      text-align:left;
+      padding-bottom:15px;
+    }
+
+    .foo_right div{
+      width:200px;
+    }
+    .social_cont{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding-bottom:10px
+    }
+    .social_cont h3{
+      width: 80%;
+      margin: 0;
+      font-weight: {{ section.settings.so_text_w }};
+      font-size: {{ section.settings.so_text }}px;
+      color: {{ section.settings.so_color }};
+    }
+  .social_cont h3:hover{
+    color: rgba(var(--color-foreground),.75);
+  }
+  .social{
+    padding-top:20px;
+  }
+    .social_img{
+      width:25px;
+    }
+    .logo{
+      width: 100px;
+      padding: {{ section.settings.logo_size }}px;
+    }
+    .foo_color{
+      background-color:{{ section.settings.foo_color }};
+    }
+    .foo_main{
+      width:100%;
+      display: flex;
+    }
+    .foo_left{
+      width:30%;
+    }
+    .foo_right{
+      width:70%;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+  @media only screen and (max-width:768px){
+    .social_cont h3{
+      font-size: {{ section.settings.so_text_mb }}px;
+    }
+    .list_div h4{
+      font-size: {{ section.settings.head_text_mb }}px;
+    }
+    .list_div ul li a{
+      font-size: {{ section.settings.list_text_mb }}px;
+    }
+  }
+  @media only screen and (max-width:425px){
+    .foo_main{
+      flex-direction: column;
+    }
+    .foo_left{
+      width:100%;
+    }
+    .foo_right{
+      width:100%;
+      justify-content: left;
+      padding-left: 20px;
+    }
+    .logo{
+      padding-left: 20px;
+    }
+    .logo_div{
+      padding-bottom: 20px;
+    }
+    .foo_right div{
+      padding-bottom: 20px;
+      width:100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "foo_color",
+  "label": "Background Color",
+  "default": "#EAF4F4"
+},
+    {
+  "type": "header",
+  "content": "Logo Settings"
+},
+    {
+  "type": "image_picker",
+  "id": "Logo_img",
+  "label": "Logo"
+},
+    {
+  "type": "range",
+  "id": "logo_size",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Logo size",
+  "default": 0
+},
+{
+  "type": "header",
+  "content": "Social Settings"
+},
+{
+  "type": "range",
+  "id": "so_text",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 13
+},
+{
+  "type": "range",
+  "id": "so_text_w",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "so_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Menu Settings"
+},
+    {
+  "type": "header",
+  "content": "Menu Heading"
+},
+{
+  "type": "range",
+  "id": "head_text",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 15
+},
+{
+  "type": "range",
+  "id": "head_text_w",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+{
+  "type": "color",
+  "id": "head_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Menu Lists"
+},
+{
+  "type": "range",
+  "id": "list_text",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 13
+},
+{
+  "type": "range",
+  "id": "list_text_w",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "list_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "First Menu"
+},
+    {
+  "type": "richtext",
+  "id": "foo_header_1",
+  "label": "Menu Heading"
+},
+{
+  "type": "link_list",
+  "id": "menu",
+  "label": "Menu"
+},
+    {
+  "type": "header",
+  "content": "Second Menu"
+},
+    {
+  "type": "richtext",
+  "id": "foo_header_2",
+  "label": "Menu Heading"
+},
+{
+  "type": "link_list",
+  "id": "menu2",
+  "label": "Menu"
+},
+    {
+  "type": "header",
+  "content": "Third Menu"
+},
+    {
+  "type": "richtext",
+  "id": "foo_header_3",
+  "label": "Menu Heading"
+},
+{
+  "type": "link_list",
+  "id": "menu3",
+  "label": "Menu"
+},
+    {
+  "type": "header",
+  "content": "Forth Menu"
+},
+    {
+  "type": "richtext",
+  "id": "foo_header_4",
+  "label": "Menu Heading"
+},
+{
+  "type": "link_list",
+  "id": "menu4",
+  "label": "Menu"
+},
+    {
+  "type": "header",
+  "content": "Mobile Setting"
+},
+    {
+  "type": "range",
+  "id": "so_text_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Social Font size",
+  "default": 13
+},
+    {
+  "type": "range",
+  "id": "head_text_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font size",
+  "default": 15
+},
+    {
+  "type": "range",
+  "id": "list_text_mb",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Lists Font size",
+  "default": 13
+}
+
+
+  ],
+  "blocks":[
+    {
+        "name": "Social Network",
+      "type": "block",
+      "settings":[
+        {
+  "type": "image_picker",
+  "id": "social_icon",
+  "label": "Icon"
+},
+    {
+  "type": "richtext",
+  "id": "social_name",
+  "label": "Heading"
+}]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

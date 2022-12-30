@@ -1,0 +1,357 @@
+<section class="section_bg_color_3">
+  <div class="card_div">
+    {% for blocks in section.blocks %}
+      <div class="card_box">
+        <h5 class="h5box">{{ blocks.settings.box_text_1 }}</h5>
+        <h1 class="h1box">{{ blocks.settings.box_text_2 }}</h1>
+        <h5 class="h5para">
+          {{ blocks.settings.box_text_3 }}
+        </h5>
+        <div class="btn_div">
+          <a href="{{ blocks.settings.card_btn_link }}">
+            <button class="new_btn">
+              {{ blocks.settings.card_btn_text }}
+            </button>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+    section{
+        background-color: {{ settings.bg_sec_color }};
+        width: 100%;
+        padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+    }
+      .section_bg_color_3{
+        background-color:{{ section.settings.sec_bg_color }};
+      }
+      .card_div{
+        display:flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .h5box{
+        margin:0;
+        letter-spacing:2px;
+        padding-bottom: 10px;
+        position:relative;
+      }
+      .h5box p{
+        margin:0;
+        font-size: {{ section.settings.box_FH_fz }}px;
+        font-weight: {{ section.settings.box_FH_fw }};
+        color: {{ section.settings.box_FH_color }};
+      }
+    .h5box p strong{
+      font-weight:600;
+    }
+      .h1box{
+        margin:0;
+        padding-bottom: 15px;
+      }
+      .h1box p{
+        margin:0;
+        font-size: {{ section.settings.box_H_fz }}px;
+        font-weight: {{ section.settings.box_H_fw }};
+        color: {{ section.settings.box_H_color }};
+      }
+       .h5para{
+        margin:0;
+  /*       padding-bottom: 20px; */
+      }
+      .h5para p{
+         font-size: {{ section.settings.box_p_fz }}px;
+        font-weight: {{ section.settings.box_p_fw }};
+        color: {{ section.settings.box_p_color }};
+        margin:0;
+      }
+      .card_box{
+        width:30%;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+        padding: {{ section.settings.box_pd_tb }}px {{ section.settings.box_pd_lr }}px;
+        border-bottom: {{ section.settings.box_border }}px solid {{ section.settings.box_border_color }};
+      }
+    .h5box p:before {
+        content: "";
+        width: 50px;
+        height: 3px;
+        position: absolute;
+        background: #FCA311;
+        bottom: 8px;
+        border-radius: 50px;
+    }
+    @media only screen and (max-width: 768px) {
+    .card_div{
+      justify-content: space-around;
+    }
+    .card_box {
+      width: 48%;
+    margin-top:10px;
+    }
+    }
+    @media only screen and (max-width: 767px) {
+      section{
+          padding: {{ settings.padding_tb_mb }}px {{ settings.padding_lr_mb }}px !important;
+      }
+      .card_div{
+        justify-content: center;
+      }
+      .card_box{
+        width: 50%;
+        margin: 10px;
+        align-items: center;
+
+      }
+    .btn_div{
+        justify-content: center;
+    }
+    .h5box p{
+        font-size:{{ section.settings.sub_head_mb }}px;
+    }
+    .h1box p{
+        font-size:{{ section.settings.head_mb }}px;
+    }
+    .h5para p{
+        font-size:{{ section.settings.para_mb }}px;
+    }
+      }
+      @media only screen and (max-width: 425px) {
+        .card_box{
+        width: 100%;
+      }
+    }
+</style>
+{% schema %}
+{
+  "name": "Cards",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "header",
+  "content": "Card Settings"
+},
+    {
+  "type": "range",
+  "id": "box_pd_tb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 35
+},
+    {
+  "type": "range",
+  "id": "box_pd_lr",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 35
+},
+    {
+  "type": "range",
+  "id": "box_border",
+  "min": 0,
+  "max": 10,
+  "step": 1,
+  "unit": "px",
+  "label": "Border Bottom",
+  "default": 1
+},
+    {
+  "type": "color",
+  "id": "box_border_color",
+  "label": "Border Color",
+  "default": "#FCA311"
+},
+    {
+  "type": "header",
+  "content": "First Heading"
+},
+    {
+  "type": "range",
+  "id": "box_FH_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "box_FH_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 700
+},
+    {
+  "type": "color",
+  "id": "box_FH_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Main Heading"
+},
+    {
+  "type": "range",
+  "id": "box_H_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 24
+},
+    {
+  "type": "range",
+  "id": "box_H_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "box_H_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Paragraph"
+},
+    {
+  "type": "range",
+  "id": "box_p_fz",
+  "min": 8,
+  "max": 40,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 24
+},
+    {
+  "type": "range",
+  "id": "box_p_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+    {
+  "type": "color",
+  "id": "box_p_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},{
+  "type": "header",
+  "content": "Mobile Settings"
+},
+      {
+  "type": "range",
+  "id": "sub_head_mb",
+  "min": 6,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Sub Heading Font-size",
+  "default": 16
+},
+      {
+  "type": "range",
+  "id": "head_mb",
+  "min": 6,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font-size",
+  "default": 24
+},
+      {
+  "type": "range",
+  "id": "para_mb",
+  "min": 6,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Paragraph Font-size",
+  "default": 15
+}
+
+  ],
+  "blocks":[
+  {
+      "name": "Cards",
+    "type": "block",
+    "settings":[
+{
+  "type": "header",
+  "content": "Card Settings"
+},
+      {
+  "type": "richtext",
+  "id": "box_text_1",
+  "label": "First Text"
+},
+      {
+  "type": "richtext",
+  "id": "box_text_2",
+  "label": "Heading"
+},
+      {
+  "type": "richtext",
+  "id": "box_text_3",
+  "label": "Paragraph"
+},
+
+      {
+  "type": "header",
+  "content": "Button Settings"
+},
+  {
+  "type": "text",
+  "id": "card_btn_text",
+  "label": "Button Text",
+  "default": "View demo"
+},
+    {
+  "type": "url",
+  "id": "card_btn_link",
+  "label": "Button Link"
+}
+
+    ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

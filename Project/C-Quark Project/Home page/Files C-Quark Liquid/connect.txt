@@ -1,0 +1,164 @@
+<section class="section_bg_color_5">
+  <div class="back_img back_div">
+    <img src="https://n.foxdsgn.com/twilo/wp-content/uploads/2022/04/Group-49.png">
+  </div>
+  <div class="content">
+    <div>
+      <h1>{{ section.settings.cont_text }}</h1>
+      <div class="btn_div_Cont">
+        <a href="{{ section.settings.cont_btn_link }}">
+          <button class="new_btn">
+            {{ section.settings.cont_btn_text }}
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+    section{
+        background-color: {{ settings.bg_sec_color }};
+        width: 100%;
+        padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+    }
+    .section_bg_color_5{
+      background-color:{{ section.settings.sec_bg_color }};
+      position:relative;
+    }
+    .back_img{
+      background-position: center center;
+      background-size: cover;
+      opacity: .3;
+      transition: background .3s,border-radius .3s,opacity .3s;
+    }
+    .back_div{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      z-index: 1;
+    }
+    .content{
+      padding: 100px 45px;
+      z-index: 2;
+      position: inherit;
+    }
+    .content div{
+      display: block;
+      margin: auto;
+      width: 70%;
+      text-align: center;
+    }
+    .content div h1{
+      font-size: {{ section.settings.cont_fz }}px;
+      font-weight: {{ section.settings.cont_fw }};
+      color: {{ section.settings.cont_color }};
+      margin:0;
+  /*     padding-bottom: 20px; */
+    }
+    .content div h1 Strong{
+      font-size:48px;
+    }
+    .content div h1 p{
+      margin:0;
+    }
+    .btn_div_Cont{
+      display:block;
+      margin:auto;
+    }
+    @media only screen and (max-width: 767px) {
+      .content div{
+        width: 100%
+      }
+      .content{
+        padding:50px 0
+      }
+      .content div h1{
+        font-size:{{ section.settings.head_fz }}px;
+      }
+      .content div h1 Strong{
+          font-size:24px;
+        }
+    }
+</style>
+{% schema %}
+{
+  "name": "Connect",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "richtext",
+  "id": "cont_text",
+  "label": "Heading"
+},
+   {
+  "type": "range",
+  "id": "cont_fz",
+  "min": 8,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+{
+  "type": "range",
+  "id": "cont_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "cont_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "text",
+  "id": "cont_btn_text",
+  "label": "Button text",
+  "default": "Get started"
+},
+    {
+  "type": "url",
+  "id": "cont_btn_link",
+  "label": "Button link"
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+{
+  "type": "range",
+  "id": "head_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 40
+}
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

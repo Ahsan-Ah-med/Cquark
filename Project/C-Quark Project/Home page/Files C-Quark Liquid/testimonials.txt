@@ -1,0 +1,427 @@
+<section class="section_bg_color">
+  <div class="test_header">
+    <h1>{{ section.settings.heading_text }}</h1>
+  </div>
+  <div
+    class="carousel"
+    data-flickity='{ "cellAlign": "center", "pageDots": false, "prevNextButtons": true,  "autoPlay": 3000, "draggable": true, "contain": true, "wrapAround": true  }'
+  >
+    {% for blocks in section.blocks %}
+      <div class="carousel-cell_test">
+        <div class="test_box">
+          <div class="box-testimonial">
+            <h1>{{ blocks.settings.name }}</h1>
+            <div class="star_overflow">
+              <div class="star_back">
+                <p>{{ blocks.settings.ratting }}.0</p>
+              </div>
+              <div class="star-rating-review">
+                {% for i in (1..blocks.settings.ratting) %}
+                  {% if i > blocks.settings.ratting %}
+                    {% break %}
+                  {% else %}
+                    <img src="{{ section.settings.star_img | img_url: 'master' }}">
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <h5>
+            {{ blocks.settings.review }}
+          </h5>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="btn_test">
+    <a href="{{ section.settings.btn_test_link }}">
+      <button class="new_btn">
+        {{ section.settings.btn_test }}
+      </button>
+    </a>
+  </div>
+</section>
+
+<style>
+  section{
+    background-color: {{ settings.bg_sec_color }};
+    width: 100%;
+    padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+  }
+  .section_bg_color{
+    background-color:{{ section.settings.sec_bg_color }};
+  }
+  .test_header{
+    padding-bottom: 30px;
+  }
+  .carousel {
+    width:100%;
+    display: block;
+    padding:0 0px;
+    margin:0px auto;
+  }
+  .carousel-cell_test {
+    width: 30%;
+    counter-increment: carousel-cell;
+    padding:0 10px;
+  }
+  .carousel .flickity-slider{
+    display: flex;
+    align-items: center;
+  }
+  .test_box{
+    width:100%;
+    background-color:{{ section.settings.test_card_color }};
+    box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+    padding: {{ section.settings.test_card_pad_tb }}px {{ section.settings.test_card_pad_lr }}px;
+    border-bottom: {{ section.settings.test_bor_lgn }}px solid {{ section.settings.test_bor_color }};
+    border-left: {{ section.settings.test_bor_lgn }}px solid {{ section.settings.test_bor_color }};
+    border-right: {{ section.settings.test_bor_lgn }}px solid {{ section.settings.test_bor_color }};
+    border-top:5px solid #FCA311;
+  }
+  .test_box h1{
+    margin:0;
+  }
+  .test_box h1 p{
+    font-size:{{ section.settings.test_card_name_fz }}px;
+    font-weight:{{ section.settings.test_card_name_fw }};
+    margin:0;
+    color:{{ section.settings.test_card_name_color }};
+  }
+  .test_box h5{
+    font-size:{{ section.settings.test_card_para_fz }}px;
+    font-weight:{{ section.settings.test_card_para_fw }};
+    margin:0;
+    color:{{ section.settings.test_card_para_color }};
+  }
+  .test_header h1{
+    text-align:center;
+    font-size: {{ section.settings.test_heading_fz }}px;
+    font-weight:{{ section.settings.test_heading_fw }};
+    color:{{ section.settings.test_heading_color }};
+  }
+  .btn_test{
+    margin: 60px 0px 0 0;
+    text-align: center;
+  }
+  .box-testimonial{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .star-rating-review{
+    display: flex;
+    margin: 10px 0;
+    width: 105px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 5px 5px 5px 25px;
+    background-color: {{ section.settings.star_back }};
+    border-radius: 50px;
+  }
+  .star-rating-review img{
+    width: 10px;
+    height:auto;
+    margin-right: 5px;
+  }
+  .star_overflow{
+    position: relative;
+  }
+  .star_back{
+    left: -10px;
+    top: 5px;
+    padding: 0px 0px 0px 3px;
+    background: {{ section.settings.cir_color }};
+    width: 30px;
+    border-radius: 50px;
+    position: absolute;
+  }
+  .star_back p{
+    font-size: 16px;
+    font-weight: 800;
+    color: #14213d;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .btn_test{
+      margin:0;
+    }
+    .carousel-cell_test{
+      width: 50%
+    }
+    .test_header h1{
+      font-size:{{ section.settings.heading_mb }}px;
+    }
+    .test_box h1 p{
+      font-size:{{ section.settings.card_text_mb }}px;
+    }
+    .test_box h5{
+      font-size:{{ section.settings.card_para_mb }}px;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .carousel-cell_test{
+      width: 100%
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "TESTIMONIALS",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "header",
+  "content": "Header Settings"
+},
+    {
+  "type": "richtext",
+  "id": "heading_text",
+  "label": "Heading Text"
+},
+
+    {
+  "type": "range",
+  "id": "test_heading_fz",
+  "min": 8,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font-size",
+  "default": 40
+},
+    {
+  "type": "range",
+  "id": "test_heading_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font-Weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "test_heading_color",
+  "label": "Background Color",
+  "default": "#14213D"
+},
+      {
+  "type": "header",
+  "content": "Button Settings"
+},
+    {
+  "type": "text",
+  "id": "btn_test",
+  "label": "Button Text",
+  "default": "Free Consultation"
+},
+    {
+  "type": "url",
+  "id": "btn_test_link",
+  "label": "Button link"
+},
+    {
+  "type": "header",
+  "content": "Cards Settings"
+},
+    {
+  "type": "color",
+  "id": "test_card_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "range",
+  "id": "test_card_pad_tb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 10
+},
+    {
+  "type": "range",
+  "id": "test_card_pad_lr",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 10
+},
+    {
+  "type": "range",
+  "id": "test_card_name_fz",
+  "min": 1,
+  "max": 80,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font-size",
+  "default": 15
+},
+    {
+  "type": "range",
+  "id": "test_card_name_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Heading Font-weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "test_card_name_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "range",
+  "id": "test_card_para_fz",
+  "min": 1,
+  "max": 80,
+  "step": 1,
+  "unit": "px",
+  "label": "Review Font-size",
+  "default": 12
+},
+    {
+  "type": "range",
+  "id": "test_card_para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Review Font-weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "test_card_para_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Border Settings"
+},
+    {
+  "type": "range",
+  "id": "test_bor_lgn",
+  "min": 1,
+  "max": 10,
+  "step": 1,
+  "unit": "px",
+  "label": "Border-lenght",
+  "default": 1
+},
+    {
+  "type": "color",
+  "id": "test_bor_color",
+  "label": "Border Color",
+  "default": "#fca311"
+},
+    {
+  "type": "image_picker",
+  "id": "star_img",
+  "label": "Stars Image"
+},
+     {
+  "type": "color",
+  "id": "star_back",
+  "label": "Star Background Color",
+  "default": "#14213d"
+}, {
+  "type": "color",
+  "id": "cir_color",
+  "label": "Circle Color",
+  "default": "#fca311"
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "card_text_mb",
+  "min": 1,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Card Heading",
+  "default": 13
+},
+    {
+  "type": "range",
+  "id": "card_para_mb",
+  "min": 1,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Card Discription",
+  "default": 10
+},
+    {
+  "type": "range",
+  "id": "heading_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Heading Font-size",
+  "default": 35
+}
+
+
+  ],
+  "blocks":[
+    {
+        "name": "Cards",
+      "type": "block",
+      "settings":[
+        {
+  "type": "richtext",
+  "id": "name",
+  "label": "Name"
+},
+        {
+  "type": "richtext",
+  "id": "review",
+  "label": "Paragraph"
+},
+        {
+  "type": "range",
+  "id": "ratting",
+  "min": 1,
+  "max": 5,
+  "step": 1,
+  "unit": "px",
+  "label": "Rating Star",
+  "default": 3
+}
+
+
+
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

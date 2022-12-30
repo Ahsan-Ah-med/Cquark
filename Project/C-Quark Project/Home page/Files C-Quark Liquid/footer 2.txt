@@ -1,0 +1,130 @@
+<section>
+  <div class="mainfoo">
+    <div class="logo_sec">
+      <div class="logo_div">
+        <img src="{{ section.settings.logo_foo | img_url: 'master' }}">
+      </div>
+      <h5>{{ section.settings.foo_para }}</h5>
+    </div>
+    <div class="menu">
+      <div class="list_div">
+        <h4>Expertise</h4>
+        {%- if section.settings.menu != blank -%}
+          <ul class="">
+            {%- for link in section.settings.menu.links -%}
+              <li>
+                <a
+                  href="{{ link.url }}"
+                  class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                >
+                  {{ link.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="contact">
+      <h4>{{ section.settings.foo_cont }}</h4>
+      <h5>{{ section.settings.cont_num }}</h5>
+      <h5>{{ section.settings.cont_mail }}</h5>
+      <h5>{{ section.settings.cont_add }}</h5>
+    </div>
+  </div>
+</section>
+<style>
+    .contact h5{
+      padding: 10px 0;
+      font-size: 16px;
+      font-weight: 500;
+      color: #14213d;
+    }
+    .contact h4 {
+      font-weight: 800;
+      font-size: 15px;
+      color: #14213d;
+      text-align: left;
+      padding-bottom: 15px;
+  }
+    .list_div h4 {
+      font-weight: 800;
+      font-size: 15px;
+      color: #14213d;
+      text-align: left;
+      padding-bottom: 15px;
+  }
+    .mainfoo{
+      display: flex;
+      justify-content: space-between;
+    }
+    .logo_div{
+      width: 100px;
+    }
+    .logo_sec{
+      width: 30%;
+    }
+    .logo_sec h5{
+      font-size: 16px;
+      font-weight: 500;
+      color: #14213d;
+      padding: 10px 0;
+    }
+    .menu{
+      width: 30%;
+    }
+    .contact{
+      width: 30%;
+    }
+</style>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+  "type": "link_list",
+  "id": "menu",
+  "label": "Menu"
+},
+    {
+  "type": "image_picker",
+  "id": "logo_foo",
+  "label": "Image"
+},
+    {
+  "type": "richtext",
+  "id": "foo_para",
+  "label": "Paragraph"
+},
+    {
+  "type": "richtext",
+  "id": "foo_cont",
+  "label": "Contact Heading"
+},
+    {
+  "type": "richtext",
+  "id": "cont_num",
+  "label": "Number"
+},
+    {
+  "type": "richtext",
+  "id": "cont_mail",
+  "label": "Email"
+},
+    {
+  "type": "richtext",
+  "id": "cont_add",
+  "label": "Address"
+}
+
+
+
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

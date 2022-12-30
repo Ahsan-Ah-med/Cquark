@@ -1,0 +1,784 @@
+<section class="section_bg_color_7">
+  <div class="pricing_heading">
+    <h2>{{ section.settings.price_heading }}</h2>
+    <h1>{{ section.settings.price_heading_2 }}</h1>
+  </div>
+  <div class="pricing_container">
+    {% assign pbox = 1 %}
+    {% for blocks in section.blocks %}
+      <div class="pricing_card card_anim show-on-scroll price_box{% increment pbox %}">
+        <div class="card-head">
+          <h3>{{ blocks.settings['card-heading'] }}</h3>
+          {% if blocks.settings['card-para'] == blank %}
+            <h5 style="display:none">{{ blocks.settings['card-para'] }}</h5>
+          {% else %}
+            <h5>{{ blocks.settings['card-para'] }}</h5>
+          {% endif %}
+        </div>
+        <div class="card-middle">
+          {% if blocks.settings.pricing == blank %}
+            <h1 style="display:none">{{ blocks.settings.pricing }}</h1>
+          {% else %}
+            <h1>{{ blocks.settings.pricing }}</h1>
+          {% endif %}
+          <ul>
+            <li>{{ blocks.settings['ul-li-1'] }}</li>
+            <li>{{ blocks.settings['ul-li-2'] }}</li>
+            <details class="list_price list_item_acc">
+              <summary>
+                {{ blocks.settings['ul-li-3'] }}
+                <div class="faq-logo-plus">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1237/1237946.png">
+                </div>
+                <div class="faq-logo-minus">
+                  <img src="https://cdn-icons-png.flaticon.com/512/56/56889.png">
+                </div>
+              </summary>
+
+              <p>{{ blocks.settings['sub_ul-li-1'] }}</p>
+              <p>{{ blocks.settings['sub_ul-li-2'] }}</p>
+              <p>{{ blocks.settings['sub_ul-li-3'] }}</p>
+            </details>
+            <li>{{ blocks.settings['ul-li-4'] }}</li>
+            <details class="list_price list_item_acc">
+              <summary>
+                {{ blocks.settings['ul-li-5'] }}
+                <div class="faq-logo-plus">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1237/1237946.png">
+                </div>
+                <div class="faq-logo-minus">
+                  <img src="https://cdn-icons-png.flaticon.com/512/56/56889.png">
+                </div>
+              </summary>
+              <p>{{ blocks.settings['sub_ul-li-51'] }}</p>
+            </details>
+            <li>{{ blocks.settings['ul-li-6'] }}</li>
+            <li>{{ blocks.settings['ul-li-7'] }}</li>
+          </ul>
+          <details class="list_price more">
+            <summary>More Features</summary>
+            {% if blocks.settings.more_list == blank %}
+              <div style="display:none" class="more_list">
+                {{ blocks.settings.more_list }}
+              </div>
+            {% else %}
+              <div class="more_list">
+                {{ blocks.settings.more_list }}
+              </div>
+            {% endif %}
+          </details>
+        </div>
+        <div class="pricing_btn_div">
+          <a href="{{ blocks.settings.pricing_btn_link }}">
+            <button class="new_btn">
+              {{ blocks.settings.pricing_btn }}
+            </button>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+     *{
+       font-family: 'Mulish', sans-serif;
+     }
+    .price_box0{
+      border-top: 5px solid #E5E5E5;
+    }
+    .price_box1{
+      border-top: 5px solid #14213D;
+    }
+    .price_box2{
+      border-top: 5px solid #FCA311;
+    }
+     section{
+         background-color: {{ settings.bg_sec_color }};
+         width: 100%;
+         padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+     }
+     .section_bg_color_7{
+       background-color:{{ section.settings.sec_bg_color }};
+     }
+     .pricing_container{
+       display:flex;
+       justify-content: space-around;
+       flex-wrap: wrap;
+       align-items: flex-start;
+     }
+     .pricing_card{
+       width:30%;
+       background-color:{{ section.settings.card_bg_color }};
+       box-shadow: 4px 4px 30px 0 lightgrey;
+       padding:{{ section.settings.card_padding_tb }}px {{ section.settings.card_padding_lr }}px;
+       display:block;
+       margin: 10px 0;
+       transition: ease-in 0.1s;
+     }
+     .pricing_card:hover{
+         transform: scale(1.05);
+     }
+     .pricing_heading{
+       text-align: center;
+       display: block;
+     }
+     .pricing_heading h2{
+       font-size:{{ section.settings.fh_fz }}px;
+       font-weight:{{ section.settings.fh_fw }};
+       color:{{ section.settings.fh_color }};
+       margin:0;
+     }
+    .pricing_heading h2 p{
+        margin:0;
+    }
+     .pricing_heading h1{
+       font-size:{{ section.settings.head_fz }}px;
+       font-weight:{{ section.settings.head_fw }};
+       color:{{ section.settings.head_color }};
+       margin:0;
+        padding-bottom: 30px;
+     }
+     .pricing_heading h1 p{
+       margin:0;
+     }
+     .card-head{
+       border-bottom: {{ section.settings.card_border_b }}px solid {{ section.settings.card_border_color }};
+     }
+     .card-head h3{
+       font-size: {{ section.settings.card_heading_fz }}px;
+       font-weight:{{ section.settings.card_heading_fw }};
+       color:{{ section.settings.card_heading_color }};
+       margin:0;
+       padding-bottom: 20px;
+     }
+
+     .card-head h5{
+       font-size: {{ section.settings.card_para_fz }}px;
+       font-weight:{{ section.settings.card_para_fw }};
+       color:{{ section.settings.card_para_color }};
+       padding-bottom: 20px;
+       margin:0;
+     }
+
+     .card-middle{
+       padding: 20px 0 0 0;
+     }
+     .card-middle h1{
+       font-size: {{ section.settings.card_price_fz }}px;
+       font-weight: {{ section.settings.card_price_fw }};
+       margin: 0;
+       color: {{ section.settings.card_price_color }};
+      padding-bottom: 20px;
+     }
+     .card-middle h1 p{
+       margin:0;
+     }
+        .more_fut{
+          font-weight: 700;
+          font-size: 14px;
+          color: #14213d;
+          border-bottom: 1px solid #FCA311;
+          width: fit-content;
+          cursor: pointer;
+        }
+     .card-middle ul{
+        margin:0;
+        list-style: none;
+        padding: 0;
+     }
+     .card-middle ul ul {
+        padding-left:10px;
+     }
+     .card-middle ul li{
+       font-size: {{ section.settings.card_list_fz }}px;
+       font-weight: {{ section.settings.card_list_fw }};
+       color: {{ section.settings.card_list_color }};
+     }
+      .card-middle ul li p{
+       margin:0;
+     }
+     .pricing_btn_div{
+       display:flex;
+       justify-content: center;
+     }
+     .card_anim{
+       opacity: 0;
+       transition: transform 1.5s ease;
+       transform: translateY(20%);
+     }
+    .card_anim.visible{
+       opacity: 1;
+       transform: translateY(0);
+    }
+    .list_price summary p{
+      font-size:13px;
+      color:#14213d;
+      font-weight:500;
+      padding-left:0;
+    }
+    .list_price p{
+      font-weight:300;
+      font-size:13px;
+      color:#14213d;
+      padding-left:10px;
+    }
+    .more summary{
+      font-size: 13px;
+      font-weight: 800;
+      color: #14213d;
+      width: fit-content;
+      border-bottom: 1px solid #FCA311;
+    }
+    .faq-logo-plus,.faq-logo-minus{
+      position: absolute;
+      width: 10px;
+      right: 0;
+      top: 0;
+    }
+    .show{
+      display:none;
+    }
+  .card-head h3 p strong {
+      color: #14213d;
+  }
+    .pricing_heading h2 p:before {
+      content: "";
+      width: 50px;
+      height: 3px;
+      position: absolute;
+      background: #FCA311;
+      bottom: -2px;
+      border-radius: 50px;
+  }
+  .pricing_heading h2{
+    position:relative;
+  }
+     @media only screen and (max-width: 767px) {
+       .pricing_card{
+         width: 45%
+       }
+       .pricing_heading h2{
+         font-size:{{ section.settings.sub_head_fz_mb }}px;
+       }
+       .pricing_heading h1{
+         font-size:{{ section.settings.head_fz_mb }}px;
+       }
+       .card-head h3{
+         font-size:{{ section.settings.card_head_fz_mb }}px;
+       }
+       .card-head h5{
+         font-size:{{ section.settings.card_para_fz_mb }}px;
+       }
+       .card-middle h1{
+         font-size:{{ section.settings.card_price_fz_mb }}px;
+       }
+       .card-middle ul li{
+         font-size:{{ section.settings.card_ul_fz }}px;
+       }
+     }
+     @media only screen and (max-width: 425px) {
+       .pricing_card{
+         width: 100%
+       }
+     }
+</style>
+<script>
+    document.querySelectorAll('.list_item_acc').forEach((s, i) =>{
+      s.addEventListener('click', ()=>{
+        document.querySelectorAll('.faq-logo-plus')[i].classList.toggle('show')
+  })
+    })
+    //   document.querySelector('.list_price').addEventListener('click', ()=>{
+    //     document.querySelector('.faq-logo-plus').classList.toggle('show')
+    // })
+
+      //  const accordionItems = document.querySelectorAll(".list_price");
+      //   var minus = document.querySelectorAll('.faq-logo-minus')
+      //   var plus = document.querySelectorAll('.faq-logo-plus')
+      //   const siblings = (el) => {
+      //     if (el.parentNode === null) return [];
+      //     return Array.prototype.filter.call(el.parentNode.children, function (child) {
+      //       return child !== el;
+      //     });
+      //   };
+
+      //   for(let i = 0; i < accordionItems.length; i++){
+      //         accordionItems[i].addEventListener('click', () => {
+      //         const others = siblings(accordionItems[i]);
+      //          others.forEach((sibling) => {
+      //       sibling.removeAttribute("open");
+      //     });
+      //     })
+      // }
+
+      // Pricing Card Scrolling
+                    var scroll = window.requestAnimationFrame;
+            var elementsToShow = document.querySelectorAll('.show-on-scroll');
+
+            function loop() {
+                Array.prototype.forEach.call(elementsToShow, function(element){
+                    if (isElementInViewport(element)) {
+                        element.classList.add('visible')
+                    } else {
+                        element.classList.remove('visible')
+                    }
+                });
+                scroll(loop)
+            }
+            loop()
+
+            function isElementInViewport(element) {
+                var rectangle = element.getBoundingClientRect();
+                var height = window.innerHeight || document.documentElement.clientHeight;
+                var top = rectangle.top;
+                var bottom = rectangle.bottom;
+
+                return (top <= 0 && bottom >= 0) ||
+                    (bottom >= height && top <= height) ||
+                    (top >= 0 && bottom <= height);
+            }
+
+
+        //       const accordion=document.querySelectorAll('.list_price');
+
+        // for(let i=0;i<accordion.length;i++){
+
+        //     accordion[i].addEventListener('click',function(){
+        //         this.classList.toggle('active');
+        //     })
+        // };
+        //      document.querySelectorAll('.list_price').forEach((para, index) => {
+        //       para.addEventListener( 'click' , () => {
+        //          document.querySelectorAll('.ans').forEach((ans) => {
+        //              ans.classList.remove("show")
+        //         })
+        //           document.querySelectorAll('.ans')[index].classList.add('show')
+        //        })
+        //    })
+
+        // document.querySelectorAll('.faq-logo-plus').forEach((j, i) =>{
+        //   j.addEventListener('click', () =>{
+        //     document.querySelectorAll('.active').forEach((x) =>{
+        //       x.classList.remove("plus")
+        //     })
+        //     document.querySelectorAll('.active')[i].classList.add('plus')
+        //   })
+        // })
+</script>
+{% schema %}
+{
+  "name": "Pricing",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "header",
+  "content": "Header Settings"
+},
+{
+  "type": "richtext",
+  "id": "price_heading",
+  "label": "First Heading"
+},
+    {
+  "type": "range",
+  "id": "fh_fz",
+  "min": 8,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 17
+},
+    {
+  "type": "range",
+  "id": "fh_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "fh_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+{
+  "type": "richtext",
+  "id": "price_heading_2",
+  "label": "Heading"
+},
+    {
+  "type": "range",
+  "id": "head_fz",
+  "min": 8,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 48
+},
+    {
+  "type": "range",
+  "id": "head_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "head_color",
+  "label": "Text Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Cards Settings"
+},
+    {
+  "type": "color",
+  "id": "card_bg_color",
+  "label": "Background Color",
+  "default": "#eaf4f4"
+},
+    {
+  "type": "range",
+  "id": "card_padding_tb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 30
+},
+    {
+  "type": "range",
+  "id": "card_padding_lr",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 30
+},
+    {
+  "type": "range",
+  "id": "card_border_b",
+  "min": 1,
+  "max": 10,
+  "step": 1,
+  "unit": "px",
+  "label": "Border-bottom",
+  "default": 1
+},
+    {
+  "type": "color",
+  "id": "card_border_color",
+  "label": "Border Color",
+  "default": "#FCA311"
+},
+    {
+  "type": "header",
+  "content": "Header Settings"
+},
+    {
+  "type": "range",
+  "id": "card_heading_fz",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font-size",
+  "default": 24
+},
+    {
+  "type": "range",
+  "id": "card_heading_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font-weight",
+  "default": 600
+},
+    {
+  "type": "color",
+  "id": "card_heading_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Paragraph Settings"
+},
+    {
+  "type": "range",
+  "id": "card_para_fz",
+  "min": 1,
+  "max": 60,
+  "step": 1,
+  "unit": "px",
+  "label": "Font-size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "card_para_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font-weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "card_para_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+    {
+  "type": "header",
+  "content": "Price Settings"
+},
+    {
+  "type": "range",
+  "id": "card_price_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font Size",
+  "default": 60
+},
+    {
+  "type": "range",
+  "id": "card_price_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font-weight",
+  "default": 800
+},
+    {
+  "type": "color",
+  "id": "card_price_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+      {
+  "type": "header",
+  "content": "Lists Settings"
+},
+    {
+  "type": "range",
+  "id": "card_list_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font Size",
+  "default": 16
+},
+    {
+  "type": "range",
+  "id": "card_list_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font-weight",
+  "default": 400
+},
+    {
+  "type": "color",
+  "id": "card_list_color",
+  "label": "Color",
+  "default": "#14213D"
+},
+  {
+  "type": "header",
+  "content": "mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "sub_head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Sub heading Font-size",
+  "default": 15
+},
+    {
+  "type": "range",
+  "id": "head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "heading Font-size",
+  "default": 40
+},
+    {
+  "type": "range",
+  "id": "card_head_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Card heading",
+  "default": 20
+},
+    {
+  "type": "range",
+  "id": "card_para_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Card Paragraph",
+  "default": 13
+},
+    {
+  "type": "range",
+  "id": "card_price_fz_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Card Price",
+  "default": 50
+},
+    {
+  "type": "range",
+  "id": "card_ul_fz",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Card List",
+  "default": 13
+}
+
+
+  ],
+  "blocks":[
+    {
+        "name": "Cards",
+      "type": "block",
+      "settings":[
+        {
+  "type": "header",
+  "content": "Card Settings"
+},
+        {
+  "type": "richtext",
+  "id": "card-heading",
+  "label": "Heading"
+},
+        {
+  "type": "richtext",
+  "id": "card-para",
+  "label": "Paragraph"
+},
+        {
+  "type": "richtext",
+  "id": "pricing",
+  "label": "Prices"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-1",
+  "label": "List"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-2",
+  "label": "List"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-3",
+  "label": "List"
+},
+         {
+  "type": "richtext",
+  "id": "sub_ul-li-1",
+  "label": "Sub List"
+}, {
+  "type": "richtext",
+  "id": "sub_ul-li-2",
+  "label": "Sub List"
+}, {
+  "type": "richtext",
+  "id": "sub_ul-li-3",
+  "label": "Sub List"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-4",
+  "label": "List"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-5",
+  "label": "List"
+},
+    {
+  "type": "richtext",
+  "id": "sub_ul-li-51",
+  "label": "Sub List"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-6",
+  "label": "List"
+},
+        {
+  "type": "richtext",
+  "id": "ul-li-7",
+  "label": "List"
+},
+        {
+  "type": "html",
+  "id": "more_list",
+  "label": "More List"
+},
+        {
+  "type": "text",
+  "id": "pricing_btn",
+  "label": "Button Text",
+  "default": "Get Started"
+},
+        {
+  "type": "url",
+  "id": "pricing_btn_link",
+  "label": "Button link"
+}      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
