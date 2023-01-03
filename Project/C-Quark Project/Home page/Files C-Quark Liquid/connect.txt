@@ -78,7 +78,7 @@
         font-size:{{ section.settings.head_fz }}px;
       }
       .content div h1 Strong{
-          font-size:24px;
+          font-size:26px;
         }
     }
 </style>

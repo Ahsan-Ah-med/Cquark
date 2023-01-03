@@ -1,4 +1,4 @@
-<section>
+<section class="foo_bg_color">
   <div class="mainfoo">
     <div class="logo_sec">
       <div class="logo_div">
@@ -8,7 +8,7 @@
     </div>
     <div class="menu">
       <div class="list_div">
-        <h4>Expertise</h4>
+        <h4>{{ section.settings.foo_menu }}</h4>
         {%- if section.settings.menu != blank -%}
           <ul class="">
             {%- for link in section.settings.menu.links -%}
@@ -24,67 +24,162 @@
           </ul>
         {%- endif -%}
       </div>
+      <div class="contact">
+        <h4>{{ section.settings.foo_cont }}</h4>
+        <h5><img src="https://cdn-icons-png.flaticon.com/512/561/561127.png"> {{ section.settings.cont_mail }}</h5>
+      </div>
     </div>
-    <div class="contact">
-      <h4>{{ section.settings.foo_cont }}</h4>
-      <h5>{{ section.settings.cont_num }}</h5>
-      <h5>{{ section.settings.cont_mail }}</h5>
-      <h5>{{ section.settings.cont_add }}</h5>
+    <div class="socail_box">
+      {% for block in section.blocks %}
+        <div class="social_net">
+          <a href="{{ block.settings.social_link }}"><img src="{{ block.settings.social_pic | img_url: 'master' }}"></a>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 <style>
-    .contact h5{
-      padding: 10px 0;
-      font-size: 16px;
-      font-weight: 500;
-      color: #14213d;
+  .social_net{
+    width: {{ section.settings.social_icon }}px;
+    height: {{ section.settings.social_icon }}px;
+  }
+  .social_net img:hover{
+    box-shadow: 0 3px 10px rgb(0 0 0 / 50%);
+    border-radius: 50%
+  }
+  .socail_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width:10%;
+  }
+  .contact h5 img{
+    width:18px;
+    margin-right:10px;
+  }
+  .contact h5{
+    display:flex;
+    padding: 10px 0;
+    align-items: center;
+    font-size: {{ section.settings.mail_fz }}px;
+    font-weight: {{ section.settings.mail_fw }};
+    color: {{ section.settings.mail_color }};
+  }
+  .contact h4 {
+    font-weight: {{ section.settings.menu_fw }};
+    font-size: {{ section.settings.menu_fz }}px;
+    color: {{ section.settings.menu_color }};
+    text-align: left;
+    padding-bottom: 15px;
+  }
+  .list_div h4 {
+    font-weight: {{ section.settings.menu_fw }};
+    font-size: {{ section.settings.menu_fz }}px;
+    color: {{ section.settings.menu_color }};
+    text-align: left;
+    padding-bottom: 15px;
+  }
+  .mainfoo{
+    display: flex;
+    justify-content: space-between;
+  }
+  .logo_div{
+    width: {{ section.settings.logo_size }}px;
+  }
+  .logo_sec, .menu{
+    width: 25%;
+  }
+  .contact{
+   width:100%
+  }
+  .logo_sec h5{
+    font-size: {{ section.settings.dis_fz }}px;
+    font-weight: {{ section.settings.dis_fw }};
+    color: {{ section.settings.dis_color }};
+    padding: 10px 10px 10px 10px;
+  }
+  .list_div ul li a {
+    font-size: {{ section.settings.mail_fz }}px;
+    font-weight: {{ section.settings.mail_fw }};
+    color: {{ section.settings.mail_color }};
+  }
+  .list_div ul {
+    list-style: none;
+    padding: 0;
+  }
+  .foo_bg_color{
+    background-color:{{ section.settings.foo_bg_color }};
+  }
+  @media only screen and (max-width:767px){
+    .logo_sec h5{
+      font-size:{{ section.settings.dis_fz_mb }}px;
     }
-    .contact h4 {
-      font-weight: 800;
-      font-size: 15px;
-      color: #14213d;
-      text-align: left;
-      padding-bottom: 15px;
-  }
-    .list_div h4 {
-      font-weight: 800;
-      font-size: 15px;
-      color: #14213d;
-      text-align: left;
-      padding-bottom: 15px;
-  }
-    .mainfoo{
-      display: flex;
-      justify-content: space-between;
+    .list_div h4{
+      font-size:{{ section.settings.menu_fz_mb }}px;
+    }
+    .contact h4{
+      font-size:{{ section.settings.menu_fz_mb }}px;
+      padding-top: 15px;
+    }
+    .list_div ul li a{
+      font-size:{{ section.settings.list_fz_mb }}px;
+      padding:0;
+    }
+    .list_div ul{
+      margin:0;
+    }
+    .contact h5{
+      font-size:{{ section.settings.mail_fz_mb }}px;
+      padding:0;
+    }
+    .social_net{
+      width:{{ section.settings.social_icon_mb }}px;
+      height:{{ section.settings.social_icon_mb }}px;
     }
     .logo_div{
-      width: 100px;
+    width: {{ section.settings.logo_size_mb }}px;
     }
-    .logo_sec{
-      width: 30%;
-    }
-    .logo_sec h5{
-      font-size: 16px;
-      font-weight: 500;
-      color: #14213d;
-      padding: 10px 0;
-    }
-    .menu{
-      width: 30%;
-    }
-    .contact{
-      width: 30%;
-    }
+  }
+  @media only screen and (max-width:600px){
+  .logo_sec, .menu, .contact{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .mainfoo{
+    flex-direction: column;
+  }
+  .socail_box{
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  .logo_sec h5{
+    padding: 10px 0px;
+  }
+  }
 </style>
 {% schema %}
 {
   "name": "Footer",
   "settings": [
     {
-  "type": "link_list",
-  "id": "menu",
-  "label": "Menu"
+  "type": "header",
+  "content": "Footer Settings"
+},
+    {
+  "type": "header",
+  "content": "Section Settings"
+},
+    {
+  "type": "color",
+  "id": "foo_bg_color",
+  "label": "Background Color",
+  "default": "#EAF4F4"
+},
+    {
+  "type": "header",
+  "content": "Logo Settings"
 },
     {
   "type": "image_picker",
@@ -92,9 +187,89 @@
   "label": "Image"
 },
     {
+  "type": "range",
+  "id": "logo_size",
+  "min": 50,
+  "max": 200,
+  "step": 5,
+  "unit": "px",
+  "label": "Logo size",
+  "default": 100
+},
+    {
+  "type": "header",
+  "content": "Discription Settings"
+},
+{
   "type": "richtext",
   "id": "foo_para",
-  "label": "Paragraph"
+  "label": "Discription"
+},
+    {
+  "type": "range",
+  "id": "dis_fz",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "dis_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+{
+  "type": "color",
+  "id": "dis_color",
+  "label": "Body text",
+  "default": "#14213d"
+},
+{
+  "type": "header",
+  "content": "Menu Settings"
+},
+    {
+  "type": "richtext",
+  "id": "foo_menu",
+  "label": "Menu Heading"
+},
+    {
+  "type": "range",
+  "id": "menu_fz",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "menu_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 800
+},
+{
+  "type": "color",
+  "id": "menu_color",
+  "label": "Text Color",
+  "default": "#14213d"
+},
+    {
+  "type": "link_list",
+  "id": "menu",
+  "label": "Menu"
 },
     {
   "type": "richtext",
@@ -102,9 +277,8 @@
   "label": "Contact Heading"
 },
     {
-  "type": "richtext",
-  "id": "cont_num",
-  "label": "Number"
+  "type": "header",
+  "content": "Email Settings"
 },
     {
   "type": "richtext",
@@ -112,13 +286,129 @@
   "label": "Email"
 },
     {
-  "type": "richtext",
-  "id": "cont_add",
-  "label": "Address"
+  "type": "range",
+  "id": "mail_fz",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "mail_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weight",
+  "default": 500
+},
+{
+  "type": "color",
+  "id": "mail_color",
+  "label": "Text Color",
+  "default": "#14213d"
+},
+    {
+  "type": "header",
+  "content": "Icon Settings"
+},
+{
+  "type": "range",
+  "id": "social_icon",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Social Icon size",
+  "default": 50
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "logo_size_mb",
+  "min": 50,
+  "max": 200,
+  "step": 5,
+  "unit": "px",
+  "label": "Logo size",
+  "default": 100
+},
+    {
+  "type": "range",
+  "id": "dis_fz_mb",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Discription Font size",
+  "default": 14
+},
+{
+  "type": "range",
+  "id": "menu_fz_mb",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Menu Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "list_fz_mb",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "List Font size",
+  "default": 16
+},
+{
+  "type": "range",
+  "id": "mail_fz_mb",
+  "min": 1,
+  "max": 70,
+  "step": 1,
+  "unit": "px",
+  "label": "Email Font size",
+  "default": 14
+},
+    {
+  "type": "range",
+  "id": "social_icon_mb",
+  "min": 1,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Social Icon size",
+  "default": 50
+}
+
+  ],
+  "blocks":[
+    {
+        "name": "Social Network",
+      "type": "block",
+      "settings":[
+        {
+  "type": "image_picker",
+  "id": "social_pic",
+  "label": "Image"
+},{
+  "type": "url",
+  "id": "social_link",
+  "label": "Socail Link"
 }
 
 
-
+      ]
+    }
   ]
 }
 {% endschema %}

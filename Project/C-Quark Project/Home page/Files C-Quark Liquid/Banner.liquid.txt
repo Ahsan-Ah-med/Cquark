@@ -1,5 +1,5 @@
 <section class="section_bg_color_1">
-  <div class="main_section">
+  <div class="main_section animate__animated animate__fadeIn ">
     <div class="main_div">
       <div class="left_div">
         <h1 class="h1">
@@ -10,13 +10,15 @@
             {{ section.settings.main_para }}
           </p>
         </div>
-        <div class="btn_div">
-          <a href="{{ section.settings.btn_link }}">
-            <button class="new_btn">
-              {{ section.settings.btn_text }}
-            </button>
-          </a>
-        </div>
+        <!--
+          <div class="btn_div">
+            <a href="{{ section.settings.btn_link }}">
+              <button class="new_btn">
+                {{ section.settings.btn_text }}
+              </button>
+            </a>
+          </div>
+        -->
       </div>
       <div class="right_div">
         <div>
@@ -203,9 +205,9 @@
            font-size:{{ section.settings.para_fz_mb }}px;
          }
       }
-      @media only screen and (max-width: 425px) {
+      @media only screen and (max-width: 600px) {
         .carousel-cell{
-          width:33%;
+          width:50%;
         }
       }
 </style>

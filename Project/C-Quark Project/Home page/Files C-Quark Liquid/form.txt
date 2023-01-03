@@ -8,7 +8,7 @@
       <form>
         <input type="text" placeholder="First Name">
         <input type="text" placeholder="Last Name">
-        <input type="email" placeholder="Email Address">
+        <input type="email" placeholder="Email Address" required>
         <div class="form_btn_div">
           <a href="{{ section.settings.btn_link }}">
             <button class="new_btn form_btn" type="submit">
@@ -69,7 +69,7 @@
     border: 1px solid #14213d;
     background: #EAF4F4;
     padding: 15px 20px;
-    font-size: 20px;
+    font-size: 15px;
     margin-bottom: 10px;
     color:#14213d;
   }
@@ -89,8 +89,12 @@
     }
     .form_head h5{
       font-size:{{ section.settings.para_fz_mb }}px;
+      padding: 15px 0;
     }
-      input {
+    .form_head{
+      padding:0;
+    }
+    input {
       width: 100%;
     }
     .form_btn_div {
@@ -98,7 +102,7 @@
     }
     input[type="text"], input[type="email"]{
       padding: 10px 15px;
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 </style>

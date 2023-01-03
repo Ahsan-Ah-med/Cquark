@@ -33,13 +33,15 @@
       </div>
     {% endfor %}
   </div>
-  <div class="btn_test">
-    <a href="{{ section.settings.btn_test_link }}">
-      <button class="new_btn">
-        {{ section.settings.btn_test }}
-      </button>
-    </a>
-  </div>
+  <!--
+    <div class="btn_test">
+      <a href="{{ section.settings.btn_test_link }}">
+        <button class="new_btn">
+          {{ section.settings.btn_test }}
+        </button>
+      </a>
+    </div>
+  -->
 </section>
 
 <style>
@@ -142,7 +144,22 @@
     font-weight: 800;
     color: #14213d;
   }
-
+  .flickity-prev-next-button.previous{
+    left: -15px;
+    background: transparent;
+  }
+  .flickity-prev-next-button.next{
+    right: -15px;
+    background: transparent;
+  }
+  .flickity-button:focus{
+    box-shadow: none;
+  }
+  @media only screen and (max-width: 950px) {
+    .carousel-cell_test{
+      width:50%;
+    }
+  }
   @media only screen and (max-width: 767px) {
     .btn_test{
       margin:0;
@@ -158,6 +175,12 @@
     }
     .test_box h5{
       font-size:{{ section.settings.card_para_mb }}px;
+    }
+    .section_bg_color .carousel .flickity-viewport{
+      margin:0;
+    }
+    .test_header{
+      padding-bottom:20px;
     }
   }
   @media only screen and (max-width: 425px) {

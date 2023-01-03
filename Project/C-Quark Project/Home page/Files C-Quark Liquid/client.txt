@@ -20,6 +20,11 @@
     </div>
   {% endcomment %}
   <div class="main_container">
+    <!--
+      <div class="client_image_left">
+        <img src="{{ section.settings.client_image | img_url: 'master' }}">
+      </div>
+    -->
     <div class="client_container">
       <h1>{{ section.settings.client_head }}</h1>
       <h5>{{ section.settings.client_para }}</h5>
@@ -41,108 +46,123 @@
   </div>
 </section>
 <style>
-  .client_btn{
-    display:flex;
-    justify-content: center;
-  }
-  .parent{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .main_container{
-    width:100%;
-    display:flex;
-    justify-content: flex-end;
-  }
-  .client_container{
-    width:70%;
-    text-align:center;
-  }
-  .client_img_container{
-    width: 25%;
-    padding: 29px;
-    max-width: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .client_header{
-    text-align:center;
-    padding-bottom: 30px;
-  }
-  .client_container h1 p{
-    font-size:{{ section.settings.client_head_fz }}px;
-    font-weight:{{ section.settings.client_head_fw }};
-    color:{{ section.settings.client_head_color }};
-  }
-  .client_container h5{
-    font-size:{{ section.settings.client_para_fz }}px;
-    font-weight:{{ section.settings.client_para_fw }};
-    color:{{ section.settings.client_para_color }};
-  }
-  section{
-      background-color: {{ settings.bg_sec_color }};
-      width: 100%;
-      padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
-  }
-  .section_bg_color_6{
-    background-color:{{ section.settings.sec_bg_color }};
-  }
-  .client_box{
-    display: flex;
-    padding: 60px 0;
+    .client_image_left{
+      width:30%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .section_bg_color_6{
+      padding-top:60px;
+  /*     background-image:url({{ section.settings.client_image | img_url: 'master' }}); */
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .client_btn{
+      display:flex;
+      justify-content: center;
+    }
+    .parent{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .main_container{
+      width:100%;
+      display:flex;
+      justify-content: flex-end;
+      align-items: center;
 
-  }
-      .client_logo{
-        background: {{ section.settings.logo_color }};
-    /*     width: 25%; */
-        padding: 15px 10px;
-        margin: 0px 0px;
-        display: block;
-        text-align: center;
-        transition: ease-in 0.1s;
-  /*       box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px; */
-      }
-    /*   .client_logo:hover{
-        background: {{ section.settings.logo_hover_color }};
-        box-shadow: 2px 2px 8px 3px #928c8c;
-        transform: scale(1.05);
-      } */
-      .client_logo img{
-        margin: 0 auto;
-        width: 125px;
-        cursor: pointer;
-      }
-      @media only screen and (max-width: 767px) {
+    }
+    .client_container{
+      width:70%;
+      text-align:center;
+    }
+    .client_img_container{
+      width: 25%;
+      padding: 29px;
+      max-width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .client_header{
+      text-align:center;
+      padding-bottom: 30px;
+    }
+    .client_container h1 p{
+      font-size:{{ section.settings.client_head_fz }}px;
+      font-weight:{{ section.settings.client_head_fw }};
+      color:{{ section.settings.client_head_color }};
+    }
+    .client_container h5{
+      font-size:{{ section.settings.client_para_fz }}px;
+      font-weight:{{ section.settings.client_para_fw }};
+      color:{{ section.settings.client_para_color }};
+      padding: 15px 0;
+    }
+    section{
+        background-color: {{ settings.bg_sec_color }};
+        width: 100%;
+        padding: {{ settings.padding_tb }}px {{ settings.padding_lr }}px ;
+    }
+    .section_bg_color_6{
+      background-color:{{ section.settings.sec_bg_color }};
+    }
+    .client_box{
+      display: flex;
+      padding: 60px 0;
+
+    }
         .client_logo{
-          width: 33%
+          background: {{ section.settings.logo_color }};
+      /*     width: 25%; */
+          padding: 15px 10px;
+          margin: 0px 0px;
+          display: block;
+          text-align: center;
+          transition: ease-in 0.1s;
+    /*       box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px; */
         }
-          .client_container h1 p{
-            font-size:{{ section.settings.client_head_fz_mb }}px;
+      /*   .client_logo:hover{
+          background: {{ section.settings.logo_hover_color }};
+          box-shadow: 2px 2px 8px 3px #928c8c;
+          transform: scale(1.05);
+        } */
+        .client_logo img{
+          margin: 0 auto;
+          width: 125px;
+          cursor: pointer;
+        }
+        @media only screen and (max-width: 767px) {
+          .client_logo{
+            width: 33%
           }
-        .client_container h5{
-            font-size:{{ section.settings.client_para_fz_mb }}px;
+            .client_container h1 p{
+              font-size:{{ section.settings.client_head_fz_mb }}px;
+            }
+          .client_container h5{
+              font-size:{{ section.settings.client_para_fz_mb }}px;
+            }
+          .client_img_container{
+            padding:10px 10px 0 10px;
+            width: 26%;
           }
-        .client_img_container{
-          padding:10px 10px 0 10px;
-          width: 26%;
+          .client_container{
+            width: 100%;
+          }
         }
-        .client_container{
-          width: 100%;
+        @media only screen and (max-width: 425px) {
+          .client_logo{
+            width: 50%
+          }
         }
-      }
-      @media only screen and (max-width: 425px) {
-        .client_logo{
-          width: 50%
+        @media only screen and (max-width: 375px) {
+          .client_logo{
+            width: 100%
+          }
         }
-      }
-      @media only screen and (max-width: 375px) {
-        .client_logo{
-          width: 100%
-        }
-      }
 </style>
 {% schema %}
 {
@@ -254,6 +274,7 @@
   "id": "btn_link",
   "label": "Button link"
 },
+
     {
   "type": "header",
   "content": "Mobile Settings"
@@ -277,7 +298,13 @@
   "unit": "px",
   "label": "Paragraph Font size",
   "default": 12
+},
+    {
+  "type": "image_picker",
+  "id": "client_image",
+  "label": "Background Image"
 }
+
 
 
 
