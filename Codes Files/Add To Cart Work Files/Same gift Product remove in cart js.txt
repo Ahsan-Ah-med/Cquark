@@ -1,0 +1,36 @@
+var demoprice = {{ total__price }}
+    // console.log("started")
+ if ({{ total__price }} < 10000.00) {
+        document.querySelectorAll(".cart-item__details").forEach((item, index) => {
+          if(item.innerText === "Nike Airmax 3"){
+            item.parentNode.querySelector(".cart-item__quantity cart-remove-button").click()
+          // console.log("remove")
+            }
+        })
+   
+    // console.log("ended")
+  }   
+
+  // console.log("started")
+ if ({{ total__price }} < 15000.00) {
+        document.querySelectorAll(".cart-item__details").forEach((item, index) => {
+          if(item.innerText === "Nike Airmax 2"){
+            item.parentNode.querySelector(".cart-item__quantity cart-remove-button").click()
+          // console.log("remove")
+            }
+        })
+   
+    // console.log("ended")
+  }   
+
+    // console.log("started")
+ if ({{ total__price }} < 20000.00) {
+        document.querySelectorAll(".cart-item__details").forEach((item, index) => {
+          if(item.innerText === "Nike Airmax"){
+            item.parentNode.querySelector(".cart-item__quantity cart-remove-button").click()
+          // console.log("remove")
+            }
+        })
+   // 
+    // console.log("ended")
+  }   

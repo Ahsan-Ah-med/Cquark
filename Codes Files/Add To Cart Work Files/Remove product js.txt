@@ -1,0 +1,43 @@
+// console.log("started Gift Item")
+//         all_items.forEach((item, index) => {
+//     if(item.querySelector('.cart-item__name').innerText === "Nike Airmax 3"){
+//     console.log("started Gift Item")
+      
+//     document.querySelector('#gift_one').style.display = "none"
+      
+//               }break;
+//     else {
+//     document.querySelector('#gift_one').style.display = "flex"
+//       }
+//     console.log("ended Gift Item")
+//     }
+//     )
+
+//     // console.log("started Second Gift Item")
+//     all_items.forEach((item, index) => {
+//     if(item.querySelector('.cart-item__name').innerText === "Nike Airmax 2"){
+//     console.log("started Second Gift Item")
+      
+//     document.querySelector('#gift_two').style.display = "none"
+      
+//     }break; else {
+//     document.querySelector('#gift_two').style.display = "flex"
+//       }
+//     console.log("ended Gift Item")
+//     })
+
+//     // console.log("started Third Gift Item")
+//    all_items.forEach((item, index) => {
+//     if(item.querySelector('.cart-item__name').innerText === "Nike Airmax"){
+//     console.log("started Third Gift Item")
+      
+//     document.querySelector('#gift_third').style.display = "none"
+//               }
+//       break;
+      
+//     else {
+//     document.querySelector('#gift_third').style.display = "flex"
+//       }
+//     console.log("ended Gift Item")
+//     }
+//     )

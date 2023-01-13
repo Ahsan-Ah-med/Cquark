@@ -1,0 +1,24 @@
+
+section-main-product.css asset css file 
+
+  .product--large:not(.product--no-media) .product__media-wrapper{
+  max-width:50% !important;
+  width:50%;
+  }
+.product--large:not(.product--no-media) .product__info-wrapper{
+  max-width:50% !important;
+  width:50%;
+  padding:0;
+}
+
+
+
+
+
+component-price.css asset css file 
+
+
+.price--on-sale .price__sale{
+  display: flex;
+  flex-direction: row-reverse;
+}

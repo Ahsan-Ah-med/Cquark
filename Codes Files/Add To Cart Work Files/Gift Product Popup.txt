@@ -1,0 +1,70 @@
+{% if total__price >= fixed_value %}
+        <div class="gift_box">
+          <div class="gift_text">
+            <h4>{{ settings.won_text }}</h4>
+          </div>
+  {% if total__price >= 10000 %}
+          <div class="gift_item" id="gift_one">
+            <div class="gift_img">
+              <img src="{{ settings.gift_img_1 | img_url: "master" }}">
+            </div>
+            <div class="gift_name">
+              <h2>{{ settings.gift_name1 }}</h2>
+              <p>{{ settings.gift_price_1 }}</p>
+            </div>
+            <div class="gift_btn">
+              <div class="gift_sign">
+              <span id="sp1">-</span>
+              <span id="sp3">1</span>
+              <span id="sp2">+</span>
+              </div>
+    <form method="post" action="/cart/add?id=42240932217011">
+              <button type="submit">Add Cart</button>
+            </form>
+            </div>
+          </div>
+  {% endif %}
+  {% if total__price >= 15000 %}
+        <div class="gift_item" id="gift_two">
+                <div class="gift_img">
+                  <img src="{{ settings.gift_img_2 | img_url: "master" }}">
+                </div>
+                <div class="gift_name">
+                  <h2>{{ settings.gift_name2 }}</h2>
+                  <p>{{ settings.gift_price_2 }}</p>
+                </div>
+                <div class="gift_btn">
+                  <div class="gift_sign">
+                  <span id="sp1">-</span>
+                  <span id="sp3">1</span>
+                  <span id="sp2">+</span>
+                  </div>
+                 <form method="post" action="/cart/add?id=42240931594419">
+                  <button type="submit">Add Cart</button>
+                </form>
+                </div>
+              </div>
+        {% endif %}
+  {% if total__price >= 20000 %}
+          <div class="gift_item" id="gift_third">
+            <div class="gift_img">
+              <img src="{{ settings.gift_img_3 | img_url: "master" }}">
+            </div>
+            <div class="gift_name">
+              <h2>{{ settings.gift_name3 }}</h2>
+              <p>{{ settings.gift_price_3 }}</p>
+            </div>
+            <div class="gift_btn">
+              <div class="gift_sign">
+              <span id="sp1">-</span>
+              <span id="sp3">1</span>
+              <span id="sp2">+</span>
+              </div>
+              <form method="post" action="/cart/add?id=42240929431731">
+              <button type="submit">Add Cart</button>
+            </form>
+            </div>
+          </div>
+  {% endif %}
+        </div>
+      {% endif %}

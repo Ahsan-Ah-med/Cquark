@@ -1,0 +1,7 @@
+document.getElementsByName('minus').forEach((s, i) =>{
+      s.addEventListener('click', ()=>{
+          setTimeout(()=>{
+              window.location.reload()
+          }, 3000)  
+  })                                    
+})  

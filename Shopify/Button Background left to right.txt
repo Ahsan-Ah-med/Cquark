@@ -1,0 +1,10 @@
+.product_cus_btn{
+  background: linear-gradient(to right, white 50%, #16A418 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+}
+.product_cus_btn:hover{
+  color:#16A418;
+  background-position: left center;
+}

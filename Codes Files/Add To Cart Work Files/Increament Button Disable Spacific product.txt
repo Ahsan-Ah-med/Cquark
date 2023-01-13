@@ -1,0 +1,24 @@
+
+// Minus Button Display="none"
+
+{% if item.product.title == "Nike Airmax 2"  %}
+                              <button class="quantity__button no-js-hidden" name="minus" type="button" style="display:none;">
+                                  {% elsif item.product.title == "Nike Airmax" %}
+                          <button class="quantity__button no-js-hidden" name="minus" type="button" style="display:none;">
+                          {% elsif item.product.title == "Nike Airmax 3" %}
+                          <button class="quantity__button no-js-hidden" name="minus" type="button" style="display:none;">
+                                  {% else %}
+                          <button class="quantity__button no-js-hidden" name="minus" type="button">
+                            {% endif %}
+
+// Plus Button Display="none"
+
+{% if item.product.title == "Nike Airmax 2" %}
+                              <button class="quantity__button no-js-hidden" name="plus" type="button" style="display:none;">
+                                  {% elsif item.product.title == "Nike Airmax 3" %}
+                         <button class="quantity__button no-js-hidden" name="plus" type="button" style="display:none;">
+                                  {% elsif item.product.title == "Nike Airmax" %}
+                         <button class="quantity__button no-js-hidden" name="plus" type="button" style="display:none;">
+                                  {% else %}
+                         <button class="quantity__button no-js-hidden" name="plus" type="button">
+                         {% endif %}

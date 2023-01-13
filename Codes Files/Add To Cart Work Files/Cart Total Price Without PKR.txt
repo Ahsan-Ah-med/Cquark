@@ -1,0 +1,5 @@
+{% assign total__price_with_curr = cart.total_price | money_without_currency %}
+        {% assign total__price_with_comma = total__price_with_curr | replace: ',', '' %}
+        {% assign total__price = total__price_with_comma | plus: 0 %}
+        {% assign fixed_value = 10000.00 %}
+        {% assign remain_value = fixed_value | minus: total__price %}
