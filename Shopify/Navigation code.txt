@@ -1,0 +1,13 @@
+<div class="menu">
+    {%- if section.settings.menu != blank -%}
+      <ul class="header-nav">
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            <a href="{{ link.url }}" class="">
+              {{ link.title }}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>

@@ -1,0 +1,38 @@
+<script>
+var yourTime = new Date("dec 26, 2023 10:00:00").getTime();
+var x = setInterval(function(){
+var currentTime = new Date().getTime();
+var remainTime = yourTime - currentTime ;
+var days = Math.floor(remainTime / (1000*60*60*24));
+var hrs = Math.floor((remainTime / (1000*60*60*24)) / (1000*60*60));
+var mins =  Math.floor((remainTime / (1000*60*60)) / (1000*60));
+var sec =  Math.floor((remainTime / (1000*60)) / (1000));
+
+// output in html document.querySeletor('');
+
+}, 1000);
+
+</script>
+
+
+
+
+{% comment %}     // var yourTime = new Date("dec 26, 2023 10:00:00").getTime();
+      // var x = setInterval(function(){
+      // var currentTime = new Date().getTime();
+      // var remainTime = yourTime - currentTime ;
+      //   console.log(remainTime)
+      // var days = Math.floor(remainTime / (1000*60*60*24));
+
+      // var hrs = Math.floor((remainTime / (1000*60*60*24)) / (1000*60*60));
+
+      // var mins =  Math.floor((remainTime / (1000*60*60)) / (1000*60));
+
+      // var sec =  Math.floor((remainTime / (1000*60)) / (1000));
+
+      // document.querySelector('.days h4').innerHTML = "-"+days + "days :";
+      // document.querySelector('.hrs h4').innerHTML = "-"+hrs + "hrs :";
+      // document.querySelector('.mins h4').innerHTML = "-"+mins + "mins";
+
+      //   console.log(days,hrs,mins,sec)
+      // }, 1000); {% endcomment %}

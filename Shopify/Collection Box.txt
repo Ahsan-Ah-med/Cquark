@@ -1,0 +1,219 @@
+<div class="collections">
+  <div class="colls_head">
+    <h2>{{ section.settings.main_heading }}</h2>
+  </div>
+  <div class="coll_img_box">
+    <div class="coll_div">
+      {% for block in section.blocks %}
+        <div class="coll-1" style="background-image: url('{{ block.settings.coll_img | img_url: 'master' }}')">
+          <a
+            href="{{ block.settings.coll_link }}"
+          >
+            <h2>{{ block.settings.coll_text }}</h2>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="dead" style="background-image: url('{{ section.settings.sale_img | img_url: 'master' }}')">
+      <a href="{{ section.settings.sales_link }}">
+        <h2>{{ section.settings.dead_text }}</h2>
+      </a>
+    </div>
+  </div>
+</div>
+<style>
+  .coll_img_box{
+    margin-top: 59px;
+    margin-bottom: 0px;
+    padding: 0px 0px 40px;
+  }
+  .colls_head h2{
+    font-family: 'Embarla firgasto', sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 45px;
+    padding-bottom: 0px;
+    margin-bottom:1px;
+  }
+  .dead{
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    background-position: 0px 0px;
+    background-size: cover;
+    object-fit: scale-down;
+    display: grid;
+    place-content: center;
+  }
+  .dead a img{
+    width:100%;
+    height:100%;
+  }
+  .coll_div{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .coll-1 a img{
+    width: 100%;
+    height: 100%;
+  }
+  .coll-1{
+    width: 24%;
+    height: 350px;
+    background-position: 50% 50%;
+    background-size: cover;
+    object-fit: scale-down;
+    display: grid;
+    place-content: center;
+  }
+  .coll-1 h2{
+    color: {{section.settings.body_text}};
+    font-size: {{ section.settings.font_size }}px;
+  }
+  .dead a h2{
+    color: {{section.settings.sales_text}};
+    font-size: {{ section.settings.sales_size }}px;
+  }
+  .collections{
+    text-transform: uppercase;
+  }
+  p{
+    margin:0;
+  }
+  h2{
+    margin:0;
+  }
+  h3{
+    margin:0;
+  }
+  @media only screen and (max-width:767px){
+  .coll-1 h2{
+    font-size: {{ section.settings.font_size_mb }}px;
+  }
+  .dead a h2{
+    font-size: {{ section.settings.sales_size_mb }}px;
+  }
+  }
+</style>
+{% schema %}
+{
+  "name": "Collection Image",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Collection Settings"
+},
+    {
+  "type": "richtext",
+  "id": "main_heading",
+  "label": "Heading"
+},
+    {
+  "type": "image_picker",
+  "id": "sale_img",
+  "label": "DEADSTOCK Sales"
+},
+    {
+  "type": "richtext",
+  "id": "dead_text",
+  "label": "DEADSTOCK Text"
+},
+      {
+  "type": "url",
+  "id": "sales_link",
+  "label": "DEADSTOCK link"
+},
+  {
+  "type": "range",
+  "id": "font_size",
+  "min": 12,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Collection Font size",
+  "default": 70
+},
+  {
+  "type": "color",
+  "id": "body_text",
+  "label": "Collection Text Color",
+  "default": "#fff"
+},
+  {
+  "type": "range",
+  "id": "sales_size",
+  "min": 12,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "DEADSTOCK Font size",
+  "default": 100
+},
+  {
+  "type": "color",
+  "id": "sales_text",
+  "label": "DEADSTOCK Text Color",
+  "default": "#fff"
+},
+    {
+  "type": "header",
+  "content": "Mobile Settings"
+},
+    {
+  "type": "range",
+  "id": "font_size_mb",
+  "min": 12,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Collection Font size",
+  "default": 70
+},
+{
+  "type": "range",
+  "id": "sales_size_mb",
+  "min": 12,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "DEADSTOCK Font size",
+  "default": 100
+}
+
+  ],
+  "blocks":[
+  {
+      "name": "Images",
+    "type": "block",
+    "settings":[
+      {
+  "type": "image_picker",
+  "id": "coll_img",
+  "label": "Collection Image"
+},
+    {
+  "type": "richtext",
+  "id": "coll_text",
+  "label": "Collection Text"
+},
+      {
+  "type": "url",
+  "id": "coll_link",
+  "label": "Collection link"
+}
+
+    ]
+  }
+],
+  "presets": [
+  {
+    "name": "Collection Image Box"
+
+  }
+  ]
+}
+{% endschema %}

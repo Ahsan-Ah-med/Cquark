@@ -1,0 +1,56 @@
+Theme:Dawn 7.0.0
+
+Find card-product.liquid file in snippets
+Then open card-product.liquid
+
+and search code line with Ctrl + F 
+
+{% render 'price', product: card_product, price_class: '' %}
+
+Add The code below of this line:
+Above 2 close </div> tags
+
+{% assign keys = "Color,color,Colour,colour" | split: ',' %}
+            {% for key in keys %}
+            {% if card_product.options contains key %}
+            <div class="product_tile_color_holder">
+              {% for color_option in card_product.options_by_name[key].values %}
+              {% for variant in card_product.variants  %}
+              {% if variant.options contains color_option %}
+              {% if variant.image %}
+              {% assign background_style = color_option %}
+              {% endif %}
+              {% if variant.metafields.color.values %}
+              {% assign background_style = variant.metafields.color.values %}
+              {% endif %}
+              {% if variant.metafields.image.values %}
+              {% assign background_style = "url(" | append: variant.metafields.image.swatch | append: ")" %}
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+			  <!--- Coded by websensepro.com --->
+              <input
+                     type="radio"
+                     name="{{ card_product.id }}_card_color"
+                     id="{{ card_product.id }}_color_{{ forloop.index }}"
+                     style="background: {{ background_style }}; background-size: cover;">
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+Add the following code in base.css file
+
+
+
+Css Code:
+
+input[type=radio][name$=_card_color]{
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+		border: 1px solid black;
+                appearance: none;
+                background-size: 9px 9px;
+                background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, #ebebeb 0, #ebebeb 50%);
+              }
+
