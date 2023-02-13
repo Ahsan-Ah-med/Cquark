@@ -1,0 +1,29 @@
+// Set the target date and time
+  var targetDate = new Date("{{ section.settings.time_down }}");
+
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+
+    // Get the current date and time
+    var currentDate = new Date();
+
+    // Calculate the time remaining until the target date and time
+    var timeRemaining = targetDate - currentDate;
+
+    // Calculate the number of days, hours, minutes, and seconds remaining
+    var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+    // Display the time remaining in the "countdown" element
+    document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    // If the countdown has reached the target date and time, stop the countdown
+    if (timeRemaining < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "{{ section.settings.end_time_down }}";
+      document.querySelector('.dead_btn').style.display = "block"
+    }
+  }, 1000);

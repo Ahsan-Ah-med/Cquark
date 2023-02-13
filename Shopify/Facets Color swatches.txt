@@ -1,0 +1,46 @@
+
+                    <!-- Color swatches code start -->
+                    <div class="price-top">
+                      <form>
+                        <div class="Color-filter-div">
+                          <div class="Color-filter-box">
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=white&sort_by=title-ascending"
+                              class="Color-white"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e594d35420b24_WHITESWATCH.png?v=1675146402"
+                            ></a>
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=black&sort_by=title-ascending"
+                              class="Color-black"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e594d47420b1b_BLACK_SEER.png?v=1675146402"
+                            ></a>
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=yellow&sort_by=title-ascending"
+                              class="Color-yellow"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e5930d742093d_YELLOW.jpg?v=1675146400"
+                            ></a>
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=red&sort_by=title-ascending"
+                              class="Color-red"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e59488d420b1f_636500e40bb372c25d5a06c6_E107750-03-1.png?v=1675146402"
+                            ></a>
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=blue&sort_by=title-ascending"
+                              class="Color-blue"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e596b5b420b28_BLUESEER.png?v=1675146403"
+                            ></a>
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=pink&sort_by=title-ascending"
+                              class="Color-pink"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e59dcf3420b2a_PINK_SEER.png?v=1675146403"
+                            ></a>
+                            <a
+                              href="/collections/all?filter.v.price.gte=&filter.v.price.lte=&filter.v.option.color=green&sort_by=title-ascending"
+                              class="Color-green"
+                              ><img src="https://cdn.shopify.com/s/files/1/0576/0555/4376/files/63c78a20208e592593420999_WGREENGINGHAM-p-800-removebg-preview.png?v=1675149055"
+                            ></a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- Color swatches code end -->
