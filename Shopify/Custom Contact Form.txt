@@ -1,0 +1,38 @@
+<div class="form">
+    <div class="contact_head">
+      <h1>{{ section.settings.heading }}</h1>
+      <h2>{{ section.settings.sub_heading }}</h2>
+    </div>
+    {% form 'contact' %}
+      {{ form.errors | default_errors }}
+      <label class="name">Name*</label>
+      <div class="first-name">
+        <label for="first-name">First name</label>
+        <input type="text" name="contact[first_name]" id="first-name">
+      </div>
+
+      <div class="last-name">
+        <label for="last-name">Last name</label>
+        <input type="text" name="contact[last_name]" id="last-name">
+      </div>
+
+      <div class="email">
+        <label for="email">Email</label>
+        <input type="email" name="contact[email]" id="email">
+      </div>
+
+      <div class="subject">
+        <label for="subject">Subject</label>
+        <input type="text" name="contact[subject]" id="subject">
+      </div>
+
+      <div class="message">
+        <label for="message">Message</label>
+        <textarea name="contact[body]" id="message"></textarea>
+      </div>
+
+      <div class="submit">
+        <input type="submit" value="SUBMIT">
+      </div>
+    {% endform %}
+  </div>

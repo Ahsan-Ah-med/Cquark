@@ -1,0 +1,114 @@
+.custom-contact{
+  padding:{{ section.settings.padd_tb }}px {{ section.settings.padd_lr }}px;
+  width:100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+  .form{
+   width: 70%;
+  }
+  .map{
+   width: 20%;
+  }
+  .contact_head{
+    padding: 0 17px 17px 17px;
+  }
+  .contact-form{
+    padding: 17px 17px 17px 17px;
+  }
+  .contact_head h1{
+    font-family: brandon-grotesque;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: .14em;
+    line-height: 1.6em;
+    text-transform: uppercase;
+    color:#222;
+  }
+  .contact_head h2{
+    font-family: brandon-grotesque;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: 0em;
+    line-height: 1.6em;
+    text-transform: none;
+    color: #222;
+    margin-top: 16px;
+  }
+  .first-name, .last-name{
+    width: 48%;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .email, .message, .subject, .name{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+  .contact-form{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: brandon-grotesque;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 0em;
+  line-height: 1.6em;
+  text-transform: none;
+  color: #222;
+  }
+  .first-name, .last-name{
+    font-size:12px
+  }
+  #first-name, #last-name, #email, #subject, #message{
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0 4px;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    color: #000;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: normal;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+  #message{
+    min-height: 100px;
+    resize: vertical;
+  }
+  .submit input{
+    border-width: 2px;
+    border-style: solid;
+    transition: 0.1s background-color linear, 0.1s color linear;
+    border-color: #315935;
+    font-family: brandon-grotesque;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    background-color: transparent;
+    color: #315935;
+    display: inline-block;
+    padding: 1em 2.5em;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .submit input:hover{
+    background-color: #315935;
+    color: #fff;
+  }
+  .last-name{
+    margin: 0 0 24px 14px;
+  }
+  .first-name{
+    margin: 0 0 24px 0;
+  }
