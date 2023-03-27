@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">		
+<link rel="stylesheet" href="https://www.reviewerly.io/css/shopify-warning.css">
+
+{% if request.design_mode %}
+	<div class="alert alert-warning" role="alert">
+		<i class="fas fa-exclamation-circle fa-lg"></i>
+		<br>
+		To see your Instagram Reels in the Theme Editor, simply click Save in the upper right-hand corner. By clicking Save, your reels will also appear on your live website. (Note that this yellow warning message is only for your reference and will not appear on your store.)
+	</div>
+{% endif %}
+
+<div id="instagramReelsWrapper"></div>
+
+<script>
+	const instagramReelsWrapper = document.querySelector('#instagramReelsWrapper');
+	const shadowRoot = instagramReelsWrapper.attachShadow({mode: 'open'});
+	shadowRoot.innerHTML = `  
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://www.reviewerly.io/css/section.css">
+
+		<div class="container carousel-container">	
+			<div class="carousel">
+				<div class="nav nav-left">
+					<i class="fas fa-chevron-left fa-2x"></i>
+				</div>
+			
+				<div class="carousel-content row">
+					<div class="slide slide-3">
+						<div class="reel-container">
+							<div class="overlay">
+								<img class="instagram-icon" src="https://www.reviewerly.io/images/instagram-black.svg"></img>  
+							</div>
+							<iframe class="instagram-media instagram-media-rendered" id="instagram-embed-0" src="https://www.instagram.com/reel/CTC51kgn1tQ/embed/?cr=1&amp;v=13&amp;wp=675&amp;rd=https%3A%2F%2Fvesper247.com&amp;rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A12967.600000023842%2C%22ls%22%3A208.80000007152557%2C%22le%22%3A209.70000004768372%7D" allowtransparency="true" allowfullscreen="true" frameborder="0" height="429" data-instgrm-payload-id="instagram-media-payload-0" scrolling="no"></iframe>
+						</div>
+					</div>
+					<div class="slide slide-2">
+						<div class="reel-container">
+							<div class="overlay">
+								<img class="instagram-icon" src="https://www.reviewerly.io/images/instagram-black.svg"></img>  
+							</div>
+							<iframe class="instagram-media instagram-media-rendered" id="instagram-embed-0" src="https://www.instagram.com/reel/CTgl6jKnMO1/embed/?cr=1&amp;v=13&amp;wp=675&amp;rd=https%3A%2F%2Fvesper247.com&amp;rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A12967.600000023842%2C%22ls%22%3A208.80000007152557%2C%22le%22%3A209.70000004768372%7D" allowtransparency="true" allowfullscreen="true" frameborder="0" height="429" data-instgrm-payload-id="instagram-media-payload-0" scrolling="no"></iframe>
+						</div>
+					</div>
+					<div class="slide slide-1">
+						<div class="reel-container">
+							<div class="overlay">
+								<img class="instagram-icon" src="https://www.reviewerly.io/images/instagram-black.svg"></img>  
+							</div>
+							<iframe class="instagram-media instagram-media-rendered" id="instagram-embed-0" src="https://www.instagram.com/reel/CTobwRPAwGz/embed/?cr=1&amp;v=13&amp;wp=675&amp;rd=https%3A%2F%2Fvesper247.com&amp;rp=%2F#%7B%22ci%22%3A0%2C%22os%22%3A12967.600000023842%2C%22ls%22%3A208.80000007152557%2C%22le%22%3A209.70000004768372%7D" allowtransparency="true" allowfullscreen="true" frameborder="0" height="429" data-instgrm-payload-id="instagram-media-payload-0" scrolling="no"></iframe>
+						</div>
+					</div>
+				</div>
+
+				<div class="nav nav-right">
+					<i class="fas fa-chevron-right fa-2x"></i>
+				</div>
+			</div>    
+		</div>
+
+		<script src="https://www.reviewerly.io/js/section.js" defer><\/script>`;
+</script>
+
+<div style="display: none !important">
+	<button type="submit" class="btn btn-primary btn-lg save shadow-none">Save</button>
+	<form class="addReel" action="/" method="POST"></form>
+	<a class="hint" href="#flush-headingOne">How do I find this?</a>
+</div>
+
+<script src="https://www.reviewerly.io/js/section.js" defer></script>
+{% schema %}
+	{
+		"name": "Instagram Reels",
+		"class": "reels-section",
+		"settings": [
+			{
+				"type": "paragraph",
+				"content": "To add or remove reels, please navigate to the app itself. There, you will also find an FAQ to provide additional assistance. If you need quick support, please reach out to peter@reviewerly.io."
+			}
+		],
+		"presets": [
+			{
+				"name": "Instagram Reels",
+				"category": "Instagram Reels"
+			}
+		]
+	}
+{% endschema %}

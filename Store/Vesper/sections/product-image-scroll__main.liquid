@@ -1,0 +1,620 @@
+{% comment %}
+** Product - image scroll view **
+- Product template
+{% endcomment %}
+
+{% assign id = section.id %}
+{% comment %} Layout {% endcomment %}
+{% assign width = section.settings.width %}
+{% assign padding_top = section.settings.padding_top %}
+{% assign padding_bottom = section.settings.padding_bottom %}
+{% comment %} Advanced {% endcomment %}
+{% assign css_class = section.settings.css_class %}
+{% assign custom_css = section.settings.custom_css %}
+
+{% comment %} Section specific CSS {% endcomment %}
+{% style %}
+  #shopify-section-{{ id }} {
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+    {% if width == 'wide' %}
+      width: 100%;
+    {% endif %}
+  }
+
+  {% render 'css-loop',
+          css: custom_css,
+          id: id
+  %}
+{% endstyle %}
+
+{% assign collection_handles = product.collections | map: 'handle' %}
+{% liquid
+  assign selected_variant = product.selected_variant
+
+  if product.variants.size == 1 or settings.select_first_available_variant
+    assign selected_variant = product.selected_or_first_available_variant
+  endif
+%}
+{% assign product_tags = product.tags | join: ' ' %}
+
+{% comment %} HTML markup {% endcomment %}
+<section class="section
+                is-width-{{ width }}
+                {{ css_class }}
+                ">
+  <div class="product-{{ product.id }} has-padding-top">
+    <div class="product_section
+                js-product_section
+                container
+                is-justify-space-between
+                {% if section.settings.product_images_position == 'right' %}
+                  is-flex-row-reverse
+                {% endif %}">
+
+    <div class="product__images
+                one-half
+                column
+                medium-down--one-whole
+                ">
+      {%
+        render 'product__images',
+        product: product,
+        display_thumbnails: section.settings.display_thumbnails,
+        enable_thumbnail_slider: section.settings.enable_thumbnail_slider,
+        product_height: section.settings.product_height,
+        set_product_height: section.settings.set_product_height,
+        video_looping: section.settings.video_looping,
+        slideshow_transition: section.settings.slideshow_transition,
+        enable_product_lightbox: section.settings.enable_product_lightbox,
+        enable_zoom: section.settings.enable_zoom
+      %}
+    </div>
+
+      <div class="product__information
+                  has-product-sticker
+                  one-half
+                  column
+                  medium-down--one-whole">
+        <div class="sticky-product-scroll">
+          {% comment %} Sale sticker {% endcomment %}
+          {% if settings.stickers_enabled %}
+            {% render 'product-thumbnail__sticker',
+                    context: 'product',
+                    collection_handles: collection_handles
+            %}
+          {% endif %}
+
+        {%- for block in section.blocks -%}
+          <div class="product-block
+                      product-block--{{ block.type | downcase | replace: '_', '-' }}
+                      {% if forloop.first == true %}
+                        product-block--first
+                      {% endif %}"
+                      {{ block.shopify_attributes }}>
+
+          {%- if block.type == 'vendor' -%}
+            {% comment %} Vendor {% endcomment %}
+            <p class="vendor">
+              <span class="vendor">{{ product.vendor | link_to_vendor }}</span>
+            </p>
+
+          {%- elsif block.type == 'sku' -%}
+            {% comment %} Sku {% endcomment %}
+            <p class="sku">{{ selected_variant.sku }}</p>
+
+          {%- elsif block.type == 'title' -%}
+            {% comment %} Name {% endcomment %}
+            <h1 class="product_name title">
+              {% if section_id == 'quickshop' %}
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              {% else %}
+                {{ product.title }}
+              {% endif %}
+            </h1>
+
+          {%- elsif block.type == 'size-chart' -%}
+            {% comment %} Size chart {% endcomment %}
+            {% for tag in product.tags %}
+              {% if tag contains 'meta-size-chart-' %}
+                {% assign meta-size-chart = true %}
+              {% endif %}
+            {% endfor %}
+
+            {% comment %} Size chart Mobile {% endcomment %}
+            {% if block.settings.size_chart != blank or meta-size-chart %}
+              <a href="javascript:;" class="product__size-chart size-chart--medium-down" data-fancybox data-src="#size-chart{{ product.id }}" data-type="inline">{{ 'products.product.size_chart' | t }} {% render 'icon', name: 'right-caret' %}</a>
+              {% render 'popup-size-chart', product_id: product.id %}
+            {% endif %}
+            {% comment %} Size chart {% endcomment %}
+            {% if block.settings.size_chart != blank or meta-size-chart %}
+              <a href="javascript:;" class="product__size-chart medium-down--hidden" data-fancybox data-src="#size-chart{{ product.id }}" data-type="inline">{{ 'products.product.size_chart' | t }} {% render 'icon', name: 'right-caret' %}</a>
+              {% render 'popup-size-chart', product_id: product.id %}
+            {% endif %}
+
+          {%- elsif block.type == 'price' -%}
+            {% comment %} Price {% endcomment %}
+            <div class="modal_price subtitle" data-display-savings="{{ block.settings.display_savings }}">
+              {% comment %}Inject @pixelunion/shopify-price-ui/price-ui begin{% endcomment %}
+              <div class="price-ui price-ui--loading" data-price-ui>
+                <noscript>
+                  <style>
+                    .price-ui--loading {
+                      display: block !important;
+                      opacity: 1 !important;
+                    }
+                  </style>
+                </noscript>
+                {% assign compare_at_price = false %}
+              
+                {% if product.compare_at_price and product.compare_at_price != product.price %}
+                  {% if product.compare_at_price_varies %}
+                    {%- capture price_min -%}
+                      {%-
+                        render 'price-ui-templates',
+                        template: 'price-min',
+                        value: product.compare_at_price_min,
+                      -%}
+                    {%- endcapture -%}
+              
+                    {%- capture price_max -%}
+                      {%-
+                        render 'price-ui-templates',
+                        template: 'price-max',
+                        value: product.compare_at_price_max,
+                      -%}
+                    {%- endcapture -%}
+              
+                    {%- assign compare_at_price = 'product.price.range_html' | t: price_min: price_min, price_max: price_max -%}
+                  {% else %}
+                    {%- capture compare_at_price -%}
+                      {%-
+                        render 'price-ui-templates',
+                        template: 'price',
+                        value: product.compare_at_price,
+                      -%}
+                    {%- endcapture -%}
+                  {% endif %}
+                {% endif %}
+              
+                {% if product.price_varies %}
+                  {%- capture price_min -%}
+                    {%-
+                      render 'price-ui-templates',
+                      template: 'price-min',
+                      value: product.price_min,
+                    -%}
+                  {%- endcapture -%}
+              
+                  {%- capture price_max -%}
+                    {%-
+                      render 'price-ui-templates',
+                      template: 'price-max',
+                      value: product.price_max,
+                    -%}
+                  {%- endcapture -%}
+              
+                  {%- assign price = 'product.price.range_html' | t: price_min: price_min, price_max: price_max -%}
+                {% else %}
+                  {%- capture price -%}
+                    {%-
+                      render 'price-ui-templates',
+                      template: 'price',
+                      value: product.price,
+                    -%}
+                  {%- endcapture -%}
+                {% endif %}
+              
+                {%-
+                  render 'price-ui-templates',
+                  template: 'price-ui',
+                  compare_at_price: compare_at_price,
+                  price: price,
+                  unit_pricing: false,
+                -%}
+              </div>
+              {% comment %}Inject @pixelunion/shopify-price-ui/price-ui end{% endcomment %}
+
+            </div>
+
+          {%- elsif block.type == 'description' -%}
+            {% comment %} Description {% endcomment %}
+            {% if product.description != blank %}
+              <div class="description content has-padding-top">
+                {{ product.description | split: '<!-- split -->' | first }}
+              </div>
+            {% endif %}
+
+          {%- elsif block.type == 'form' -%}
+            {% comment %} Purchase form {% endcomment %}
+            <div class="product-form-container has-padding-top">
+
+              {% comment %} Notify form {% endcomment %}
+              {% render 'product__notify-me-form', product: product %}
+
+              {% comment %} Product form {% endcomment %}
+              {% unless collection_handles contains 'coming-soon' %}
+                {%
+                  render 'product__form',
+                  context: 'product',
+                  product: product,
+                  sold_out_options: sold_out_options,
+                  selected_variant: selected_variant,
+                  show_payment_button: block.settings.show_payment_button,
+                  collection_handles: collection_handles
+                %}
+              {% endunless %}
+            </div>
+
+          {%- elsif block.type == 'product-links' -%}
+            {% comment %} Collections, type, tags {% endcomment %}
+            {% if block.settings.show_collections or block.settings.show_tags or block.settings.show_type %}
+              <div class="product__classification-links has-padding-top">
+                {% if block.settings.show_collections %}
+                  <p class="product__collections-list tags">
+                    <span class="product__classification-title">{{ 'products.product.collections' | t }}:</span>
+                    {% for col in product.collections %}
+                      <span class="tag tag--{{ tag_style }}">
+                        <a href="{{ col.url }}" title="{{ col.title }}">{{ col.title }}</a>
+                      </span>
+                    {% endfor %}
+                  </p>
+                {% endif %}
+
+                {% if block.settings.show_type %}
+                  <p class="product__type-list tags">
+                    <span class="product__classification-title">{{ 'products.product.product_types' | t }}:</span>
+                    <span class="tag tag--{{ tag_style }}">{{ product.type | link_to_type }}</span>
+                  </p>
+                {% endif %}
+
+                {% if block.settings.show_tags and product.tags.size > 0 %}
+                  <p class="product__tags-list tags">
+                    <span class="product__classification-title">{{ 'products.product.tags' | t }}:</span>
+                    {% for tag in product.tags %}
+                      {% unless tag contains 'meta-' %}
+                        <span class="tag tag--{{ tag_style }}">
+                          <a href="{{ routes.collections_url }}/{% if collection %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handle }}" title="{{ 'products.product.products_tagged' | t: tag: tag }}">{{ tag }}</a>
+                        </span>
+                      {% endunless %}
+                    {% endfor %}
+                  </p>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          {%- elsif block.type == 'share' -%}
+            {% comment %} Social share icons {% endcomment %}
+            <div class="product__social-share has-padding-top">
+              {% render 'social-share-buttons' %}
+            </div>
+
+          {%- elsif block.type == 'text' -%}
+            {% comment %} Text {% endcomment %}
+            <div class="product-text">
+              {{ block.settings.text }}
+            </div>
+
+          {%- endif -%}
+
+        {%- endfor -%}
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% comment %} Shopify-XR {% endcomment %}
+{% if product.media %}
+  <script>
+    window.ShopifyXR=window.ShopifyXR||function(){(ShopifyXR.q=ShopifyXR.q||[]).push(arguments)}
+      {% assign models = product.media | where: 'media_type', 'model' | json %}
+      ShopifyXR('addModels', {{ models }});
+  </script>
+{% endif %}
+
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-data
+>
+  {
+    "display_savings": {{ section.settings.display_savings | json }},
+    "enable_zoom": {{ section.settings.enable_zoom | json }},
+    "enable_product_lightbox": {{ section.settings.enable_product_lightbox | json }},
+    "enable_thumbnail_slider": {{ section.settings.enable_thumbnail_slider | json }},
+    "slideshow_speed": {{ section.settings.slideshow_speed | json }},
+    "slideshow_transition": {{ section.settings.slideshow_transition | json }},
+    "thumbnails_enabled": {{ section.settings.display_thumbnails | json }},
+    "product_media_amount": {{ product.media.size }},
+    "template": "image-scroll"
+  }
+</script>
+<script src="{{ 'z__jsProduct.js' | asset_url }}"></script>
+
+{% schema %}
+
+{
+  "name": "Product - image scroll",
+  "max_blocks": 10,
+  "class": "product-template product-main has-sidebar-option jsProduct product-template--image-scroll",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_zoom",
+      "label": "Magnify on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_product_lightbox",
+      "label": "Enable lightbox",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile Product Gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_thumbnails",
+      "label": "Show thumbnails",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "slideshow_speed",
+      "label": "Gallery speed",
+      "min": 0,
+      "max": 6,
+      "unit": "sec",
+      "default": 0,
+      "info": "Set to 0 to disable autoplay."
+    },
+    {
+      "type": "select",
+      "id": "slideshow_transition",
+      "label": "Gallery transition",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Slide"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_thumbnail_slider",
+      "label": "Enable thumbnail slider",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Media",
+      "info": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media)"
+    },
+    {
+      "type": "radio",
+      "id": "product_images_position",
+      "label": "Media position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "set_product_height",
+      "label": "Set height of product media",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "product_height",
+      "label": "Product media height",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "default": 500,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_looping",
+      "label": "Enable video looping",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "standard",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "min": 0,
+      "max": 80,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 80,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Advanced",
+      "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "display_savings",
+          "label": "Show price savings",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Text block</p>"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "form",
+      "name": "Form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Dynamic Checkout Button"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_payment_button",
+          "label": "Show dynamic checkout button",
+          "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/change-the-layout\/dynamic-checkout)",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Customize additional form features for the product in Theme settings > Product form."
+        }
+      ]
+    },
+    {
+      "type": "product-links",
+      "name": "Product links",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_collections",
+          "label": "Show collections",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_types",
+          "label": "Show types",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tags",
+          "label": "Show tags",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1
+    },
+    {
+      "type": "size-chart",
+      "name": "Size chart",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "page",
+          "id": "size_chart",
+          "label": "Size chart",
+          "info": "[Learn more](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/115006910707-Using-the-Size-Chart-Sections-themes-)"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {
+
+    }
+  }
+}
+
+{% endschema %}

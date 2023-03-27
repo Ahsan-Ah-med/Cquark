@@ -1,0 +1,315 @@
+/*********************** Custom CSS for Boost Filter & Search  ************************/
+{% assign breakpointMobile = '767px' %}
+{% assign breakpointTabletMin = '768px' %}
+{% assign breakpointTabletMax = '1199px' %}
+{% assign breakpointDesktop = '1200px' %}
+{% assign searchBoxMobileHeight = '64px' %}
+
+/**************************** Place your custom css below  ****************************/
+.fancybox-active .boost-pfs-search-suggestion-wrapper {
+  z-index: 99999;
+  position: fixed;
+}
+
+.boost-pfs-filter-option-title-text {
+  text-transform: none;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.boost-pfs-filter-tree-v .boost-pfs-filter-option .boost-pfs-filter-option-title-text:before {
+  border: none;
+  content: "‒";
+  color: #c1c1c1;
+  font-size: 25px;
+  position: absolute;
+  right: 6px;
+  font-weight: lighter;
+  margin: -4px 10px -2px 0;
+}
+
+.boost-pfs-filter-tree-v .boost-pfs-filter-option.boost-pfs-filter-option-collapsed .boost-pfs-filter-option-title-text:before {
+  content: "+";
+  font-size: 35px;
+  right: 10px;
+  margin: -2px 10px -2px 0;
+}
+
+.boost-pfs-filter-tree-v .boost-pfs-filter-option-title .boost-pfs-filter-clear {
+  margin-right: 30px;
+}
+
+/* Wrap theme's sidebar with bc sidebar */
+.boost-pfs-filter-sidebar #shopify-section-collection__sidebar, .boost-pfs-filter-sidebar #shopify-section-search__sidebar {
+  width: 100%;
+}
+
+.boost-pfs-filter-sidebar .block__collection-list, .boost-pfs-filter-sidebar .block__tag-list, .boost-pfs-filter-sidebar .block__type-list, .boost-pfs-filter-sidebar .block__vendor-list {
+  display: none;
+}
+
+.collection__sort-by-filter {
+  max-width: 100% !important;
+}
+
+.collection__sort-by-filter:after {
+  display: none !important;
+}
+
+.boost-pfs-in-collection-search-wrapper, .boost-pfs-in-collection-search {
+  margin: 0;
+}
+
+.product-thumbnail {
+  font-family: "Open Sans",sans-serif;
+  font-size: 15px;
+}
+
+.boost-pfs-filter-top-sorting-wrapper {
+  margin-top: 30px;
+}
+
+.boost-pfs-filter-message {
+  height: 300px;
+  margin-top: 50px;
+}
+
+.boost-pfs-search-result-wrap {
+  max-width: 1200px;
+  padding: 0 10px;
+  margin-top: -50px;
+}
+
+.search__results-wrapper {
+  display: none !important;
+}
+
+.boost-pfs-search-result-list-item {
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: {{breakpointMobile}}) {
+  .search-popup {
+    opacity: 0;
+  }
+
+  .boost-pfs-filter-sidebar {
+    width: 100%;
+  }
+
+  #shopify-section-collection__main, #shopify-section-search__main {
+    width: 100%;
+  }
+
+  .boost-pfs-filter-sidebar #shopify-section-collection__sidebar, .boost-pfs-filter-sidebar #shopify-section-collection__sidebar {
+    display: none;
+  }
+  
+  .boost-pfs-filter-tree-mobile-button button {
+	margin-top: 10px;
+  }
+}
+@media only screen and (min-width: {{breakpointTabletMin}}) {
+  .search-popup .boost-pfs-search-box {
+    min-width: 400px;
+  }
+
+  .search-popup {
+    margin-bottom: 400px;
+  }
+
+  .collection__main {
+    width: 75%;
+  }
+
+  .boost-pfs-in-collection-search {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  
+  .collection-page .heading-wrapper--collection {
+	margin-bottom: 0;
+  }
+  
+  .search-form {
+	margin-top: 30px;
+  }
+}
+
+.collection__filters {
+  display: initial;
+}
+
+.boost-pfs-filter-tree-open-body .mobile-menu__toggle-button {
+  z-index: 0;
+}
+
+/**** Custom Search result toolbar ****/
+.boost-pfs-search-result-toolbar {
+  display: flex;
+  align-items: center;
+  margin: 10px 10px 30px;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.boost-pfs-search-result-toolbar .boost-pfs-search-result-item:first-child {
+  flex: auto;
+}
+
+.boost-pfs-search-result-toolbar .boost-pfs-search-result-panel-controls {
+  padding: 17px 0;
+  margin: 0;
+}
+
+.boost-pfs-search-result-header {
+  margin: 0 10px;
+}
+
+@media (max-width: {{breakpointMobile}}) {
+  .boost-pfs-search-result-toolbar .boost-pfs-search-total-result {
+    display: none;
+  }
+  
+  .sidebar-section {
+	order: 0
+  }
+}
+
+.boost-pfs-search-total-result {
+  font-style: italic;
+}
+
+main {
+  min-height: initial;
+}
+
+.boost-pfs-in-collection-search {
+  padding: 0 10px;
+}
+
+.collection__content .collection__filters {
+  margin-bottom: 0;
+}
+
+.section .boost-pfs-filter-tree-desktop-button-wrapper {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+}
+
+.boost-pfs-filter-products {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container--pagination .boost-pfs-filter-bottom-pagination {
+  display: inline-block !important;
+}
+/* Boost S 147428 */
+ul.boost-pfs-filter-filter-dropdown {
+    display: block !important;
+}
+.boost-pfs-filter-top-sorting button {
+  display: none;
+}
+li.boost-pfs--dflex {
+    display: flex;
+    align-items: center;
+    margin: 7px 0 6px;
+    line-height: 24px;
+}
+span.boost-pfs--checkbox {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba(0,0,0,.2);
+    margin-right: 5px;
+}
+.boost-pfs-filter-filter-dropdown li a {
+    font-size: 12px;
+    color: #000;
+    font-weight: 400;
+    font-family: Libre Franklin,sans-serif;
+}
+span.boost-pfs--checkbox.active::before {
+  content: '';
+  width: 5.5px;
+  height: 9px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  border: 2px solid #000;
+  transform: translate(-50%, -50%) rotate(45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  border-top: none;
+  border-left: none;
+}
+.sort-by--label {
+    position: relative;
+    cursor: pointer;
+}
+.sort-by--label::before {
+    content: '+';
+    right: 13px;
+    width: 0;
+    font-size: 25px;
+    position: absolute;
+    color: #c1c1c1;
+    font-weight: 400;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.sort-by--label.active::before {
+    border: none;
+    content: "\2012";
+}
+.boost-pfs-filter-top-sorting {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 100ms;
+}
+.boost-pfs-filter-top-sorting.active {
+    max-height: 220px;
+    overflow: initial;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+}
+.boost-pfs-filter-top-sorting::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+}
+.boost-pfs-filter-top-sorting::-webkit-scrollbar-thumb {
+    background-color: #777;
+}
+.boost-pfs-filter-top-sorting::-webkit-scrollbar {
+    width: 4px;
+}
+@media (max-width: 767px) {
+  .sort-by--label {
+    display: block;
+  }
+  .sort-by--label::before {
+    display: none;
+  }
+  .boost-pfs-filter-top-sorting {
+    position: absolute;
+    display: none;
+    z-index: 999;
+    background: #fff;
+    width: 98vw;
+    left: -9px;
+    border: 1px solid #eee;
+    padding: 20px 10px;
+    top: 35px;
+  }
+}
+/* END Boost S 147428 */
