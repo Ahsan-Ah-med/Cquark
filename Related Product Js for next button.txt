@@ -1,0 +1,5 @@
+document.querySelectorAll('.caro0 .next-btn').forEach((i) =>{
+    i.addEventListener('click', () => {
+    document.querySelector('.caro0 .flickity-prev-next-button.next').click();
+})
+})
