@@ -1,0 +1,52 @@
+You Can change settings id	
+
+	{
+          "type": "header",
+          "content": "Fonts Settings Desktop"
+        },
+        {
+          "type": "range",
+          "id": "anno_bar_fz",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "anno_bar_fw",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font weight",
+          "default": 400
+        },
+        {
+          "type": "color",
+          "id": "anno_bar_fc",
+          "label": "Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "anno_bar_bg",
+          "label": "Background Color",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "Fonts Settings Mobile"
+        },
+        {
+          "type": "range",
+          "id": "anno_bar_fz_mb",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 15
+        }

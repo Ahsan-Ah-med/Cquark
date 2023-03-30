@@ -1,0 +1,131 @@
+Slick Slider Files upload in shopify theme
+
+upload in assets 
+
+slick-theme.css
+slick.css
+slick.min.js
+
+upload in file contant
+find in font folder 
+
+slick.eot
+slick.svg
+slick.ttf
+slick.woff
+
+then J-Query cnd past in theme.liquid
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="crossorigin="anonymous"></script>
+
+then all assets file link in theme.liquid 
+
+{{ 'slick.min.js' | asset_url | script_tag }}
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+{{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+
+Then open a slick-theme.css and update font src url 
+
+Html Code 
+
+<div class="your-class">
+  <div><h3>1</h3></div>
+  <div><h3>2</h3></div>
+  <div><h3>3</h3></div>
+  <div><h3>4</h3></div>
+  <div><h3>5</h3></div>
+  <div><h3>6</h3></div>
+</div>
+
+J-Query Code
+BreakPoint is used to different screen size to change layout
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.your-class').slick({
+    slidesToShow: 4,
+   slidesToScroll: 4,
+   autoplay: {{ section.settings.slick_autoplay }},
+   autoplaySpeed: {{ section.settings.slick_autoplay_speed }},
+    dots: {{ section.settings.slick_dots }},
+    arrows: {{ section.settings.slick_arrow }},
+    centerPadding: '60px',
+    responsive: [
+      {
+       breakpoint: 1200,
+       settings: {
+         arrows: {{ section.settings.slick_arrow }},
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 3,
+         slidesToScroll: 3,
+       }
+     },
+     {
+       breakpoint: 990,
+       settings: {
+         arrows: {{ section.settings.slick_arrow }},
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 2,
+         slidesToScroll: 2,
+       }
+     },
+     {
+       breakpoint: 768,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 2,
+         slidesToScroll: 2,
+       }
+     },
+     {
+       breakpoint: 600,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 1,
+         slidesToScroll: 1,
+       }
+     }
+   ]
+  });
+  });
+</script>
+
+Schema Settings
+
+{
+  "type": "header",
+  "content": "Slider Settings"
+},
+    {
+  "type": "checkbox",
+  "id": "slick_arrow",
+  "label": "Arrow Show/Hide",
+  "default": true
+},
+    {
+  "type": "checkbox",
+  "id": "slick_dots",
+  "label": "Dots Show/Hide",
+  "default": true
+},
+    {
+  "type": "checkbox",
+  "id": "slick_autoplay",
+  "label": "Autoplay",
+  "default": false
+},
+{
+  "type": "range",
+  "id": "slick_autoplay_speed",
+  "min": 1000,
+  "max": 5000,
+  "step": 500,
+  "unit": "px",
+  "label": "Autoplay Speed",
+  "default": 2000
+},
