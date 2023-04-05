@@ -8,6 +8,24 @@ function moveProductDifference() {
   window.addEventListener("load", moveProductDifference)
 
 // End Code
+// Add @media query if condition
+
+function moveProductDifference() {
+      if (window.innerWidth <= 990) {
+          var productDifference = document.querySelector('.logo_n_icon');
+          var relatedProductsWrapper = document.querySelector('.new_menu_mobile');
+          relatedProductsWrapper.parentNode.insertBefore(productDifference, relatedProductsWrapper.nextSibling);
+      } else {
+        var productDifference = document.querySelector('.new_menu_mobile');
+          var relatedProductsWrapper = document.querySelector('.logo_n_icon');
+          relatedProductsWrapper.parentNode.insertBefore(productDifference, relatedProductsWrapper.nextSibling);
+      }
+    }
+
+  window.addEventListener("load", moveProductDifference);
+  window.addEventListener("resize", moveProductDifference);
+
+// End Code
 
 const insertAfter = (elementToMove, elementToInsertAfter) => {
   document.addEventListener("DOMContentLoaded", function () {
