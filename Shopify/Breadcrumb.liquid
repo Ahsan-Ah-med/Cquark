@@ -1,0 +1,123 @@
+<div class="custom_breadcrumb">
+  <div class="custom_breadcrumb_max_width">
+    {% if template contains 'product' %}
+      <nav class="breadcrumb" aria-label="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <ol class="breadcrumb__list" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          {% for collection in product.collections %}
+            {% if collection.handle != 'all' %}
+              <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a href="{{ collection.url }}" itemprop="item">{{ collection.title }}</a>
+                <meta itemprop="position" content="{{ forloop.index }}">
+              </li>
+            {% endif %}
+          {% endfor %}
+          <li
+            class="breadcrumb__item breadcrumb__item--active"
+            itemprop="itemListElement"
+            itemscope
+            itemtype="http://schema.org/ListItem"
+          >
+            <span itemprop="name">{{ product.title }}</span>
+            <meta itemprop="position" content="{{ forloop.length }}">
+          </li>
+        </ol>
+      </nav>
+    {% elsif template contains 'collection' %}
+      <nav class="breadcrumb" aria-label="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <ol class="breadcrumb__list" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          {% for collection in collection.all_parents %}
+            <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <a href="{{ collection.url }}" itemprop="item">{{ collection.title }}</a>
+              <meta itemprop="position" content="{{ forloop.index }}">
+            </li>
+          {% endfor %}
+          <li
+            class="breadcrumb__item breadcrumb__item--active"
+            itemprop="itemListElement"
+            itemscope
+            itemtype="http://schema.org/ListItem"
+          >
+            <span itemprop="name">{{ collection.title }}</span>
+            <meta itemprop="position" content="{{ forloop.length }}">
+          </li>
+        </ol>
+      </nav>
+    {% endif %}
+  </div>
+</div>
+<style>
+    .custom_breadcrumb{
+    width:100%;
+  }
+  .custom_breadcrumb_max_width{
+    width:100%;
+    max-width:{{ settings.section_max_width }}px;
+    margin: 0 auto;
+    padding:0px {{ settings.section_padding_lr }}px;
+    padding-top:10px;
+  }
+    .breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumb__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 10px;
+  }
+
+  .breadcrumb__item a,
+  .breadcrumb__item--active span {
+    color: #172026;
+    text-decoration: none;
+  }
+  .breadcrumb__item a{
+    text-decoration: underline !important;
+  }
+  .breadcrumb__item--active span {
+    font-weight: 400;
+  }
+
+  @media only screen and (max-width:767px){
+    .custom_breadcrumb_max_width{
+      padding:5px {{ settings.section_padding_lr_mb }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Breadcrumb",
+  "settings": [
+  {
+    "type": "checkbox",
+    "id": "show_breadcrumb",
+    "label": "Show Breadcrumb",
+    "default": true
+  }
+  ],
+  "presets": [
+  {
+    "name": "Breadcrumb"
+
+  }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
