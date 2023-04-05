@@ -1,0 +1,78 @@
+{% if block.settings.show_accordions %}
+            <ul class="accordion">
+              {% if product.description != blank %}
+                <li class="accordion-item is-active">
+                  <h3 class="accordion-thumb">{{ block.settings.first_title }}</h3>
+                  <h4 class="accordion-panel">{{ product.description }}</h4>
+                </li>
+              {% endif %}
+
+              {% if product.metafields.custom.accordion_second_tab_title != blank %}
+                <li class="accordion-item">
+                  <h3 class="accordion-thumb">{{ product.metafields.custom.accordion_second_tab_title }}</h3>
+                  <h4 class="accordion-panel">{{ block.settings.sec_dec }}</h4>
+                </li>
+              {% endif %}
+
+              {% if product.metafields.custom.accordion_third_tab_title != blank %}
+                <li class="accordion-item">
+                  <h3 class="accordion-thumb">{{ product.metafields.custom.accordion_third_tab_title }}</h3>
+                  <h4 class="accordion-panel">{{ block.settings.third_dec }}</h4>
+                </li>
+              {% endif %}
+
+              {% if product.metafields.custom.accordion_forth_tab_title != blank %}
+                <li class="accordion-item">
+                  <h3 class="accordion-thumb">{{ product.metafields.custom.accordion_forth_tab_title }}</h3>
+                  <h4 class="accordion-panel">{{ block.settings.forth_dec }}</h4>
+                </li>
+              {% endif %}
+
+              {% if product.metafields.custom.accordion_fifth_tab_title != blank %}
+                <li class="accordion-item">
+                  <h3 class="accordion-thumb">{{ product.metafields.custom.accordion_fifth_tab_title }}</h3>
+                  <h4 class="accordion-panel">{{ block.settings.fifth_dec }}</h4>
+                </li>
+              {% endif %}
+            </ul>
+          {% endif %}
+
+
+{
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_accordions",
+          "label": "Show Accordions Block",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "first_title",
+          "label": "Discription Title",
+          "default": "Product Detail"
+        },
+        {
+          "type": "richtext",
+          "id": "sec_dec",
+          "label": "Second Tab Description"
+        },
+        {
+          "type": "richtext",
+          "id": "third_dec",
+          "label": "Third Tab Description"
+        },
+        {
+          "type": "richtext",
+          "id": "forth_dec",
+          "label": "Forth Tab Description"
+        },
+        {
+          "type": "richtext",
+          "id": "fifth_dec",
+          "label": "Fifth Tab Description"
+        }
+      ]
+    },

@@ -1,0 +1,314 @@
+<div class="recently_product">
+  <div class="recently_product_max_width">
+    <div class="recently_product_heading">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <!-- <h2 class="product-recommendations__heading h2">{{ section.settings.heading | escape }}</h2> -->
+    <ul class="recently-viewed grid product-grid grid--4-col-desktop grid--2-col-tablet-down" role="list">
+      <!-- Recently viewed products will appear here -->
+    </ul>
+  </div>
+</div>
+
+<style>
+  .recently_product{
+    width:100%;
+  }
+  .recently_product_max_width{
+    width:100%;
+    max-width:{{ settings.section_max_width }}px;
+    margin: 0 auto;
+    padding:{{ settings.section_padding_tb }}px {{ settings.section_padding_lr }}px;
+  }
+  .recently_product .grid__item{
+    padding: 0 10px;
+  }
+  .recently_product_heading h2 p{
+    font-size: {{ section.settings.heading_fz }}px;
+    font-weight: {{ section.settings.heading_fw }};
+    color: {{ section.settings.heading_fc }};
+    text-align: {{ section.settings.vertical_alignment }};
+    margin: 10px 0;
+    line-height: 30px;
+  }
+  .recently_product_heading h2::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: block;
+    background: {{ section.settings.dots_color }};
+    border-radius: 10px;
+    margin-right: 15px;
+  }
+  .recently_product_heading h2::after{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: block;
+    background: {{ section.settings.dots_color }};
+    border-radius: 10px;
+    margin-left: 15px;
+  }
+  .recently_product_heading h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media only screen and (max-width:767px){
+    .recently_product_max_width{
+      padding:{{ settings.section_padding_tb_mb }}px {{ settings.section_padding_lr_mb }}px;
+    }
+    .recently_product_heading h2 p{
+      font-size: {{ section.settings.heading_fz_mb }}px;
+    }
+  }
+</style>
+
+<script>
+  
+  
+  
+ 
+function setRecentlyViewedProducts() {
+  const productData = {
+    productTitle: "{{ product.title }}",
+    productImg: "{{ product.featured_media | image_url: width: 533 }}",
+    imgWidth:"{{ product.featured_media.width }}",
+    imgHeight:"{{ product.featured_media.height }}",
+    productPrice: "{{ product.price | money_with_currency }}",
+    productUrl: "{{ product.url }}",
+    productImageAltText: "{{product.featured_media.alt | escape }}"
+  };
+  const productList = [];
+  let jsonResp, jsonRespArr, jsonRespArrStr;
+  const numberOfProducts = 10;
+  productList.push(productData);
+  const currProductPageTitle = productData.productTitle;
+  const productDataString = JSON.stringify(productList);
+  const localData = localStorage.getItem("recentlyViewedProduct");
+
+  if (localData === null) {
+    localStorage.setItem("recentlyViewedProduct", productDataString);
+  } else if (localData) {
+    const oldProductData = localStorage.getItem("recentlyViewedProduct");
+    const countProductData = (oldProductData.match(/productTitle/g) || []).length;
+    const sameProduct = oldProductData.includes(currProductPageTitle);
+    if (countProductData < numberOfProducts && sameProduct == false) {
+      jsonResp = JSON.parse(oldProductData);
+      jsonRespArr = jsonResp.concat(productList);
+      jsonRespArrStr = JSON.stringify(jsonRespArr);
+      localStorage.setItem("recentlyViewedProduct", jsonRespArrStr);
+    } else if (countProductData >= numberOfProducts && sameProduct == false) {
+      jsonResp = JSON.parse(oldProductData);
+      jsonResp.shift();
+      jsonRespArr = jsonResp.concat(productList);
+      jsonRespArr = JSON.stringify(jsonRespArr);
+      localStorage.setItem("recentlyViewedProduct", jsonRespArr);
+    }
+  }
+}
+
+setRecentlyViewedProducts();
+const localViewed = localStorage.recentlyViewedProduct;
+function getRecentlyViewedProducts() {
+  const productData = JSON.parse(localStorage.getItem("recentlyViewedProduct"));
+  const recentlyViewedHtml = [];
+  productData.map(item => {
+    recentlyViewedHtml.unshift(`
+    <li class="grid__item">
+     <div class="card-wrapper underline-links-hover">
+      <div class="card card--standard card--media " style="--ratio-percent: 100%;">
+        <div class="card__inner color-background-2 gradient ratio" style="--ratio-percent: 100%;">
+         <div style="position:static" class="card__media">
+         <div class="media media--transparent media--hover-effect">
+    		  <img class="motion-reduce" src="${item.productImg}" width="${item.imgWidth}" height="${item.imgHeight}"  loading="lazy" alt="${item.productImageAltText}"/>
+         </div>
+         </div>
+       </div>
+       <div class="card__content">
+       <div class="card__information">
+       <h3 class="card__heading h5">
+       <a class="full-unstyled-link" href="${item.productUrl}">${item.productTitle}</a></h3>
+         <div class="card-information">
+           <div class="price ">
+             <div class="price__container">
+               <div class="price-item price-item--regular">
+                   ${item.productPrice}
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       </div>
+       </div>
+       </div>
+    </li>
+   `);
+  });
+  const newProductData = `${recentlyViewedHtml.join("")}`;
+  const fullContent = document.getElementsByClassName("recently-viewed");
+  fullContent[0].innerHTML = newProductData;
+}
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  getRecentlyViewedProducts();
+});
+
+
+
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.recently-viewed').slick({
+    slidesToShow: 4,
+   slidesToScroll: 1,
+   autoplay: true,
+   autoplaySpeed: 2000,
+    dots: true,
+    arrows: true,
+    centerPadding: '60px',
+    responsive: [
+      {
+       breakpoint: 1200,
+       settings: {
+         arrows: true,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 3,
+         slidesToScroll: 1,
+       }
+     },
+     {
+       breakpoint: 990,
+       settings: {
+         arrows: true,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 2,
+         slidesToScroll: 1,
+       }
+     },
+     {
+       breakpoint: 768,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 2,
+         slidesToScroll: 1,
+       }
+     },
+     {
+       breakpoint: 600,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 1,
+         slidesToScroll: 1,
+       }
+     }
+   ]
+  });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Recent Products",
+  "settings": [
+    {
+    "type": "text",
+    "id": "heading",
+    "default": "Recently Viewed",
+    "label": "Heading"
+  },
+    {
+  "type": "select",
+  "id": "vertical_alignment",
+  "label": "Heading alignment",
+  "options": [
+    {
+      "value": "left",
+      "label": "Left"
+    },
+    {
+      "value": "center",
+      "label": "Center"
+    },
+    {
+      "value": "right",
+      "label": "Right"
+    }
+  ],
+  "default": "center"
+},
+{
+  "type": "color",
+  "id": "dots_color",
+  "label": "Dots Color",
+  "default": "#e1ca25"
+},
+{
+  "type": "header",
+  "content": "Fonts Settings Desktop"
+},
+{
+  "type": "header",
+  "content": "Heading"
+},
+{
+  "type": "range",
+  "id": "heading_fz",
+  "min": 6,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 23
+},
+{
+  "type": "range",
+  "id": "heading_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font weight",
+  "default": 400
+},
+{
+  "type": "color",
+  "id": "heading_fc",
+  "label": "Text Color",
+  "default": "#000000"
+},
+{
+  "type": "header",
+  "content": "Fonts Settings Mobile"
+},
+{
+  "type": "header",
+  "content": "Heading"
+},
+{
+  "type": "range",
+  "id": "heading_fz_mb",
+  "min": 6,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Font size",
+  "default": 23
+}
+  ],
+  "presets": [
+  {
+    "name": "Recent Products"
+
+  }
+  ]
+}
+{% endschema %}

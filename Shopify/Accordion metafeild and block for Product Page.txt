@@ -1,0 +1,123 @@
+{% when 'custom-accordion' %}
+            
+              <ul class="accordion">
+  {% if product.description != blank %}
+<li class="accordion-item is-active">
+<h3 class="accordion-thumb">{{ block.settings.description_title }}</h3>
+<h4 class="accordion-panel"> {{ product.description }}</h4>
+</li>
+    {% endif %}
+    {% if product.metafields.custom.first_faq_answer  != blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb">{{ block.settings.detail_title }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text }}
+  </div>
+</div>
+</li>
+      {% endif %}
+    {% if product.metafields.custom.second_faq_answer  != blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb">{{ block.settings.detail_title2 }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text2 }}
+  </div>
+</div>
+</li>
+      {% endif %}
+              </ul>
+
+
+//CSS code
+
+.accordion {
+margin: 1rem 0;
+padding: 0;
+list-style: none;
+border-top: 1px solid #e5e5e5;
+}
+.accordion-item {
+border-bottom: 1px solid #e5e5e5;
+list-style: none !important; 
+}
+/* Thumb */
+.accordion-thumb {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: row-reverse;
+margin: 0;
+padding: 0.6rem 0;
+cursor: pointer;
+font-weight: {{ settings.question_font_weight }};
+font-size: {{ settings.question_font_size }}px;
+color: {{ settings.question_color }};
+line-height: 33px;
+}
+.accordion-thumb::before {
+content: '';
+display: inline-block;
+height: 7px;
+width: 7px;
+margin-right: 1rem;
+margin-left: 0.5rem;
+vertical-align: middle;
+border-right: 1px solid #e1ca25;
+border-bottom: 1px solid #e1ca25;
+transform: rotate(-45deg);
+transition: transform 0.2s ease-out;
+}
+/* Panel */
+.accordion-panel {
+margin: 0;
+padding-bottom: 0.8rem;
+display: none;
+font-size: {{ settings.answer_font_size }}px;
+font-weight: {{ settings.answer_font_weight }};
+letter-spacing: 1px;
+word-spacing: 2px;
+color: {{ settings.answer_color }};
+line-height: 33px;
+}
+/* Active */
+.accordion-item.is-active .accordion-thumb::before {
+transform: rotate(45deg);
+}
+
+
+//schema settings 
+
+
+{
+      "type": "custom-accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+        "type": "richtext",
+        "id": "description_title",
+        "label": "Heading"
+        },
+        {
+        "type": "richtext",
+        "id": "detail_title",
+        "label": "Heading"
+        },
+        {
+        "type": "richtext",
+        "id": "accordion_text",
+        "label": "Text"
+        },
+        {
+        "type": "richtext",
+        "id": "detail_title2",
+        "label": "Heading"
+        },
+        {
+        "type": "richtext",
+        "id": "accordion_text2",
+        "label": "Text"
+        }
+      ]
+    },

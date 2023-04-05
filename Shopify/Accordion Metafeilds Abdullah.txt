@@ -1,0 +1,140 @@
+<head>
+  {{ 'accordion.css' | asset_url | stylesheet_tag }}
+   <script src="{{ 'accordion.js' | asset_url }}" defer="defer"></script>
+</head>
+ {% for block in section.blocks %}
+ {% if block.type == 'accordion' %}
+<ul class="accordion">
+  {% if product.description != blank %}
+<li class="accordion-item is-active">
+<h3 class="accordion-thumb">{{ block.settings.description_title }}</h3>
+<h4 class="accordion-panel"> {{ product.description }}</h4>
+</li>
+    {% endif %}
+    {% if product.metafields.custom.second_tab_value  != blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb">{{ block.settings.detail_title }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text }}
+      {% if product.metafields.custom.dimentions_details_image != blank  %}
+      <img src="{{ product.metafields.custom.dimentions_details_image | img_url: 'master' }}">
+       {% endif %} 
+  </div>
+</div>
+</li>
+      {% endif %}
+    {% if product.metafields.custom.first_tab_value != blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb">{{ block.settings.video_title }}</h3>
+<div class="accordion-panel">
+  {% assign value = product.metafields.custom.first_tab_value %}
+  
+ {% if value != blank %}
+        <video
+          class="video"
+          {% if settings['autoplay-video'] %}
+            autoplay loop muted playsinline
+          {% endif %}
+          {% if settings.controls_video %}
+            controls
+          {% endif %}
+        >
+          <source src="{{ product.metafields.custom.first_tab_value | file_url }}" type="video/mp4">
+        </video>
+  {% endif %}
+</li>
+      {% endif %}
+   {% if block.settings.accordion_page != blank %}
+  <li class="accordion-item">
+<h3 class="accordion-thumb">{{ block.settings.accordion_page.title }}</h3>
+<div class="accordion-panel">
+  <div class="page-width page-content">
+   {{ block.settings.accordion_page.content }}
+   
+  </div>
+</div>
+</li>
+  {% endif %}
+   {% if product.metafields.custom.faq_page != blank %}
+  <li class="accordion-item">
+<h3 class="accordion-thumb">{{ block.settings.faq_title }}</h3>
+<div class="accordion-panel">
+  {{ product.metafields.custom.faq_page.value.content }}
+</div>
+</li>
+  {% endif %}
+   
+</ul>
+ {% endif %}
+  {% endfor %}
+
+
+
+
+
+
+.accordion {
+	 margin: 1rem 0;
+	 padding: 0;
+	 list-style: none;
+	 border-top: 1px solid #e5e5e5;
+}
+ .accordion-item {
+	 border-bottom: 1px solid #e5e5e5;
+   list-style: none !important; 
+}
+/* Thumb */
+ .accordion-thumb {
+	 margin: 0;
+     padding: 0.6rem 0;
+     cursor: pointer;
+     font-weight: {{ settings.question_font_weight }};
+     font-size: {{ settings.question_font_size }}px;
+     color: {{ settings.question_color }};
+}
+ .accordion-thumb::before {
+	 content: '';
+	 display: inline-block;
+	 height: 7px;
+	 width: 7px;
+	 margin-right: 1rem;
+	 margin-left: 0.5rem;
+	 vertical-align: middle;
+	 border-right: 1px solid;
+	 border-bottom: 1px solid;
+	 transform: rotate(-45deg);
+	 transition: transform 0.2s ease-out;
+}
+/* Panel */
+ .accordion-panel {
+	 margin: 0;
+	 padding-bottom: 0.8rem;
+	 display: none;
+     font-size: {{ settings.answer_font_size }}px;
+     font-weight: {{ settings.answer_font_weight }};
+     letter-spacing: 1px;
+     word-spacing: 2px;
+     color: {{ settings.answer_color }};
+}
+/* Active */
+ .accordion-item.is-active .accordion-thumb::before {
+	 transform: rotate(45deg);
+}
+
+
+
+
+
+
+$(function() {
+	// (Optional) Active an item if it has the class "is-active"	
+	$(".accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
+	
+	$(".accordion > .accordion-item").click(function() {
+		// Cancel the siblings
+		$(this).siblings(".accordion-item").removeClass("is-active").children(".accordion-panel").slideUp();
+		// Toggle the item
+		$(this).toggleClass("is-active").children(".accordion-panel").slideToggle("ease-out");
+	});
+});
