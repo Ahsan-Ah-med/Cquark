@@ -1,0 +1,41 @@
+<div class="collection-page--sort-by col-md-3 col-sm-6 {% if section.settings.tags_enable %}offset-md-6{% endif %}">
+          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+          <wetheme-dropdown>
+            <label for="sort-by">{{ 'collections.sorting.title' | t }}</label>
+            <select id="sort-by" class="wetheme-dropdown__select">
+              <option
+                value="position"
+                {% if sort_by == 'position' %}
+                  selected
+                {% endif %}
+              >
+                Position
+              </option>
+              <option
+                value="best-selling"
+                {% if sort_by == 'best-selling' %}
+                  selected
+                {% endif %}
+              >
+                Best Match
+              </option>
+              <option
+                value="price-ascending"
+                {% if sort_by == 'price-ascending' %}
+                  selected
+                {% endif %}
+              >
+                Price: Low to High
+              </option>
+              <option
+                value="price-descending"
+                {% if sort_by == 'price-descending' %}
+                  selected
+                {% endif %}
+              >
+                Price: High to Low
+              </option>
+            </select>
+          </wetheme-dropdown>
+          <input class="collection-header__default-sort" type="hidden" value="{{ collection.default_sort_by }}">
+        </div>

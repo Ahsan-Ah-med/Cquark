@@ -1,0 +1,86 @@
+ <div class="sort-per-page">
+      <label for="sel1">Show per page:</label>
+      <select id="sel1" class="num">
+        <option
+          value="/collections/{{ collection.handle }}?view=2"
+          {% if limit == 2 %}
+            selected="selected"
+          {% endif %}
+        >
+          2
+        </option>
+        <option
+          value="/collections/{{ collection.handle }}?view=3"
+          {% if limit == 3 %}
+            selected="selected"
+          {% endif %}
+        >
+          3
+        </option>
+        <option
+          value="/collections/{{ collection.handle }}?view=9"
+          {% if limit == 9 %}
+            selected="selected"
+          {% endif %}
+        >
+          9
+        </option>
+        <option
+          value="/collections/{{ collection.handle }}?view=12"
+          {% if limit == 12 %}
+            selected="selected"
+          {% endif %}
+        >
+          12
+        </option>
+        <option
+          value="/collections/{{ collection.handle }}?view=24"
+          {% if limit == 24 %}
+            selected="selected"
+          {% endif %}
+        >
+          24
+        </option>
+        <option
+          value="/collections/{{ collection.handle }}?view=36"
+          {% if limit == 36 %}
+            selected="selected"
+          {% endif %}
+        >
+          36
+        </option>
+      </select>
+    </div>
+
+
+{%- assign limit = 9 -%}
+
+    {%- capture contentForQuerystring -%}{{ content_for_header }}{%- endcapture -%}
+    {%- assign pageUrl = contentForQuerystring
+      | split: '"pageurl":"'
+      | last
+      | split: '"'
+      | first
+      | split: '.myshopify.com'
+      | last
+      | replace: '\/', '/'
+      | replace: '%20', ' '
+      | replace: '\u0026', '&'
+    -%}
+    {{ pageUrl }}
+    {%- for i in (1..1) -%}
+      {%- unless pageUrl contains '?' -%}{% break %}{%- endunless -%}
+      {%- if pageUrl contains 'view=9' -%}{%- assign limit = 9 -%}{%- endif -%}
+      {%- if pageUrl contains 'view=12' -%}{%- assign limit = 12 -%}{%- endif -%}
+      {%- if pageUrl contains 'view=24' -%}{%- assign limit = 24 -%}{%- endif -%}
+      {%- if pageUrl contains 'view=36' -%}{%- assign limit = 36 -%}{%- endif -%}
+    {%- endfor -%}
+
+
+<script type="text/javascript">
+            $(document).ready(function(){
+          jQuery('.sort-per-page select.num').on('change', function(){
+            window.location.replace(jQuery(this).val());
+          });
+      });
+    </script>
