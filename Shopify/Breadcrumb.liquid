@@ -3,6 +3,15 @@
     {% if template contains 'product' %}
       <nav class="breadcrumb" aria-label="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
         <ol class="breadcrumb__list" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+        <li
+            class="breadcrumb__item breadcrumb__item--active"
+            itemprop="itemListElement"
+            itemscope
+            itemtype="http://schema.org/ListItem"
+          >
+            <a href="/"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="{{ forloop.length }}">
+          </li>
           {% for collection in product.collections %}
             {% if collection.handle != 'all' %}
               <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
