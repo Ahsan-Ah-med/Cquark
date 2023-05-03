@@ -1,0 +1,153 @@
+// Make sure Your classes is matched 
+
+// Thumbnail slide Code
+
+$(document).ready(function() {
+  $('.thumbnail-list').slick({
+    slidesToShow: 4,
+   slidesToScroll: 1,
+   autoplay: true,
+    dots: false,
+     swipe: false,
+    touchMove: true,
+    vertical: true,
+    useTransform: true,
+    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+    arrows: true,
+    prevArrow:"<svg xmlns='http://www.w3.org/2000/svg' width='29' height='11' viewBox='0 0 29 11' fill='none' class='thumb-arrow-prev'><path d='M27.4925 10.4755L14.5 2.63716L1.50745 10.4755L2.09556e-07 9.56009L14.5 0.812349L29 9.56009L27.4925 10.4755Z' fill='#828282'></path></svg>",
+    nextArrow:"<svg xmlns='http://www.w3.org/2000/svg' width='29' height='11' viewBox='0 0 29 11' fill='none' class='thumb-arrow-next'><path d='M27.4925 10.4755L14.5 2.63716L1.50745 10.4755L2.09556e-07 9.56009L14.5 0.812349L29 9.56009L27.4925 10.4755Z' fill='#828282'></path></svg>",
+    centerPadding: '60px',
+    responsive: [
+      {
+       breakpoint: 990,
+       settings: {
+         arrows: true,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 4,
+         slidesToScroll: 1,
+         swipe: true,
+         touchMove: true,
+        vertical: false,
+       },  
+     }
+   ]
+  });
+  });
+
+
+//  Product Main Image Slider code
+
+$(document).ready(function() {
+  $('.product__media-list').slick({
+    slidesToShow: 1,
+   slidesToScroll: 1,
+   autoplay: true,
+   autoplaySpeed: 2000,
+    dots: true,
+    arrows: true,
+    prevArrow:'<svg width="25" height="29" viewBox="0 0 25 29" fill="none" class="slider-prev"><path d="M19.7356 25.3476L20.0886 25.7017L19.7345 26.0547L18.4307 27.3541L18.0766 27.7071L17.7236 27.353L5.26428 14.853L4.91245 14.5L5.26428 14.147L17.7236 1.64702L18.0766 1.2929L18.4307 1.64586L19.7345 2.94533L20.0886 3.29831L19.7356 3.65244L8.92342 14.5L19.7356 25.3476Z" fill="currentColor" stroke="currentColor"></path></svg>',
+    nextArrow:'<svg width="25" height="29" viewBox="0 0 25 29" fill="none" class="slider-next"><path d="M5.26438 3.65244L4.9114 3.29831L5.26554 2.94533L6.56931 1.64586L6.92344 1.2929L7.2764 1.64702L19.7357 14.147L20.0875 14.5L19.7357 14.853L7.2764 27.353L6.92343 27.7071L6.5693 27.3541L5.26554 26.0547L4.9114 25.7017L5.26438 25.3476L16.0766 14.5L5.26438 3.65244Z" fill="currentColor" stroke="currentColor"></path></svg>',
+    centerPadding: '60px',
+    responsive: [
+      {
+       breakpoint: 1200,
+       settings: {
+         arrows: true,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 1,
+         slidesToScroll: 1,
+       }
+     },
+     {
+       breakpoint: 990,
+       settings: {
+         arrows: true,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 1,
+         slidesToScroll: 1,
+       }
+     },
+     {
+       breakpoint: 768,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 1,
+         slidesToScroll: 1,
+       }
+     },
+     {
+       breakpoint: 600,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 1,
+         slidesToScroll: 1,
+       }
+     }
+   ]
+  });
+  });
+
+
+// Css Code
+
+
+/* Slick Slider Products Thumbnail Picture Slider Code Css */
+
+@media only screen and (min-width:990px){
+  #GalleryViewer-template--17944359633212__main{
+  width: 70%;
+}
+#GalleryThumbnails-template--17944359633212__main{
+  width: 20%;
+}
+#MediaGallery-template--17944359633212__main{
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.thumbnail-slider .thumbnail-list.slider--tablet-up{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumb-arrow-prev{
+  transform: rotate(180deg);
+}
+}
+
+.product--thumbnail_slider .thumbnail-slider{
+  display: block !important;
+}
+@media only screen and (max-width:990px){
+.thumb-arrow-prev {
+  right: -25px;
+  top: 40%;
+  position: absolute;
+  transform: rotate(90deg);
+}
+.thumb-arrow-next{
+  left: -25px;
+  top: 40%;
+  position: absolute;
+  transform: rotate(269deg);
+}
+.slick-slider{
+  display: block !important;
+}
+}
+
+// This Code only main image slide
+.product--thumbnail .product__media-item:not(.is-active), .product--thumbnail_slider .product__media-item:not(.is-active){
+  display: block !important;
+}
+.grid--peek .grid__item {
+  min-width: 0;
+}

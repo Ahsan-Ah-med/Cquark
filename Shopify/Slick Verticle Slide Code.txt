@@ -1,0 +1,32 @@
+$(document).ready(function() {
+  $('.Thumbnail-slick-box').slick({
+    slidesToShow: 4,
+   slidesToScroll: 1,
+   autoplay: true,
+    dots: false,
+     swipe: false,
+    touchMove: true,
+    vertical: true,
+    useTransform: true,
+    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+    arrows: true,
+    prevArrow:"<svg xmlns='http://www.w3.org/2000/svg' width='29' height='11' viewBox='0 0 29 11' fill='none' class='thumb-arrow-prev'><path d='M27.4925 10.4755L14.5 2.63716L1.50745 10.4755L2.09556e-07 9.56009L14.5 0.812349L29 9.56009L27.4925 10.4755Z' fill='#828282'></path></svg>",
+    nextArrow:"<svg xmlns='http://www.w3.org/2000/svg' width='29' height='11' viewBox='0 0 29 11' fill='none' class='thumb-arrow-next'><path d='M27.4925 10.4755L14.5 2.63716L1.50745 10.4755L2.09556e-07 9.56009L14.5 0.812349L29 9.56009L27.4925 10.4755Z' fill='#828282'></path></svg>",
+    centerPadding: '60px',
+    responsive: [
+      {
+       breakpoint: 1023,
+       settings: {
+         arrows: false,
+         centerMode: false,
+         centerPadding: '40px',
+         slidesToShow: 4,
+         slidesToScroll: 1,
+         swipe: true,
+         touchMove: true,
+        vertical: false,
+       },  
+     }
+   ]
+  });
+  });

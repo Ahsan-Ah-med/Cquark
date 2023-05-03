@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-hero-banner",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
