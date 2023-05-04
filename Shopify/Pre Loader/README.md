@@ -4,7 +4,11 @@
 
 ```HTML:
 <div id="pre-loader">
-  <div class="loader"></div>
+  <div class="loader">
+    <!-- 
+  If you need image include 
+  <img src=""/> -->
+  </div>
 </div>```
 
 ```CSS:
