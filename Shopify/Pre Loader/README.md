@@ -44,7 +44,7 @@ window.addEventListener("load", function() {
 
 > In this example, we're using a simple circle loader that spins while the page is loading. The pre-loader is shown when the page is first loaded, and then hidden once the 'window.load' event is fired. You can customize the CSS and animation to fit your needs.
 
-> Implementing In Shopify Themes
+## Implementing In Shopify Themes
 
 > To add a pre-loader to a Shopify theme, you can follow these steps:
 
