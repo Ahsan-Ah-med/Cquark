@@ -42,11 +42,11 @@ window.addEventListener("load", function() {
   loader.classList.add("hide");
 });```
 
-In this example, we're using a simple circle loader that spins while the page is loading. The pre-loader is shown when the page is first loaded, and then hidden once the 'window.load' event is fired. You can customize the CSS and animation to fit your needs.
+> In this example, we're using a simple circle loader that spins while the page is loading. The pre-loader is shown when the page is first loaded, and then hidden once the 'window.load' event is fired. You can customize the CSS and animation to fit your needs.
 
-Implementing In Shopify Themes
+> Implementing In Shopify Themes
 
-To add a pre-loader to a Shopify theme, you can follow these steps:
+> To add a pre-loader to a Shopify theme, you can follow these steps:
 
 1. Open your Shopify theme code editor. Go to "Online Store" in your Shopify admin panel, select your theme, and click "Actions" > "Edit code".
 
@@ -60,9 +60,9 @@ To add a pre-loader to a Shopify theme, you can follow these steps:
 
 {% include 'pre-loader' %}
 
-This will include the pre-loader HTML and CSS code in your theme.
+> This will include the pre-loader HTML and CSS code in your theme.
 
 6. Save your changes and test your pre-loader by loading your Shopify store. The pre-loader should appear while the page is loading, and disappear once the page has fully loaded.
 
 
-Note: Keep in mind that the specific implementation may vary depending on the structure of your Shopify theme. It's always a good idea to create a backup of your theme files before making any changes.
+> Note: Keep in mind that the specific implementation may vary depending on the structure of your Shopify theme. It's always a good idea to create a backup of your theme files before making any changes.
