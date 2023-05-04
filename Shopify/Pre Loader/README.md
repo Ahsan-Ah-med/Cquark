@@ -2,10 +2,10 @@
 
 ## Sure, I can provide a sample code for a pre-loader. Here's an example of a basic pre-loader using HTML, CSS, and JavaScript:
 
-HTML:
+```HTML:
 <div id="pre-loader">
   <div class="loader"></div>
-</div>
+</div>```
 
 ```CSS:
 #pre-loader {
