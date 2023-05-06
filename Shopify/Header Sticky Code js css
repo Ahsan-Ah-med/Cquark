@@ -9,7 +9,7 @@ window.onscroll = function() {myFunction()};
 
 var header = document.querySelector(".header");
 var sticky = header.offsetTop;
-
+// this code execute a miner scrolling window but you need top 150px down then code execute replace this (sticky + 150) in IF statement. 
 function myFunction() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky");
