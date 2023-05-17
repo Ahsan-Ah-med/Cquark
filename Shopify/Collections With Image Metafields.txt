@@ -1,0 +1,356 @@
+{% if section.settings.collection1 != blank  or section.settings.collection2 != blank or section.settings.collection3 != blank or section.settings.collection4 != blank or section.settings.collection5 != blank or section.settings.collection6 != blank %}
+  <div class="custom_coll_list">
+    <div class="custom_coll_list_width">
+      <div class="coll_list_contain">
+        <ul>
+          {% if section.settings.collection_image1 != blank and section.settings.collection1 != blank %}
+            <li class="li{% increment 0 %}">
+              <a href="{{ section.settings.collection1.url }}">
+                <div class="custom_coll_list_img">
+                  <img src="{{ section.settings.collection_image1 | img_url: 'master' }}">
+                </div>
+                <div class="custom_coll_list_text">
+                  <h3>{{ section.settings.collection1.title }}</h3>
+                </div>
+              </a>
+            </li>
+              {% endif %}
+            {% if section.settings.collection_image2 != blank and section.settings.collection2 != blank %}
+            <li class="li{% increment 0 %}">
+              <a href="{{ section.settings.collection2.url }}">
+                <div class="custom_coll_list_img">
+                  <img src="{{ section.settings.collection_image2 | img_url: 'master' }}">
+                </div>
+                <div class="custom_coll_list_text">
+                  <h3>{{ section.settings.collection2.title }}</h3>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+            {% if section.settings.collection_image3 != blank and section.settings.collection3 != blank %}
+            <li class="li{% increment 0 %}">
+              <a href="{{ section.settings.collection3.url }}">
+                <div class="custom_coll_list_img">
+                  <img src="{{ section.settings.collection_image3 | img_url: 'master' }}">
+                </div>
+                <div class="custom_coll_list_text">
+                  <h3>{{ section.settings.collection3.title }}</h3>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+            {% if section.settings.collection_image4 != blank and section.settings.collection4 != blank %}
+            <li class="li{% increment 0 %}">
+              <a href="{{ section.settings.collection4.url }}">
+                <div class="custom_coll_list_img">
+                  <img src="{{ section.settings.collection_image4 | img_url: 'master' }}">
+                </div>
+                <div class="custom_coll_list_text">
+                  <h3>{{ section.settings.collection4.title }}</h3>
+                </div>
+              </a>
+            </li>
+              {% endif %}
+              {% if section.settings.collection_image5 != blank and section.settings.collection5 != blank %}
+            <li class="li{% increment 0 %}">
+              <a href="{{ section.settings.collection5.url }}">
+                <div class="custom_coll_list_img">
+                  <img src="{{ section.settings.collection_image5 | img_url: 'master' }}">
+                </div>
+                <div class="custom_coll_list_text">
+                  <h3>{{ section.settings.collection5.title }}</h3>
+                </div>
+              </a>
+            </li>
+          {% endif %}
+          {% if section.settings.collection_image6 != blank and section.settings.collection6 != blank %}
+            <li class="li{% increment 0 %}">
+              <a href="{{ section.settings.collection6.url }}">
+                <div class="custom_coll_list_img">
+                  <img src="{{ section.settings.collection_image6 | img_url: 'master' }}">
+                </div>
+                <div class="custom_coll_list_text">
+                  <h3>{{ section.settings.collection6.title }}</h3>
+                </div>
+              </a>
+            </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endif %}
+<style>
+  .coll_list_contain ul li{
+    max-width: 160px;
+    /*     width: calc((1 / 5.5) * 100%); */
+    padding-right: 40px;
+    list-style: none;
+  }
+  .coll_list_contain ul{
+    width: fit-content;
+    flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 auto;
+  }
+  .custom_coll_list_width{
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .custom_coll_list{
+    padding: {{ section.settings.padding_tb }}px {{ section.settings.padding_lr }}px;
+    background-color: {{ section.settings.sec_bg_color }};
+  }
+  .custom_coll_list_img{
+    width: 100%;
+    max-width: {{ section.settings.image_size }}px;
+    height: {{ section.settings.image_size }}px;
+    border-radius: {{ section.settings.border_radius }}%;
+    background: {{ section.settings.image_color }};
+    margin: 0 auto;
+  }
+  .custom_coll_list_img img{
+    width: 100%;
+    height: 100%;
+    border-radius: {{ section.settings.border_radius }}%;
+  }
+  .custom_coll_list_text h3{
+    font-size: {{ section.settings.title_fz }}px;
+    font-weight: {{ section.settings.title_fw }};
+    color: {{ section.settings.title_fc }};
+    margin-top: 10px;
+    text-align: center;
+  }
+  .custom_coll_list li{
+    margin-bottom: 0;
+  }
+  @media only screen and (max-width:767px){
+    .custom_coll_list{
+      padding: {{ section.settings.padding_tb_mb }}px {{ section.settings.padding_lr_mb }}px;
+    }
+    .custom_coll_list_text h3{
+      font-size: {{ section.settings.title_fz_mb }}px;
+    }
+    .coll_list_contain ul {
+      flex-wrap: nowrap;
+      display: flex;
+      width: 100%;
+      overflow: scroll;
+    }
+    .coll_list_contain ul li {
+      flex: 0 0 auto;
+      min-width: 100px;
+      width: calc(((1 / 3.5) * 100%) + 5px);
+      padding-right: 20px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Custom Collection List",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "header",
+      "content": "Padding Desktop"
+    },
+    {
+  "type": "range",
+  "id": "padding_tb",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 50
+},
+    {
+  "type": "range",
+  "id": "padding_lr",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 50
+},
+    {
+      "type": "header",
+      "content": "Padding Mobile"
+    },
+    {
+  "type": "range",
+  "id": "padding_tb_mb",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Top-Bottom",
+  "default": 20
+},
+    {
+  "type": "range",
+  "id": "padding_lr_mb",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "unit": "px",
+  "label": "Padding Left-Right",
+  "default": 20
+},
+{
+  "type": "color",
+  "id": "sec_bg_color",
+  "label": "Background Color",
+  "default": "#007fa6"
+},
+    {
+      "type": "header",
+      "content": "Collections Settings"
+    },
+    {
+  "type": "collection",
+  "id": "collection1",
+  "label": "Collection 1"
+},
+    {
+  "type": "image_picker",
+  "id": "collection_image1",
+  "label": "Image 1"
+},
+    {
+  "type": "collection",
+  "id": "collection2",
+  "label": "Collection 2"
+},
+    {
+  "type": "image_picker",
+  "id": "collection_image2",
+  "label": "Image 2"
+},
+    {
+  "type": "collection",
+  "id": "collection3",
+  "label": "Collection 3"
+},
+    {
+  "type": "image_picker",
+  "id": "collection_image3",
+  "label": "Image 3"
+},
+    {
+  "type": "collection",
+  "id": "collection4",
+  "label": "Collection 4"
+},
+    {
+  "type": "image_picker",
+  "id": "collection_image4",
+  "label": "Image 4"
+},
+    {
+  "type": "collection",
+  "id": "collection5",
+  "label": "Collection 5"
+},
+    {
+  "type": "image_picker",
+  "id": "collection_image5",
+  "label": "Image 5"
+},
+    {
+  "type": "collection",
+  "id": "collection6",
+  "label": "Collection 6"
+},
+    {
+  "type": "image_picker",
+  "id": "collection_image6",
+  "label": "Image 6"
+},
+    {
+  "type": "range",
+  "id": "image_size",
+  "min": 10,
+  "max": 200,
+  "step": 10,
+  "unit": "px",
+  "label": "Image Size",
+  "default": 90
+},
+    {
+  "type": "range",
+  "id": "border_radius",
+  "min": 0,
+  "max": 100,
+  "step": 10,
+  "unit": "%",
+  "label": "Border Radius",
+  "default": 50
+},
+{
+  "type": "color",
+  "id": "image_color",
+  "label": "Image Circle Color",
+  "default": "#ffffff"
+},
+    {
+      "type": "header",
+      "content": "Collections Title"
+    },
+    {
+  "type": "range",
+  "id": "title_fz",
+  "min": 1,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Font Size",
+  "default": 11
+},
+    {
+  "type": "range",
+  "id": "title_fw",
+  "min": 100,
+  "max": 900,
+  "step": 100,
+  "unit": "px",
+  "label": "Font Weigth",
+  "default": 500
+},
+    {
+  "type": "color",
+  "id": "title_fc",
+  "label": "Font Color",
+  "default": "#ffffff"
+},
+    {
+  "type": "range",
+  "id": "title_fz_mb",
+  "min": 1,
+  "max": 50,
+  "step": 1,
+  "unit": "px",
+  "label": "Font Size Mobile",
+  "default": 11
+}
+  ],
+  "presets": [
+    {
+      "name": "Custom Collection List"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
