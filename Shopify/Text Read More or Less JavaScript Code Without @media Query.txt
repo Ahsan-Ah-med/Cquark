@@ -1,0 +1,46 @@
+ // Collections discription text readmore and readless code
+window.addEventListener("DOMContentLoaded", function() {
+
+// dynamic read more or less javascript 
+  
+  const textAreaPara = document.querySelector(".collection-copy-container p").innerHTML
+  const letterCount = textAreaPara.length
+  const product_describtions = document.querySelector(".collection-copy-container")
+  const firstHalf = textAreaPara.split(',')[0] +  ' '+textAreaPara.split(',')[1] +  ' '+textAreaPara.split(',')[2]
+  const describtionHalf = document.querySelectorAll(".collection-copy-container p")[1].innerHTML.split(',')[0]
+  
+  if (letterCount > 69) {
+      document.querySelector(".collection-copy-container p").innerHTML = firstHalf
+    
+    // creating a readmore btn
+      const ancharTag = document.createElement("button")
+      ancharTag.innerHTML = "READMORE..."
+      ancharTag.setAttribute("class", "moreORlessBTN");
+      product_describtions.appendChild(ancharTag);
+    
+    // creating read less btn
+      const readlessBTn = document.createElement("button")
+      readlessBTn.innerHTML = "READLESS..."
+      readlessBTn.setAttribute("class", "lessBTN");
+      product_describtions.appendChild(readlessBTn);
+      document.querySelector(".lessBTN").style.display = "none"
+  }
+
+  // the function to make the remaining para visible
+  const readmore = () => {
+          document.querySelector(".collection-copy-container p").innerHTML = textAreaPara;
+          document.querySelector(".moreORlessBTN").style.display = "none";
+          document.querySelector(".lessBTN").style.display = "initial"
+  }
+  
+  document.querySelector(".moreORlessBTN").addEventListener("click", readmore)
+
+  // function to make the para small
+   const readless = () => {
+    document.querySelector(".collection-copy-container p").innerHTML = firstHalf;
+    document.querySelector(".moreORlessBTN").style.display = "initial"
+    document.querySelector(".lessBTN").style.display = "none"
+    
+      }
+  document.querySelector(".lessBTN").addEventListener("click", readless)
+  });
