@@ -1,0 +1,39 @@
+  var descriptionElement = document.querySelector('.product__description');
+  var childElements = descriptionElement.children;
+  var totalChildCount = childElements.length;
+  var showCount = 2;
+  var showMoreButton = document.createElement('button');
+  var showLessButton = document.createElement('button');
+
+  showMoreButton.innerText = 'Read More';
+  showLessButton.innerText = 'Read Less';
+  showMoreButton.classList.add('read_more_btn');
+  showLessButton.classList.add('read_less_btn');
+
+
+  function showMore() {
+    for (var i = 0; i < totalChildCount; i++) {
+      childElements[i].style.display = 'block';
+    }
+    showMoreButton.style.display = 'none';
+    showLessButton.style.display = 'inline-block';
+  }
+
+  function showLess() {
+    for (var i = showCount; i < totalChildCount; i++) {
+      childElements[i].style.display = 'none';
+    }
+    showMoreButton.style.display = 'inline-block';
+    showLessButton.style.display = 'none';
+  }
+
+  for (var i = showCount; i < totalChildCount; i++) {
+    childElements[i].style.display = 'none';
+  }
+
+  descriptionElement.appendChild(showMoreButton);
+  descriptionElement.appendChild(showLessButton);
+
+  showMoreButton.addEventListener('click', showMore);
+  showLessButton.addEventListener('click', showLess);
+    
