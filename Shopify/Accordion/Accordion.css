@@ -1,0 +1,201 @@
+<style>.hide {
+    display: none;
+}
+
+.read_less_btn {
+    display: none;
+}
+
+.read_less_btn,
+.read_more_btn {
+    border: none;
+    background: transparent;
+    color: white;
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0;
+    cursor: pointer;
+}
+
+.product_inner_div {
+    height: 80px;
+    overflow: hidden;
+}
+
+/* accordion style code */
+
+.accordion {
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #e5e5e5;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #e5e5e5;
+    list-style: none !important;
+}
+
+/* Panel */
+.accordion-panel {
+    margin: 0;
+    padding-bottom: 0.8rem;
+    display: none;
+
+    font-size: {
+            {
+            settings.answer_font_size
+        }
+    }
+
+    px;
+
+    font-weight: {
+            {
+            settings.answer_font_weight
+        }
+    }
+
+    ;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+
+    color: {
+            {
+            settings.answer_color
+        }
+    }
+
+    ;
+}
+
+.accordion-panel p {
+    font-size: {
+            {
+            settings.answer_font_size
+        }
+    }
+
+    px;
+
+    font-weight: {
+            {
+            settings.answer_font_weight
+        }
+    }
+
+    ;
+
+    color: {
+            {
+            settings.answer_color
+        }
+    }
+
+    ;
+}
+
+/* Active */
+.accordion-item.is-active .accordion-thumb::before {
+    transform: rotate(45deg);
+}
+
+
+
+/* faqs */
+.accordion-panel .page-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.accordion-panel .page-width {
+    padding: 0px 0px
+}
+
+.accordion-thumb {
+    font-weight: {
+            {
+            settings.question_font_weight
+        }
+    }
+
+    ;
+
+    font-size: {
+            {
+            settings.question_font_size
+        }
+    }
+
+    px;
+
+    color: {
+            {
+            settings.question_color
+        }
+    }
+
+    ;
+}
+
+.accordion-thumb {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.acc_minus {
+    transition: transform 0.2s ease-out;
+    display: none;
+    width: 20px;
+}
+
+.acc_plus {
+    transition: transform 0.2s ease-out;
+    display: block;
+    width: 20px;
+}
+
+.accordion .is-active .acc_minus {
+    display: block;
+}
+
+.accordion .is-active .acc_plus {
+    display: none;
+}
+
+.acc_more,
+.acc_less {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0;
+    cursor: pointer;
+}
+
+.acc_less {
+    display: none;
+}
+
+.accordion-panel_des p {
+    height: 50px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width:767px) {
+    .product_inner_div {
+        height: 60px;
+    }
+
+    .read_less_btn,
+    .read_more_btn {
+        font-size: 14px;
+    }
+}
+
+
+</style>

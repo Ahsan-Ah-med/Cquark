@@ -1,0 +1,75 @@
+// agar block ma lagana hai tu ya settings block ma lagado
+// accordion ki file bhi check when ki type same hai
+// agar block may nahi lagana tu accordion ki files say block ki chizay atha do
+
+{
+    "type": "custom-accordion",
+    "name": "Accordions",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "plus",
+            "label": "Plus Icon"
+        },
+        {
+            "type": "image_picker",
+            "id": "minus",
+            "label": "Minus Icon"
+        },
+        {
+            "type": "text",
+            "id": "description_title",
+            "label": "Please Select Description Accordion Title"
+        },
+        {
+            "type": "text",
+            "id": "detail_title_1",
+            "label": "Accordion Title 1"
+        },
+        {
+            "type": "richtext",
+            "id": "accordion_text_1",
+            "label": "Accordion Description 1"
+        },
+        {
+            "type": "text",
+            "id": "detail_title_2",
+            "label": "Accordion Title 2"
+        },
+        {
+            "type": "richtext",
+            "id": "accordion_text_2",
+            "label": "Accordion Description 2"
+        },
+        {
+            "type": "text",
+            "id": "detail_title_3",
+            "label": "Accordion Title 3"
+        },
+        {
+            "type": "richtext",
+            "id": "accordion_text_3",
+            "label": "Accordion Description 3"
+        },
+        {
+            "type": "text",
+            "id": "detail_title_4",
+            "label": "Accordion Title 4"
+        },
+        {
+            "type": "richtext",
+            "id": "accordion_text_4",
+            "label": "Accordion Description 4"
+        },
+        {
+            "type": "text",
+            "id": "detail_title_5",
+            "label": "Accordion Title 5"
+        },
+        {
+            "type": "richtext",
+            "id": "accordion_text_5",
+            "label": "Accordion Description 5"
+        }
+    ]
+},

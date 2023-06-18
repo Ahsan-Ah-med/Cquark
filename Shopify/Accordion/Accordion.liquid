@@ -1,0 +1,74 @@
+<!--             cq code for accordion -->
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+            {% when 'custom-accordion' %}
+            
+              <ul class="accordion">
+  {% if product.description != blank %}
+<li class="accordion-item is-active">
+<h3 class="accordion-thumb"><div><img src="{{ block.settings.plus | img_url: 'master' }}" class="acc_plus"/><img src="{{ block.settings.minus | img_url: 'master' }}" class="acc_minus"/></div>{{ block.settings.description_title }}</h3>
+<h4 class="accordion-panel accordion-panel_des"> {{ product.description }}
+    <button class="acc_more">Read More:</button>
+    <button class="acc_less">Read Less:</button>
+    </h4>
+</li>
+    {% endif %}
+    {% if block.settings.detail_title_1 !=blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb"><div><img src="{{ block.settings.plus | img_url: 'master' }}" class="acc_plus"/><img src="{{ block.settings.minus | img_url: 'master' }}" class="acc_minus"/></div>{{ block.settings.detail_title_1 }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text_1 }}
+      
+  </div>
+</div>
+</li>
+      {% endif %}
+    {% if block.settings.detail_title_2 !=blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb"><div><img src="{{ block.settings.plus | img_url: 'master' }}" class="acc_plus"/><img src="{{ block.settings.minus | img_url: 'master' }}" class="acc_minus"/></div>{{ block.settings.detail_title_2 }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text_2 }}
+      
+  </div>
+</div>
+</li>
+      {% endif %}
+    {% if block.settings.detail_title_3 !=blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb"><div><img src="{{ block.settings.plus | img_url: 'master' }}" class="acc_plus"/><img src="{{ block.settings.minus | img_url: 'master' }}" class="acc_minus"/></div>{{ block.settings.detail_title_3 }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text_3 }}
+      
+  </div>
+</div>
+</li>
+      {% endif %}
+    {% if block.settings.detail_title_4 !=blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb"><div><img src="{{ block.settings.plus | img_url: 'master' }}" class="acc_plus"/><img src="{{ block.settings.minus | img_url: 'master' }}" class="acc_minus"/></div>{{ block.settings.detail_title_4 }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text_4 }}
+      
+  </div>
+</div>
+</li>
+      {% endif %}
+    {% if block.settings.detail_title_5 !=blank %}
+<li class="accordion-item">
+<h3 class="accordion-thumb"><div><img src="{{ block.settings.plus | img_url: 'master' }}" class="acc_plus"/><img src="{{ block.settings.minus | img_url: 'master' }}" class="acc_minus"/></div>{{ block.settings.detail_title_5 }}</h3>
+<div class="accordion-panel">
+  <div class="accordion-rich-text">
+      {{ block.settings.accordion_text_5 }}
+      
+  </div>
+</div>
+</li>
+      {% endif %}
+    
+   
+</ul>
