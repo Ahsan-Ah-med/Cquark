@@ -1,0 +1,27 @@
+div class="metafields_data">
+    <div class="o-product-thumbnail-secondary__marquee">
+    {{ product.metafields.custom.featured_products_text | metafield_tag }}
+    {{ product.metafields.custom.featured_products_text | metafield_tag }}
+    {{ product.metafields.custom.featured_products_text | metafield_tag }}
+    {{ product.metafields.custom.featured_products_text | metafield_tag }}
+    </div>
+</div>
+
+<style>
+.o-product-thumbnail-secondary__marquee{
+display: flex;
+overflow: hidden;
+max-width:100%;
+}
+.o-product-thumbnail-secondary__marquee ul, .o-product-thumbnail-secondary__marquee .metafield-rich_text_field{
+white-space: nowrap;
+will-change: transform;
+animation: marquee 5s linear infinite;
+display: flex;
+}
+.o-product-thumbnail-secondary__marquee ul li, .o-product-thumbnail-secondary__marquee p, .o-product-thumbnail-secondary__marquee h5{
+display: flex;
+align-items: center;
+gap: 1rem;
+}
+</style>
