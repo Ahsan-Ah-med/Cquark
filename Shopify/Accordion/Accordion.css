@@ -43,57 +43,17 @@
     padding-bottom: 0.8rem;
     display: none;
 
-    font-size: {
-            {
-            settings.answer_font_size
-        }
-    }
-
-    px;
-
-    font-weight: {
-            {
-            settings.answer_font_weight
-        }
-    }
-
-    ;
+    font-size: {{settings.answer_font_size}}px;
+    font-weight: {{settings.answer_font_weight}};
     letter-spacing: 1px;
     word-spacing: 2px;
-
-    color: {
-            {
-            settings.answer_color
-        }
-    }
-
-    ;
+    color: {{settings.answer_color}};
 }
 
 .accordion-panel p {
-    font-size: {
-            {
-            settings.answer_font_size
-        }
-    }
-
-    px;
-
-    font-weight: {
-            {
-            settings.answer_font_weight
-        }
-    }
-
-    ;
-
-    color: {
-            {
-            settings.answer_color
-        }
-    }
-
-    ;
+    font-size: {{settings.answer_font_size}}px;
+    font-weight: {{settings.answer_font_weight}};
+    color: {{settings.answer_color}};
 }
 
 /* Active */
@@ -114,29 +74,9 @@
 }
 
 .accordion-thumb {
-    font-weight: {
-            {
-            settings.question_font_weight
-        }
-    }
-
-    ;
-
-    font-size: {
-            {
-            settings.question_font_size
-        }
-    }
-
-    px;
-
-    color: {
-            {
-            settings.question_color
-        }
-    }
-
-    ;
+    font-weight: {{settings.question_font_weight}};
+    font-size: {{settings.question_font_size}}px;
+    color: {{settings.question_color}};
 }
 
 .accordion-thumb {
