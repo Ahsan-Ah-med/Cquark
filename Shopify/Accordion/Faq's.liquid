@@ -34,13 +34,13 @@
 </div>
 <style>
   .custom_faq_container{
-    background-color: #f7f0e9;
+    background-color: {{section.settings.background-color}};
   }
   .custom_faq_container{
     padding: {{section.settings.top_padding}}px {{section.settings.right_padding}}px {{section.settings.bottom_padding}}px {{section.settings.left_padding}}px;
   }
   .custom_faq_div{
-    max-width: 770px;
+    max-width: {{ section.settings.page_size }}px;
     margin: 0 auto;
     width: 100%;
   }
@@ -187,23 +187,6 @@
   .accordion .is-active .acc_plus {
       display: none;
   }
-
-  .acc_more,
-  .acc_less {
-      border: none;
-      background: transparent;
-      color: #ffffff;
-      text-decoration: underline;
-      font-size: 16px;
-      font-weight: 500;
-      padding: 0;
-      cursor: pointer;
-  }
-
-  .acc_less {
-      display: none;
-  }
-
   .accordion-panel_des p {
       height: 50px;
       overflow: hidden;
@@ -254,6 +237,18 @@
         {
           "type": "header",
           "content": "Section Settings"
+        },
+        {
+          "type": "number",
+          "id": "page_size",
+          "label": "Section Container Size",
+          "default": 770
+        },
+        {
+          "type": "color",
+          "id": "background-color",
+          "label": "Background Color",
+          "default": "#f7f0e9"
         },
         {
           "type": "range",
