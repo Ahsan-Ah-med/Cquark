@@ -1,0 +1,605 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<div class="{{ section.id }} custom_faqs">
+  <div class="custom_faq_container">
+    <div class="custom_faq_div">
+      <div class="custom_faq_heading">
+        <h2>{{ section.settings.heading }}</h2>
+        <h3>{{ section.settings.para }}</h3>
+      </div>
+      <ul class="accordion">
+        {% for block in section.blocks %}
+          {% if block.settings.detail_title_1 != blank %}
+            <li class="accordion-item">
+              <h3 class="accordion-thumb">
+                <div>
+                  <img src="{{ section.settings.plus | img_url: 'master' }}" class="acc_plus"
+                  ><img src="{{ section.settings.minus | img_url: 'master' }}" class="acc_minus">
+                </div>
+                {{ block.settings.detail_title_1 }}
+              </h3>
+              <div class="accordion-panel">
+                <div class="accordion-rich-text">
+                  {{ block.settings.accordion_text_1 }}
+                </div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+  .custom_faq_container{
+    background-color: #f7f0e9;
+  }
+  .custom_faq_container{
+    padding: {{section.settings.top_padding}}px {{section.settings.right_padding}}px {{section.settings.bottom_padding}}px {{section.settings.left_padding}}px;
+  }
+  .custom_faq_div{
+    max-width: 770px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .custom_faq_heading h2 p{
+    color: {{ section.settings.heading_fc }};
+    text-align: center;
+    font-family: Poppins;
+    font-size: {{ section.settings.heading_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.heading_fw }};
+    line-height: 44px;
+    letter-spacing: -0.72px;
+  }
+  .custom_faq_heading h2 p strong{
+    color: {{ section.settings.heading_fc_bold }};
+    font-weight: {{ section.settings.heading_fw }};
+  }
+  .custom_faq_heading h3 p{
+    color: {{ section.settings.para_fc }};
+    text-align: center;
+    font-family: Poppins;
+    font-size: {{ section.settings.para_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.para_fw }};
+    line-height: 30px;
+  }
+  .custom_faq_heading{
+    margin-bottom: {{ section.settings.below_para_space }}px;
+  }
+  .hide {
+      display: none;
+  }
+
+  .read_less_btn {
+      display: none;
+  }
+
+  .read_less_btn,
+  .read_more_btn {
+      border: none;
+      background: transparent;
+      color: white;
+      text-decoration: underline;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 0;
+      cursor: pointer;
+  }
+
+
+  /* accordion style code */
+
+  .accordion {
+      margin: 1rem 0;
+      padding: 0;
+      list-style: none;
+      border-top: none;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid #49946D;
+    list-style: none !important;
+    padding: 24px 0;
+  }
+
+  /* Panel */
+  .accordion-panel {
+    margin: 0;
+    padding-bottom: 0;
+    padding-top: 10px;
+    display: none;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+  }
+
+  .accordion-panel p {
+    color: {{ section.settings.acco_ans_fc }};
+    font-family: Poppins;
+    font-size: {{ section.settings.acco_ans_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.acco_ans_fw }};
+    line-height: 28px;
+  }
+  .accordion-panel p strong{
+    color: {{ section.settings.acco_ans_fc_bold }};
+    font-weight: {{ section.settings.acco_ans_fw_bold }};
+  }
+
+  /* Active */
+  .accordion-item.is-active .accordion-thumb::before {
+      transform: rotate(45deg);
+  }
+
+
+
+  /* faqs */
+  .accordion-panel .page-content {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+
+  .accordion-panel .page-width {
+      padding: 0px 0px
+  }
+
+  .accordion-thumb p{
+    color: {{section.settings.acco_title_fc}};
+    font-family: Poppins;
+    font-size: {{ section.settings.acco_title_fz }}px;
+    font-style: normal;
+    font-weight: {{section.settings.acco_title_fw}};
+    line-height: 28px;
+  }
+  .accordion-thumb p strong{
+    color: {{section.settings.acco_title_fc_bold}};
+    font-weight: {{section.settings.acco_title_fw_bold}};
+  }
+
+  .accordion-thumb {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .acc_minus {
+    transition: transform 0.2s ease-out;
+    display: none;
+    width: 24px;
+    height: auto;
+  }
+
+  .acc_plus {
+    transition: transform 0.2s ease-out;
+    display: block;
+    width: 24px;
+    height: auto;
+  }
+
+  .accordion .is-active .acc_minus {
+      display: block;
+  }
+
+  .accordion .is-active .acc_plus {
+      display: none;
+  }
+
+  .acc_more,
+  .acc_less {
+      border: none;
+      background: transparent;
+      color: #ffffff;
+      text-decoration: underline;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 0;
+      cursor: pointer;
+  }
+
+  .acc_less {
+      display: none;
+  }
+
+  .accordion-panel_des p {
+      height: 50px;
+      overflow: hidden;
+  }
+
+  @media only screen and (max-width:767px) {
+    .custom_faq_container{
+      padding: {{section.settings.top_padding_mb}}px {{section.settings.right_padding_mb}}px {{section.settings.bottom_padding_mb}}px {{section.settings.left_padding_mb}}px;
+    }
+    .custom_faq_heading h2 p{
+      font-size: {{ section.settings.heading_fz_mb }}px;
+    }
+    .custom_faq_heading h3 p{
+      font-size: {{ section.settings.para_fz_mb }}px;
+    }
+    .custom_faq_heading{
+      margin-bottom: {{ section.settings.below_para_space_mb }}px;
+    }
+    .accordion-item {
+      padding: 16px 0;
+    }
+    .accordion-panel p {
+      font-size: {{ section.settings.acco_ans_fz_mb }}px;
+    }
+    .accordion-thumb p{
+      font-size: {{ section.settings.acco_title_fz_mb }}px;
+    }
+  }
+</style>
+
+<script>
+    $(function() {
+         // (Optional) Active an item if it has the class "is-active"
+         $(".accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
+
+  	$(".accordion > .accordion-item").click(function() {
+         // Cancel the siblings
+         $(this).siblings(".accordion-item").removeClass("is-active").children(".accordion-panel").slideUp();
+     // Toggle the item
+     $(this).toggleClass("is-active").children(".accordion-panel").slideToggle("ease-out");
+  	});
+  });
+</script>
+{% schema %}
+{
+  "name": "Faq's",
+  "settings": [
+        {
+          "type": "header",
+          "content": "Section Settings"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "right_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Right Padding",
+          "default":20
+        },
+        {
+          "type": "range",
+          "id": "left_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Left Padding",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "top_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Padding Mobile",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Padding Mobile",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "right_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Right Padding Mobile",
+          "default":20
+        },
+        {
+          "type": "range",
+          "id": "left_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Left Padding Mobile",
+          "default": 20
+        },
+        {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+          "type": "range",
+          "id": "heading_fz",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 36
+        },
+        {
+          "type": "range",
+          "id": "heading_fw",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight",
+          "default": 700
+        },
+        {
+          "type": "color",
+          "id": "heading_fc",
+          "label": "Color",
+          "default": "#101828"
+        },
+        {
+          "type": "range",
+          "id": "heading_fz_mb",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size Mobile",
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "heading_fc_bold",
+          "label": "Color On Bold",
+          "default": "#EA571D"
+        },
+        {
+            "type": "richtext",
+            "id": "para",
+            "label": "Paragraph"
+        },
+        {
+          "type": "range",
+          "id": "para_fz",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "para_fw",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight",
+          "default": 400
+        },
+        {
+          "type": "color",
+          "id": "para_fc",
+          "label": "Color",
+          "default": "#686E79"
+        },
+        {
+          "type": "range",
+          "id": "para_fz_mb",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size Mobile",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "below_para_space",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Below Paragraph spacing",
+          "default": 70
+        },
+        {
+          "type": "range",
+          "id": "below_para_space_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Below Paragraph spacing",
+          "default": 50
+        },
+        {
+          "type": "header",
+          "content": "Accordion Settings"
+        },
+        {
+            "type": "image_picker",
+            "id": "plus",
+            "label": "Plus Icon"
+        },
+        {
+            "type": "image_picker",
+            "id": "minus",
+            "label": "Minus Icon"
+        },
+        {
+          "type": "header",
+          "content": "Question Settings"
+        },
+        {
+          "type": "range",
+          "id": "acco_title_fz",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 18
+        },
+        {
+          "type": "range",
+          "id": "acco_title_fw",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight",
+          "default": 400
+        },
+        {
+          "type": "color",
+          "id": "acco_title_fc",
+          "label": "Color",
+          "default": "#101828"
+        },
+        {
+          "type": "range",
+          "id": "acco_title_fz_mb",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size Mobile",
+          "default": 16
+        },
+        {
+          "type": "color",
+          "id": "acco_title_fc_bold",
+          "label": "Color On Bold",
+          "default": "#EA571D"
+        },
+        {
+          "type": "range",
+          "id": "acco_title_fw_bold",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight On Bold",
+          "default": 700
+        },
+        {
+          "type": "header",
+          "content": "Answer Settings"
+        },
+        {
+          "type": "range",
+          "id": "acco_ans_fz",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "acco_ans_fw",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight",
+          "default": 400
+        },
+        {
+          "type": "color",
+          "id": "acco_ans_fc",
+          "label": "Color",
+          "default": "#101828"
+        },
+        {
+          "type": "range",
+          "id": "acco_ans_fz_mb",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size Mobile",
+          "default": 14
+        },
+        {
+          "type": "color",
+          "id": "acco_ans_fc_bold",
+          "label": "Color On Bold",
+          "default": "#EA571D"
+        },
+        {
+          "type": "range",
+          "id": "acco_ans_fw_bold",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight On Bold",
+          "default": 700
+        }
+  ],
+  "blocks":[
+    {
+    "type": "custom-accordion",
+    "name": "Accordions",
+    "settings": [
+        {
+            "type": "richtext",
+            "id": "detail_title_1",
+            "label": "Accordion Title 1"
+        },
+        {
+            "type": "richtext",
+            "id": "accordion_text_1",
+            "label": "Accordion Description 1"
+        }
+
+    ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Faq's"
+
+    }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
