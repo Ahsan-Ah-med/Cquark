@@ -1,0 +1,11 @@
+// €33,90 before apply this code
+// 33.90 € after apply this code <sup>90$</sup>
+
+
+const prices = document.querySelectorAll('.productPrice p')
+
+prices.forEach((price) => {
+    const [beforeCommaText, afterCommaText] = price.innerText.split(',')
+    const [euro, number, secondNumber] = beforeCommaText.split('');
+    price.innerHTML = `${number}${secondNumber}.<sup>${afterCommaText} ${euro}</sup>`
+})
