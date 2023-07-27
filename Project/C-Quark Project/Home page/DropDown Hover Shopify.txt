@@ -1,5 +1,5 @@
 
-Add in div tag 
+Add in div with class header__heading-logo-wrapper tag 
 
 onmouseover="jackMousein(this)" onmouseleave="jackMouseout(this)"
 
