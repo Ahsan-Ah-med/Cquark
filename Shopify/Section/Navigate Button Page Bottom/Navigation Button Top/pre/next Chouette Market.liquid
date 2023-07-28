@@ -1,0 +1,424 @@
+<div class="{{ section.id }}">
+  <div class="customButtonNavigation">
+    <div class="custom_button_container">
+      {% if section.settings.show_back_btn %}
+        <div class="custom_back_button">
+          <a href="{{ section.settings.back_link }}">
+            {{ section.settings.back_text }}
+          </a>
+        </div>
+      {% endif %}
+      {% if section.settings.show_top_btn %}
+        <div class="custom_top_button">
+          {% if section.settings.top_image != blank %}
+            <a href="{{ section.settings.top_link }}">
+              <img src="{{ section.settings.top_image | img_url: 'master' }}">
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if section.settings.show_next_btn %}
+        <div class="custom_next_button">
+          <a href="{{ section.settings.next_link }}">
+            {{ section.settings.next_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .{{ section.id }} .custom_button_container{
+    max-width: {{section.settings.page_size}}px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .{{ section.id }} .customButtonNavigation{
+    width: 100%;
+    padding: {{ section.settings.top_padding }}px {{ section.settings.right_padding }}px {{ section.settings.bottom_padding }}px {{ section.settings.left_padding }}px;
+  }
+  .{{ section.id }} .custom_top_button a{
+    border-radius: {{ section.settings.btn_bor_raduis }}px;
+    border: {{ section.settings.btn_bor_thick }}px solid #064E3B;
+    background: #49946D;
+    display: inline-flex;
+    padding: {{ section.settings.btn_padding_tb_top }}px {{ section.settings.btn_padding_lr_top }}px;
+    align-items: center;
+    gap: 28.898px;
+    box-shadow: 2px 2px 0 0px #fff, 3px 1px 0 0px {{ section.settings.btn_bor_color }}, 1px 3px 0 0px {{ section.settings.btn_bor_color }}, 3px 3px 0 0px {{ section.settings.btn_bor_color }};
+  }
+  .{{ section.id }} .custom_back_button a{
+    color: {{ section.settings.btn_fc }};
+    font-family: Poppins;
+    font-size: {{ section.settings.btn_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.btn_fw }};
+    line-height: normal;
+    letter-spacing: -0.598px;
+    display: inline-flex;
+    padding: {{ section.settings.btn_padding_tb_BN }}px {{ section.settings.btn_padding_lr_BN }}px;
+    align-items: center;
+    gap: 24px;
+    border-radius: {{ section.settings.btn_bor_raduis }}px;
+    border: {{ section.settings.btn_bor_thick }}px solid {{ section.settings.btn_bor_color }};
+    background: {{ section.settings.btn_back_color }};
+    box-shadow: 2px 2px 0 0px #fff, 3px 1px 0 0px {{ section.settings.btn_bor_color }}, 1px 3px 0 0px {{ section.settings.btn_bor_color }}, 3px 3px 0 0px {{ section.settings.btn_bor_color }};
+  }
+  .{{ section.id }} .custom_next_button a{
+    color: {{ section.settings.btn_fc }};
+    font-family: Poppins;
+    font-size: {{ section.settings.btn_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.btn_fw }};
+    line-height: normal;
+    letter-spacing: -0.598px;
+    display: inline-flex;
+    padding: {{ section.settings.btn_padding_tb_BN }}px {{ section.settings.btn_padding_lr_BN }}px;
+    align-items: center;
+    gap: 24px;
+    border-radius: {{ section.settings.btn_bor_raduis }}px;
+    border: {{ section.settings.btn_bor_thick }}px solid {{ section.settings.btn_bor_color }};
+    background: {{ section.settings.btn_back_color }};
+    box-shadow: 2px 2px 0 0px #fff, 3px 1px 0 0px {{ section.settings.btn_bor_color }}, 1px 3px 0 0px {{ section.settings.btn_bor_color }}, 3px 3px 0 0px {{ section.settings.btn_bor_color }};
+  }
+  .{{ section.id }} .custom_next_button a:hover, .{{ section.id }} .custom_back_button a:hover, .{{ section.id }} .custom_top_button a:hover{
+    box-shadow: 1px 1px 0 0px #fff, 2px 0px 0 0px {{ section.settings.btn_bor_color }}, 1px 2px 0 0px {{ section.settings.btn_bor_color }}, 2px 2px 0 0px {{ section.settings.btn_bor_color }};
+    transform: translateX(2px);
+    transform: translate(2px, 2px);
+  }
+  {% if section.settings.show_back_btn == false and section.settings.show_next_btn  == false %}
+  .{{ section.id }} .custom_button_container{
+    justify-content: center;
+  }
+    {% endif %}
+
+  @media only screen and (max-width:767px){
+    .{{ section.id }} .customButtonNavigation{
+      padding: {{ section.settings.top_padding_mb }}px {{ section.settings.right_padding_mb }}px {{ section.settings.bottom_padding_mb }}px {{ section.settings.left_padding_mb }}px;
+    }
+    .{{ section.id }} .custom_back_button a, .{{ section.id }} .custom_next_button a{
+      font-size: {{ section.settings.btn_fz_mb }}px;
+      padding: {{ section.settings.btn_padding_tb_BN_mb }}px {{ section.settings.btn_padding_lr_BN_mb }}px;
+    }
+    .{{ section.id }} .custom_top_button a{
+      padding: {{ section.settings.btn_padding_tb_top_mb }}px {{ section.settings.btn_padding_lr_top_mb }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Button Navigation",
+  "settings": [
+    {
+          "type": "header",
+          "content": "Section Settings"
+        },
+        {
+          "type": "number",
+          "id": "page_size",
+          "label": "Section Container Size",
+          "default": 710
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "right_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Right Padding",
+          "default":20
+        },
+        {
+          "type": "range",
+          "id": "left_padding",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Left Padding",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "top_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Top Padding Mobile",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Bottom Padding Mobile",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "right_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Right Padding Mobile",
+          "default":20
+        },
+        {
+          "type": "range",
+          "id": "left_padding_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Left Padding Mobile",
+          "default": 20
+        },
+        {
+          "type": "checkbox",
+          "id": "show_back_btn",
+          "label": "Show Back Button",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_top_btn",
+          "label": "Show Top Button",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_next_btn",
+          "label": "Show Next Button",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "back_text",
+          "label": "Back Button Text",
+          "default": "Retour à l’accueil"
+        },
+        {
+          "type": "url",
+          "id": "back_link",
+          "label": "Back Button link"
+        },
+        {
+          "type": "image_picker",
+          "id": "top_image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "top_link",
+          "label": "Back Button link"
+        },
+        {
+          "type": "text",
+          "id": "next_text",
+          "label": "Back Button Text",
+          "default": "Trouver mon panier"
+        },
+        {
+          "type": "url",
+          "id": "next_link",
+          "label": "Back Button link"
+        },
+        {
+          "type": "header",
+          "content": "Button Settings"
+        },
+        {
+          "type": "range",
+          "id": "btn_fz",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "btn_fw",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": "px",
+          "label": "Font Weight",
+          "default": 500
+        },
+        {
+          "type": "color",
+          "id": "btn_fc",
+          "label": "Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "btn_fz_mb",
+          "min": 6,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size Mobile",
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "btn_back_color",
+          "label": "Background Color",
+          "default": "#49946D"
+        },
+        {
+          "type": "color",
+          "id": "btn_bor_color",
+          "label": "Border Color",
+          "default": "#064E3B"
+        },
+        {
+          "type": "range",
+          "id": "btn_bor_thick",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border Thickness",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "btn_bor_raduis",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Border Raduis",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_tb_BN",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Top-Bottom Back/Next",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_lr_BN",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Left-Right Back/Next",
+          "default": 42
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_tb_BN_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Top-Bottom Back/Next Mobile",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_lr_BN_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Left-Right Back/Next Mobile",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_tb_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Top-Bottom Top",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_lr_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Left-Right Top",
+          "default": 20
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_tb_top_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Top-Bottom Top Mobile",
+          "default": 5
+        },
+        {
+          "type": "range",
+          "id": "btn_padding_lr_top_mb",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Button Padding Left-Right Top Mobile",
+          "default": 10
+        }
+
+  ],
+  "presets": [
+    {
+      "name": "Button Navigation"
+
+    }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

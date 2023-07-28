@@ -1,0 +1,569 @@
+<div class="{{ section.id }}">
+  <div class="custom_fruits_icon_text">
+    <div class="custom_fruits_icon_text_container">
+      <div class="custom_fruits_icon_text_heading">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="custom_fruits_icon_text_container_blockLoop">
+        {% for block in section.blocks %}
+          <div class="custom_fruits_icon_text_container_block">
+            <div class="custom_fruits_image_border">
+              <div
+                class="custom_fruits_image_back"
+                style="background-color:{{ block.settings.image_back_color }}; overflow:{% if block.settings.image_overflow %}hidden{% else %}visible{% endif %}"
+              >
+                <div class="custom_fruits_image">
+                  {% if block.settings.icon_img != blank %}
+                    <img src="{{ block.settings.icon_img | img_url: 'master' }}">
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="custom_fruits_block_heading">
+              <h2>{{ block.settings.block_heading }}</h2>
+            </div>
+            <div class="custom_fruits_block_para">
+              <h3>{{ block.settings.block_para }}</h3>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom_fruits_icon_text{
+    padding: {{ section.settings.top_padding }}px {{ section.settings.right_padding }}px {{ section.settings.bottom_padding }}px {{ section.settings.left_padding }}px;
+    width: 100%;
+    background-color: {{section.settings.background-color}}
+  }
+  .custom_fruits_icon_text_container{
+    width: 100%;
+    max-width: {{section.settings.page_size}}px;
+    margin: 0 auto;
+  }
+  .custom_fruits_icon_text_heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: {{ section.settings.heading_bottom_spacing }}px;
+  }
+  .custom_fruits_icon_text_heading h2{
+    border-radius: 12px;
+    border: 1px solid #064E3B;
+    width: fit-content;
+    padding: 15px 30px;
+    position: relative;
+  }
+  .custom_fruits_icon_text_heading h2:after{
+    content: '';
+    border-radius: 12px;
+    border: 1px solid #064E3B;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: -10%;
+    left: -1.5%;
+  }
+  .custom_fruits_icon_text_heading h2 p strong{
+    color: {{ section.settings.heading_fc_bold }};
+    font-weight: {{ section.settings.heading_fw }};
+  }
+  .custom_fruits_icon_text_heading h2 p{
+    color: {{ section.settings.heading_fc }};
+    text-align: center;
+    font-family: Poppins;
+    font-size: {{ section.settings.heading_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.heading_fw }};
+    line-height: 52px;
+  }
+  .custom_fruits_icon_text_container_blockLoop{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .custom_fruits_icon_text_container_block{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .custom_fruits_image_border{
+    display: flex;
+    border: 1px solid #49946D;
+    border-radius: 50%;
+    box-shadow: 0px 0px 4px #49946D;
+    width: calc({{ section.settings.image_size }}px + 30px);;
+    height: calc({{ section.settings.image_size }}px + 30px);;
+    align-items: center;
+    justify-content: center;
+  }
+  .custom_fruits_image_back{
+    width: {{ section.settings.image_size }}px;
+    height: {{ section.settings.image_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px #49946d1c;
+  }
+  .custom_fruits_image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .custom_fruits_image img{
+    width: 100%;
+    height: 100%;
+  }
+  .custom_fruits_block_heading h2 p{
+    color: {{section.settings.block_heading_fc}};
+    text-align: center;
+    font-family: Poppins;
+    font-size: {{section.settings.block_heading_fz}}px;
+    font-style: normal;
+    font-weight: {{section.settings.block_heading_fw}};
+    line-height: 36.5px;
+  }
+  .custom_fruits_block_heading h2 p strong{
+    color: {{section.settings.block_heading_fc_bold}};
+    font-weight: {{section.settings.block_heading_fw}};
+    transition: 0.5s;
+  }
+  .custom_fruits_icon_text_container_block:hover .custom_fruits_block_heading h2 p strong{
+    background: {{ section.settings.block_heading_fc_back_hover }};
+    color: {{ section.settings.block_heading_fc_bold_hover }};
+    padding: 0 5px;
+  }
+  .custom_fruits_block_para h3 p{
+    color: {{ section.settings.block_para_fc }};
+    text-align: center;
+    font-family: Poppins;
+    font-size: {{ section.settings.block_para_fz }}px;
+    font-style: normal;
+    font-weight: {{ section.settings.block_para_fw }};
+    line-height: 26.4px;
+  }
+  .custom_fruits_block_heading{
+    margin: {{ section.settings.image_bottom_spacing }}px 0 {{ section.settings.block_head_bottom_spacing }}px 0;
+  }
+
+
+  @media only screen and (max-width:990px){
+    .custom_fruits_icon_text_container_blockLoop{
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .custom_fruits_icon_text_container_block{
+      width: 50%;
+      margin-bottom: 30px;
+    }
+    .custom_fruits_icon_text_container_block:last-child{
+      margin-bottom: 0;
+    }
+  }
+  @media only screen and (max-width:767px){
+    .custom_fruits_icon_text{
+      padding: {{ section.settings.top_padding_mb }}px {{ section.settings.right_padding_mb }}px {{ section.settings.bottom_padding_mb }}px {{ section.settings.left_padding_mb }}px;
+    }
+    .custom_fruits_icon_text_heading h2 p{
+      font-size: {{ section.settings.heading_fz_mb }}px;
+      line-height: 1;
+    }
+    .custom_fruits_icon_text_heading{
+      margin-bottom: {{ section.settings.heading_bottom_spacing_mb }}px;
+    }
+    .custom_fruits_icon_text_container_block{
+      width: 100%;
+    }
+    .custom_fruits_block_heading h2 p{
+      font-size: {{section.settings.block_heading_fz_mb}}px;
+    }
+    .custom_fruits_block_para h3 p{
+      font-size: {{ section.settings.block_para_fz_mb }}px;
+    }
+    .custom_fruits_block_heading{
+      margin: {{ section.settings.image_bottom_spacing_mb }}px 0 {{ section.settings.block_head_bottom_spacing_mb }}px 0;
+    }
+    .custom_fruits_image_border{
+      width: calc({{ section.settings.image_size_mb }}px + 30px);;
+      height: calc({{ section.settings.image_size_mb }}px + 30px);;
+    }
+    .custom_fruits_image_back{
+      width: {{ section.settings.image_size_mb }}px;
+      height: {{ section.settings.image_size_mb }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Fruits Icon With Text",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Settings"
+  },
+  {
+    "type": "number",
+    "id": "page_size",
+    "label": "Section Container Size",
+    "default": 1200
+  },
+  {
+    "type": "color",
+    "id": "background-color",
+    "label": "Background Color"
+  },
+  {
+    "type": "range",
+    "id": "top_padding",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Top Padding",
+    "default": 0
+  },
+  {
+    "type": "range",
+    "id": "bottom_padding",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Bottom Padding",
+    "default": 0
+  },
+  {
+    "type": "range",
+    "id": "right_padding",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Right Padding",
+    "default":20
+  },
+  {
+    "type": "range",
+    "id": "left_padding",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Left Padding",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "top_padding_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Top Padding Mobile",
+    "default": 0
+  },
+  {
+    "type": "range",
+    "id": "bottom_padding_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Bottom Padding Mobile",
+    "default": 0
+  },
+  {
+    "type": "range",
+    "id": "right_padding_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Right Padding Mobile",
+    "default":20
+  },
+  {
+    "type": "range",
+    "id": "left_padding_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Left Padding Mobile",
+    "default": 20
+  },
+  {
+    "type": "richtext",
+    "id": "heading",
+    "label": "Heading"
+  },
+  {
+    "type": "range",
+    "id": "heading_fz",
+    "min": 6,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Font size",
+    "default": 38
+  },
+  {
+    "type": "range",
+    "id": "heading_fw",
+    "min": 100,
+    "max": 900,
+    "step": 100,
+    "unit": "px",
+    "label": "Font Weight",
+    "default": 600
+  },
+  {
+    "type": "color",
+    "id": "heading_fc",
+    "label": "Color",
+    "default": "#1E2C21"
+  },
+  {
+    "type": "color",
+    "id": "heading_fc_bold",
+    "label": "Color On Bold",
+    "default": "#1E2C21"
+  },
+  {
+    "type": "range",
+    "id": "heading_fz_mb",
+    "min": 6,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Font size Mobile",
+    "default": 18
+  },
+  {
+    "type": "range",
+    "id": "heading_bottom_spacing",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Heading Bottom Spacing",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "heading_bottom_spacing_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Heading Bottom Spacing Mobile",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Block Settings"
+  },
+  {
+    "type": "number",
+    "id": "image_size",
+    "label": "Image Circle Size",
+    "info": "Size Should be in Pixel",
+    "default": 250
+  },
+  {
+    "type": "number",
+    "id": "image_size_mb",
+    "label": "Image Circle Size Mobile",
+    "info": "Size Should be in Pixel",
+    "default": 200
+  },
+  {
+    "type": "range",
+    "id": "block_heading_fz",
+    "min": 6,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Font size",
+    "default": 32
+  },
+  {
+    "type": "range",
+    "id": "block_heading_fw",
+    "min": 100,
+    "max": 900,
+    "step": 100,
+    "unit": "px",
+    "label": "Font Weight",
+    "default": 700
+  },
+  {
+    "type": "color",
+    "id": "block_heading_fc",
+    "label": "Color",
+    "default": "#222222"
+  },
+  {
+    "type": "color",
+    "id": "block_heading_fc_bold",
+    "label": "Color On Bold",
+    "default": "#222222"
+  },
+  {
+    "type": "color",
+    "id": "block_heading_fc_bold_hover",
+    "label": "On Hover Bold Color",
+    "default": "#ffffff"
+  },
+  {
+    "type": "color",
+    "id": "block_heading_fc_back_hover",
+    "label": "On Hover Background Color",
+    "default": "#49946d"
+  },
+  {
+    "type": "range",
+    "id": "block_heading_fz_mb",
+    "min": 6,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Font size Mobile",
+    "default": 24
+  },
+  {
+    "type": "range",
+    "id": "block_para_fz",
+    "min": 6,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Font size",
+    "default": 18
+  },
+  {
+    "type": "range",
+    "id": "block_para_fw",
+    "min": 100,
+    "max": 900,
+    "step": 100,
+    "unit": "px",
+    "label": "Font Weight",
+    "default": 400
+  },
+  {
+    "type": "color",
+    "id": "block_para_fc",
+    "label": "Color",
+    "default": "#03261D"
+  },
+  {
+    "type": "range",
+    "id": "block_para_fz_mb",
+    "min": 6,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Font size Mobile",
+    "default": 14
+  },
+  {
+    "type": "range",
+    "id": "image_bottom_spacing",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Image Bottom Spacing",
+    "default": 25
+  },
+  {
+    "type": "range",
+    "id": "image_bottom_spacing_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Image Bottom Spacing Mobile",
+    "default": 25
+  },
+  {
+    "type": "range",
+    "id": "block_head_bottom_spacing",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Heading Bottom Spacing",
+    "default": 10
+  },
+  {
+    "type": "range",
+    "id": "block_head_bottom_spacing_mb",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Heading Bottom Spacing Mobile",
+    "default": 10
+  }
+
+  ],
+  "blocks":[
+  {
+      "name": "Icon Text",
+    "type": "block",
+    "settings":[
+      {
+        "type": "image_picker",
+        "id": "icon_img",
+        "label": "Image"
+      },
+      {
+        "type": "richtext",
+        "id": "block_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "block_para",
+        "label": "Paragraph"
+      },
+      {
+        "type": "color",
+        "id": "image_back_color",
+        "label": "Image Background Color",
+        "default": "#FCE39E"
+      },
+      {
+        "type": "checkbox",
+        "id": "image_overflow",
+        "label": "Image Overflow Toggle",
+        "default": true
+      }
+
+
+    ]
+  }
+],
+  "presets": [
+  {
+    "name": "Fruits Icon With Text"
+
+  }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
