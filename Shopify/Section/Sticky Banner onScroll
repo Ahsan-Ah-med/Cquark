@@ -1,0 +1,23 @@
+
+// Ya code jab class add karay ga jab section scroll kay upper aja hai ga
+// JavaScript code
+window.addEventListener('scroll', function() {
+    var collectionBanner = document.getElementById('collection_banner');
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var collectionTop = collectionBanner.offsetTop;
+    
+    if (scrollTop >= collectionTop) {
+        collectionBanner.classList.add('your-class-name-to-add');
+    } else {
+        collectionBanner.classList.remove('your-class-name-to-add');
+    }
+});
+
+.banner_sticky {
+  position: fixed;
+  width: 100%;
+  background-color: #f7f0e9;
+  top: 75px;
+  max-width: 100% !important;
+  z-index: 2;
+}
