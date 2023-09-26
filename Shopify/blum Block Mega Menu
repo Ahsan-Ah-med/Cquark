@@ -1,0 +1,770 @@
+{%- liquid
+  capture header_logo
+    render 'header-logo'
+  endcapture
+
+  assign logo_position = ' logo-position--' | append: section.settings.logo_position
+  assign menu_style = ' menu--horizontal'
+
+  if section.settings.enable_drawer
+    assign menu_style = ' menu--drawer'
+    assign logo_position = ''
+  endif
+
+  if request.page_type == 'index'
+    if section.settings.enable_transparent
+      assign header_transparent = ' header--transparent'
+      assign sticky_header = ' is-header-transparent p-absolute top-0 left-0 w-100'
+      unless section.settings.enable_use_text_color
+        assign header_text_invert = ' header--text-invert'
+      endunless
+    endif
+  endif
+
+  capture icon_search
+    render 'icon-search'
+  endcapture
+
+  capture icon_chevron_down
+    render 'icon-chevron-down', class: ''
+  endcapture
+-%}
+
+{%- if shop.customer_accounts_enabled -%}
+  {%- capture user_account -%}
+    <div class="header__icon header__icon--account d-none">
+      {%- if customer -%}
+        <a aria-label="{{ 'customer.account_fallback' | t }}" href="{{ routes.account_url }}" class="btn btn-plain btn-large btn-icon header__account header__link" aria-label="{{ customer.first_name }}" title="{{ customer.first_name }}">
+          {%- render 'icon-user' -%}
+        </a>
+        {%- capture user_account_drawer_customer -%}
+          <span class="customer_info">{{ customer.name }}</span>
+          <a aria-label="{{ 'customer.account_fallback' | t }}" href="{{ routes.account_url }}" class="btn btn-link btn-small" title="{{ customer.name }}">
+            {{ 'customer.account.view_account' | t }}
+          </a>
+        {%- endcapture -%}
+      {%- else -%}
+        <a aria-label="{{ 'customer.log_in' | t }}" href="{{ routes.account_login_url }}" class="btn btn-plain btn-large btn-icon header__link">
+          {%- render 'icon-account' -%}
+        </a>
+        {%- capture user_account_drawer_guest -%}
+          {{ 'customer.your_account' | t }}
+          <a aria-label="{{ 'customer.log_in' | t }}" href="{{ routes.account_login_url }}" class="btn btn-link btn-small">
+            {{ 'customer.log_in' | t }}
+          </a>
+        {%- endcapture -%}
+      {%- endif -%}
+    </div>
+  {%- endcapture -%}
+
+  {%- capture user_account_drawer -%}
+    <div class="header__icon--account d-flex middle-xs mb-16">
+      {{ user_account_drawer_customer }}
+      {{ user_account_drawer_guest }}
+    </div>
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- capture header_search -%}
+<div class="header__icons header__icon--search d-block-lg {{ section.settings.logo_position | replace: 'top-center', 'ml-12 ml-md-0' | replace: section.settings.logo_position, '' }}">
+    <a href="{{ routes.search_url }}" data-js-file-id="component-predictive-search-js-file" data-js-file="{{ 'component-predictive-search.js' | asset_url }}" onclick="event.preventDefault();" aria-label="{{ 'accessibility.search' | t }}" class="btn btn-plain btn-large btn-icon btn-search js-search-open-trigger" role="button" aria-haspopup="dialog">
+      {{ icon_search }}
+    </a>
+  </div>
+{%- endcapture -%}
+{% liquid
+  if settings.cart_type == 'drawer'
+    render 'cart-drawer'
+  endif
+%}
+<sht-sticky-header class="{{ sticky_header }}" data-is-enabled="{{ section.settings.enable_sticky_header }}">
+  <sht-header class="js-header section-header p-relative" data-ui-component="Header Section">
+    <header
+      class="header ctnr{{ header_transparent }}{{ header_text_invert }}{{ menu_style }}{{ logo_position }} middle-xs p-relative zi-4"
+      style="--logo-width-desktop: {{ section.settings.logo_width | append: 'px' }};--logo-width-mobile: {{ section.settings.logo_width_mobile | append: 'px' }};"
+    >
+      {% unless section.settings.enable_drawer %}
+        {% if section.settings.logo_position == 'top-center' %}
+          {{ header_search }}
+        {% endif %}
+      {% endunless %}
+      <div class="header__logo d-flex middle-xs">
+        <sht-menu-drwer-opner
+          class="d-block header__icons {{ section.settings.enable_drawer | default: 'd-none-lg' | replace: true, '' }}"
+          hidden
+        >
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-label="{{ 'accessibility.toggle_navigation' | t }}"
+            aria-controls="menuDrawer"
+            class="btn btn-large btn-icon btn-plain mr-12 js-menu-drawer-trigger"
+          >
+            {%- render 'icon-hamburger-menu', class: 'icon-hamburger' -%}
+          </button>
+        </sht-menu-drwer-opner>
+        {{ header_logo }}
+      </div>
+      <!-- header Navigation -->
+      <div class="header__menu d-flex fd-column js-menu-drawer-content">
+        <nav class="header__nav js-header-navigation flex-1 w-100">
+          <ul class="main__menu m-zero ls-none">
+            {% if section.settings.collection_list
+              and section.settings.enable_header_collection
+              and section.settings.header_collection_title
+            %}
+              <li class="menu__item menu-collection menu__item-megamenu">
+                <sht-menu-header>
+                  <details data-level="1">
+                    <summary
+                      class="menu__link menu__link-lv1 h4 m-zero d-flex between-xs middle-xs"
+                      aria-expanded="false"
+                      aria-controls="menuHeaderCollection"
+                    >
+                      {{ section.settings.header_collection_title | escape }}
+                      {{ icon_chevron_down }}
+                    </summary>
+                    <div class="menu-dropdown mega-menu-wrapper w-100">
+                      <ul
+                        class="header-collection-list d-grid m-zero ls-none gap-1 pt-12 pb-16 p-zero"
+                        id="menuHeaderCollection"
+                        style="--gtc-equal: 2"
+                      >
+                        {% for collection in section.settings.collection_list %}
+                          <li class="header-collection__item o-hidden">
+                            {% render 'card-collection',
+                              collection: collection,
+                              media_ratio: '1/1',
+                              overlay_opacity: settings.overlay_opacity
+                            %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </details>
+                </sht-menu-header>
+              </li>
+            {% endif %}
+            {% for link in section.settings.menu.links %}
+              {% assign mega_menu = false %}
+              {% for block in section.blocks %}
+                {% liquid
+                  assign mega_menu_name = block.settings.menu_item_name | downcase | strip
+                  assign link_anchor_name = link.title | downcase | strip
+                  if mega_menu_name == link_anchor_name and section.settings.enable_drawer == false
+                    assign mega_menu = true
+                    assign promo_block = block
+                  endif
+                %}
+              {% endfor %}
+              <li
+                class="menu__item {{ mega_menu | default: '' | replace: 'true', 'menu__item-megamenu' }} p-relative"
+                style="--delay: {{ forloop.index | plus: 1 | times: 0.05 }}s;"
+              >
+                {%- if link.links.size > 0 -%}
+                  <sht-menu-header>
+                    <details data-level="1">
+                      <summary
+                        class="menu__link menu__link-lv1 h4 m-zero d-flex between-xs middle-xs"
+                        aria-expanded="false"
+                        aria-controls="menuHeaderMenuList-{{ forloop.index }}"
+                      >
+                        {{ link.title }}
+                        {{ icon_chevron_down }}
+                      </summary>
+                      <!-- Megamenu -->
+                      {%- if mega_menu -%}
+                        <div class="menu-dropdown mega-menu-wrapper w-100">
+                          <div class="d-flex mega-menu">
+                            <ul
+                              class="mega-menu__submenu m-zero w-100 ls-none d-flex fd-column"
+                              id="menuHeaderMenuList-{{ forloop.index }}"
+                            >
+                              {%- for childlink in link.links -%}
+                                <li class="menu__item p-relative">
+                                  {%- if childlink.links != blank -%}
+                                    <div class="menu__grandchild d-none">
+                                      <a href="{{ childlink.url }}" class="menu__link menu__link-lv2 d-block m-zero">
+                                        {{- childlink.title -}}
+                                      </a>
+                                      <ul
+                                        class="mega-menu__grandchild menu-dropdown__grandchild ls-none m-zero p-zero-md"
+                                        role="menu"
+                                      >
+                                        {%- capture grand_child_menu -%}
+                                          {%- for grandchildlink in childlink.links -%}
+                                            <li class="menu__item menu__item__grandchild {{ grandchildlink.current | default: '' | replace: 'true', 'menu__item--current' }}">
+                                              <a href="{{ grandchildlink.url }}" class="menu__link d-block " role="menuitem">{{ grandchildlink.title }}</a>
+                                            </li>
+                                          {%- endfor -%}
+                                        {%- endcapture -%}
+                                        {{ grand_child_menu }}
+                                      </ul>
+                                    </div>
+                                    <details data-level="2">
+                                      <summary class="menu__link between-xs d-flex middle-xs">
+                                        {{ childlink.title }}
+                                        {{ icon_chevron_down }}
+                                      </summary>
+                                      <ul
+                                        class="mega-menu__grandchild menu-dropdown__grandchild m-zero p-zero-md d-flex fd-column ls-none"
+                                        role="menu"
+                                      >
+                                        {{ grand_child_menu }}
+                                      </ul>
+                                    </details>
+                                  {%- else -%}
+                                    <a href="{{ childlink.url }}" class="menu__link menu__link-lv2 m-zero d-block">
+                                      {{- childlink.title -}}
+                                    </a>
+                                  {%- endif -%}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                            <div class="mega-menu-promotions w-100 d-none hide-empty">
+                              {%- if promo_block.settings.primary_image -%}
+                                <div
+                                  class="card__promotion p-relative sht-mask color-inverse"
+                                  style="--overlay: {{ promo_block.settings.image_overlay_opacity_first }}"
+                                >
+                                  <a
+                                    href="{{ promo_block.settings.primary_link | default: '#' }}"
+                                    class="p-absolute top-0 left-0 w-100 h-100 zi-2 hide-no-link"
+                                    aria-label="{{ promo_block.settings.primary_heading }}"
+                                  ></a>
+                                  <div class="card__media">
+                                    {%- liquid
+                                      assign primary_image_alt = promo_block.settings.primary_image.image.alt | default: promo_block.settings.primary_image.image | split: '/' | last
+                                      assign primary_image_media = promo_block.settings.primary_image | image_url: width: 400 | image_tag: alt: primary_image_alt, class: 'h-100 w-100 of-cover media js-image-lazy '
+                                      render 'image', image_item: primary_image_media, ratio: 'auto', image_wrap_classes: 'h-100 w-100', image_classes: 'w-100 h-100'
+                                    -%}
+                                  </div>
+                                  <div class="card__content wb-break-word p-absolute bottom-0 w-100 zi-2 {{ promo_block.settings.primary_heading | default: 'd-none' | replace: promo_block.settings.primary_heading, '' }}">
+                                    <span class="card__title h6">
+                                      {{- promo_block.settings.primary_heading -}}
+                                    </span>
+                                  </div>
+                                </div>
+                              {%- endif -%}
+                              {%- if promo_block.settings.secondary_image -%}
+                                <div
+                                  class="card__promotion p-relative sht-mask color-inverse"
+                                  style="--overlay: {{ promo_block.settings.image_overlay_opacity_second }}"
+                                >
+                                  <a
+                                    href="{{ promo_block.settings.secondary_link | default: '#' }}"
+                                    class="p-absolute top-0 left-0 w-100 h-100 zi-2 hide-no-link"
+                                    aria-label="{{ promo_block.settings.secondary_heading }}"
+                                  ></a>
+                                  <div class="card__media">
+                                    {%- liquid
+                                      assign secondary_image_media_alt = promo_block.settings.secondary_image.image.alt | default: promo_block.settings.secondary_image.image | split: '/' | last
+                                      assign secondary_image_media = promo_block.settings.secondary_image | image_url: width: 400 | image_tag: alt: secondary_image_media_alt, class: 'h-100 w-100 of-cover media js-image-lazy '
+                                      render 'image', image_item: secondary_image_media, ratio: '3/2', image_wrap_classes: 'h-100 w-100', image_classes: 'w-100 h-100'
+                                    -%}
+                                  </div>
+                                  <div class="card__content wb-break-word p-absolute bottom-0 w-100 zi-2 {{ promo_block.settings.secondary_heading | default: 'd-none' | replace: promo_block.settings.secondary_heading, '' }}">
+                                    <span class="card__title h6">
+                                      {{- promo_block.settings.secondary_heading -}}
+                                    </span>
+                                  </div>
+                                </div>
+                              {%- endif -%}
+                              {%- if promo_block.settings.secondary_image2 -%}
+                                <div
+                                  class="card__promotion p-relative sht-mask color-inverse"
+                                  style="--overlay: {{ promo_block.settings.image_overlay_opacity_second2 }}"
+                                >
+                                  <a
+                                    href="{{ promo_block.settings.secondary_link2 | default: '#' }}"
+                                    class="p-absolute top-0 left-0 w-100 h-100 zi-2 hide-no-link"
+                                    aria-label="{{ promo_block.settings.secondary_heading }}"
+                                  ></a>
+                                  <div class="card__media">
+                                    {%- liquid
+                                      assign secondary_image_media_alt2 = promo_block.settings.secondary_image.image.alt2 | default: promo_block.settings.secondary_image2.image2 | split: '/' | last
+                                      assign secondary_image_media2 = promo_block.settings.secondary_image2 | image_url: width: 400 | image_tag: alt: secondary_image_media_alt2, class: 'h-100 w-100 of-cover media js-image-lazy '
+                                      render 'image', image_item: secondary_image_media2, ratio: '3/2', image_wrap_classes: 'h-100 w-100', image_classes: 'w-100 h-100'
+                                    -%}
+                                  </div>
+                                  <div class="card__content wb-break-word p-absolute bottom-0 w-100 zi-2 {{ promo_block.settings.secondary_heading2 | default: 'd-none' | replace: promo_block.settings.secondary_heading2, '' }}">
+                                    <span class="card__title h6">
+                                      {{- promo_block.settings.secondary_heading2 -}}
+                                    </span>
+                                  </div>
+                                </div>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </div>
+                      {% else %}
+                        <ul
+                          class="menu-dropdown m-zero ls-none d-flex fd-column"
+                          id="menuHeaderMenuList-{{ forloop.index }}"
+                        >
+                          {%- for childlink in link.links -%}
+                            <li class="submenu__item p-relative" style="--delay: {{ forloop.index | times: 0.05 }}s;">
+                              {%- if childlink.links != blank -%}
+                                <details data-level="2">
+                                  <summary
+                                    class="menu__link menu__link-lv2 between-xs d-flex middle-xs"
+                                    aria-expanded="false"
+                                    aria-controls="menuHeaderSubMenuList-{{ forloop.index }}"
+                                  >
+                                    {{ childlink.title }}
+                                    {{ icon_chevron_down }}
+                                  </summary>
+                                  <ul class="menu-dropdown__grandchild m-zero p-zero-md ls-none d-flex fd-column">
+                                    {%- for grandchildlink in childlink.links -%}
+                                      <li
+                                        class="submenu__item menu__item__grandchild {{ grandchildlink.current | default: '' | replace: 'true', 'menu__item--current' }}"
+                                        style="--delay: {{ forloop.index | times: 0.05 }}s;"
+                                      >
+                                        <a
+                                          href="{{ grandchildlink.url }}"
+                                          class="menu__link d-block {{ grandchildlink.current | default: '' | replace: 'true', 'menu__link--active' }}"
+                                        >
+                                          {{- grandchildlink.title -}}
+                                        </a>
+                                      </li>
+                                    {%- endfor -%}
+                                  </ul>
+                                </details>
+                              {%- else -%}
+                                <a
+                                  href="{{ childlink.url }}"
+                                  class="menu__link menu__link-lv2 d-block {{ childlink.current | default: '' | replace: 'true', 'menu__link--active' }}"
+                                >
+                                  {{- childlink.title -}}
+                                </a>
+                              {%- endif -%}
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                        <!-- endif megamenu -->
+                      {%- endif -%}
+                    </details>
+                  </sht-menu-header>
+                {%- else -%}
+                  <a
+                    href="{{ link.url }}"
+                    class="menu__link menu__link-lv1 h4 m-zero d-block {{ link.current | default: '' | replace: 'true', 'menu__link--active' }}"
+                  >
+                    {{- link.title -}}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      </div>
+      <!-- end Header Navigation -->
+      <!-- Header Icons Right -->
+      <div class="header__icons header__icons--right d-flex end-xs middle-xs {{ section.settings.logo_position | replace: 'top-center', '' | replace: section.settings.logo_position, 'ml-12' }}">
+        {{ header_search }}
+        {{ user_account }}
+        <div class="header__icon header__icon--cart">
+          {%- liquid
+            capture header_cart_status
+              render 'header-cart-status', cart: cart
+            endcapture
+          -%}
+          <a
+            role="button"
+            href="{{ routes.cart_url }}"
+            onclick="event.preventDefault();try { window.shtCartDrawer.openDrawer(this); } catch(err) { window.location.assign('{{ routes.cart_url }}');}"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="shtCartDrawer"
+            class="js-header-cart-status-btn btn btn-plain btn-large btn-icon p-relative"
+            id="headerCartStatus"
+          >
+            {{- header_cart_status -}}
+          </a>
+        </div>
+      </div>
+      <!-- end Header Icons Right -->
+    </header>
+    {%- render 'predictive-search', class: 'header-search o-hidden d-block p-fixed top-0 w-100 left-0 h-100v zi-9' -%}
+  </sht-header>
+  {% render 'cart-notification-panel' %}
+</sht-sticky-header>
+<!-- Menu Drawer -->
+<sht-menu-drwer
+  aria-hidden="true"
+  id="menuDrawer"
+  class="js-menu-drawer drawer drawer--left no-focus-visible"
+  hidden
+  tabindex="-1"
+>
+  <div class="drawer__overlay js-menu-drawer-overlay js-drawer-overlay"></div>
+  <div class="drawer__wrapper oy-scroll js-menu-drawer-wrapper js-drawer-wrapper">
+    <div class="drawer__header d-flex middle-xs between-xs p-sticky top-0 zi-2">
+      <h2 class="drawer__heading h5 m-zero">{{ 'sections.header.drawer.title' | t }}</h2>
+      <button
+        class="drawer__btn-close js-menu-drawer-btn-close js-drawer-btn-close btn btn-plain btn-small btn-icon"
+        type="button"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        {%- render 'icon-close' -%}
+      </button>
+    </div>
+    <div class="drawer__body flex-1">
+      <div class="js-menu-drawer-body menu-drawer pb-32"></div>
+      <div class="header-extra-info hide-empty p-relative" style="--delay: .7s;">
+        {%- if section.settings.enable_contact %}
+          {% render 'contact',
+            classes: 'header__contact pt-16 mt-16 pb-32',
+            header_style: 'mb-16 mb-sm-24',
+            contact_class: 'r-gap-12'
+          %}
+        {%- endif -%}
+        <div class="hidden-empty pt-16 mt-12">
+          {{ user_account_drawer }}
+          {%- if section.settings.show_language_selector or section.settings.show_currency_selector -%}
+            <div class="header__localization d-flex gap-16 fw-wrap">
+              {%- if section.settings.show_language_selector and localization.available_languages.size > 1 -%}
+                <sht-localization
+                  class="d-flex fg-1"
+                  data-js-file-id="component-language-switcher-js-file"
+                  data-js-file="{{ 'component-language-switcher.js' | asset_url }}"
+                  data-section-id="shopify-section-language-switcher"
+                  data-url="{{ routes.root_url }}?section_id=language-switcher"
+                >
+                  <button
+                    type="button"
+                    class="js-language-switcher-btn btn-localization fs-body d-flex between-xs middle-xs w-100 ta-left field__text field--focus field--hover c-pointer"
+                  >
+                    {{ localization.language.endonym_name | capitalize }}
+                    {{ icon_chevron_down }}
+                  </button>
+                </sht-localization>
+              {% endif %}
+              {%- if section.settings.show_currency_selector and localization.available_countries.size > 1 -%}
+                <sht-localization
+                  class="d-flex fg-1"
+                  data-js-file-id="component-country-switcher-js-file"
+                  data-js-file="{{ 'component-country-switcher.js' | asset_url }}"
+                  data-section-id="shopify-section-country-switcher"
+                  data-url="{{ routes.root_url }}?section_id=country-switcher"
+                >
+                  <button
+                    type="button"
+                    class="js-country-switcher-btn btn-localization fs-body d-flex between-xs middle-xs w-100 ta-left field__text field--focus field--hover c-pointer"
+                  >
+                    {{ localization.country.name }} ({{ localization.country.currency.iso_code }}
+                    {{ localization.country.currency.symbol }})
+                    {{ icon_chevron_down }}
+                  </button>
+                </sht-localization>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.enable_social -%}
+            {% render 'socials', classes: 'header__social-list mt-24 gap-16' %}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</sht-menu-drwer>
+<!-- Menu Drawer -->
+
+<script type="application/ld+json">
+  {"@context": "http://schema.org","@type": "Organization","name": {{- shop.name | json -}},{%- if section.settings.logo -%}"logo": {{ section.settings.logo | image_url: width: section.settings.logo.width | prepend: "https:" | json }},{%- endif -%}"sameAs": [{{ settings.social_twitter_link | json }},{{ settings.social_facebook_link | json }},{{ settings.social_pinterest_link | json }},{{ settings.social_instagram_link | json }},{{ settings.social_tiktok_link | json }},{{ settings.social_tumblr_link | json }},{{ settings.social_snapchat_link | json }},{{ settings.social_youtube_link | json }},{{ settings.social_vimeo_link | json }}],"url": {{ request.origin | append: page.url | json }}}
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
+  <script type="application/ld+json">
+    {"@context": "http://schema.org","@type": "WebSite","name": {{ shop.name | json }},"potentialAction": {"@type": "SearchAction","target": {{ potential_action_target | json }},"query-input": "required name=search_term_string"},"url": {{ request.origin | append: page.url | json }}}
+  </script>
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "class": "js-section-header header-wrapper p-relative zi-4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.header_general.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_drawer",
+      "label": "t:sections.header.settings.enable_drawer.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "label": "t:sections.header.settings.enable_sticky.label",
+      "info": "t:sections.header.settings.enable_sticky.info",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.header_layout.content"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "middle-left",
+          "label": "t:sections.header.settings.menu_position.options__1.label"
+        },
+        {
+          "value": "top-left",
+          "label": "t:sections.header.settings.menu_position.options__3.label"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.header.settings.menu_position.options__4.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.header.settings.menu_position.options__2.label"
+        }
+      ],
+      "default": "middle-left",
+      "label": "t:sections.header.settings.menu_position.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.header_logo.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:general.settings.image.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "t:general.settings.logo_width_desktop.label",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "default": 140,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "t:general.settings.logo_width_mobile.label",
+      "min": 40,
+      "max": 140,
+      "step": 10,
+      "default": 70,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.headers.header_navigation.content"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:general.settings.menu.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.headers.header_collection.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_header_collection",
+      "label": "t:sections.header.settings.collection.label",
+      "info": "t:sections.header.settings.collection.info",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "header_collection_title",
+      "label": "t:general.settings.heading.label",
+      "default": "Shop"
+    },
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "t:general.settings.selected_collections.label",
+      "info": "t:sections.header.settings.select_collections.info",
+      "limit": 6
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.header_currency_selector.content",
+      "info": "t:general.settings.headers.header_currency_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "label": "t:general.settings.show_currency_selector.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.header_language_selector.content",
+      "info": "t:general.settings.headers.header_language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "label": "t:general.settings.show_language_selector.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:general.settings.headers.header_contact_information.content",
+      "info": "t:general.settings.headers.header_contact_information.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_contact",
+      "label": "t:general.settings.enable_contact.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_social",
+      "label": "t:general.settings.enable_social.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.headers.header_transparent.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_transparent",
+      "label": "t:sections.header.settings.header_transparent.enable_transparent.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_use_text_color",
+      "label": "t:sections.header.settings.header_transparent.enable_use_text_color.label",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_transparent",
+      "label": "t:general.settings.logo_image.label",
+      "info": "t:sections.header.settings.header_transparent.logo_transparent.info"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:sections.header.blocks.mega_menu.name",
+      "type": "mega_menu",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.header.blocks.mega_menu.settings.paragraph.content"
+        },
+        {
+          "type": "text",
+          "id": "menu_item_name",
+          "label": "t:sections.header.blocks.mega_menu.settings.menu_item_name.label",
+          "info": "t:sections.header.blocks.mega_menu.settings.menu_item_name.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.headers.promotional_content_1.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "primary_image",
+          "label": "t:general.settings.image.label",
+          "info": "t:sections.header.blocks.mega_menu.settings.image.info"
+        },
+        {
+          "type": "text",
+          "id": "primary_heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "url",
+          "id": "primary_link",
+          "label": "t:general.settings.link.label"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 1,
+          "default": 30,
+          "id": "image_overlay_opacity_first",
+          "label": "t:general.settings.overlay_opacity.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.header.blocks.mega_menu.settings.headers.promotional_content_2.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "secondary_image",
+          "label": "t:general.settings.image.label",
+          "info": "t:sections.header.blocks.mega_menu.settings.image.info"
+        },
+        {
+          "type": "text",
+          "id": "secondary_heading",
+          "label": "t:general.settings.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "url",
+          "id": "secondary_link",
+          "label": "t:general.settings.link.label"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 1,
+          "default": 30,
+          "id": "image_overlay_opacity_second",
+          "label": "t:general.settings.overlay_opacity.label"
+        },
+        {
+          "type": "header",
+          "content": "Promotional content 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "secondary_image2",
+          "label": "t:general.settings.image.label",
+          "info": "t:sections.header.blocks.mega_menu.settings.image.info"
+        },
+        {
+          "type": "text",
+          "id": "secondary_heading2",
+          "label": "t:general.settings.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "url",
+          "id": "secondary_link2",
+          "label": "t:general.settings.link.label"
+        },
+        {
+          "type": "range",
+          "unit": "%",
+          "max": 90,
+          "min": 0,
+          "step": 1,
+          "default": 30,
+          "id": "image_overlay_opacity_second2",
+          "label": "t:general.settings.overlay_opacity.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
