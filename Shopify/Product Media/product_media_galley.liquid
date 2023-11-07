@@ -1,8 +1,4 @@
 {% comment %}
-Store Name: Fruitia C Fume
-{% endcomment %}
-
-{% comment %}
   Renders a product media gallery. Should be used with 'media-gallery.js'
   Also see 'product-media-modal'
 
@@ -309,190 +305,158 @@ Store Name: Fruitia C Fume
       </button>
     </slider-component>
   {%- endif -%}
-  {% comment %}
-    <div class="custom_variants">
-      {% for variant in product.variants %}
-        <h2>{{ variant.title }}</h2>
-      {% endfor %}
-    </div>
-  {% endcomment %}
 
   <div class="custom_thumbnail_images">
     <div class="custom_main_image_slider">
-      {% for media in product.variants %}
-        <div class="custom_main_image">
-          <img loading="lazy" src="{{ media.featured_image | img_url: "master" }}">
-        </div>
+      {% for media in product.media %}
+        {% if media.media_type == 'image' %}
+          <div class="custom_main_image">
+            <img src="{{ media.preview_image | img_url: "master" }}">
+          </div>
+        {% elsif media.media_type == 'video' %}
+          <div class="custom_main_video">
+            <video controls="controls" style="max-width: 100%; height: auto;">
+              <source src="{{ media | video_tag }}" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
     <div class="custom_main_image_slider_vertical">
-      {% for media in product.variants %}
+      {% for media in product.media %}
         <div class="custom_main_image_thumbnail">
-          <img loading="lazy" src="{{ media.featured_image | img_url: "master" }}">
+          <img src="{{ media.preview_image | img_url: "master" }}">
         </div>
       {% endfor %}
     </div>
   </div>
 </media-gallery>
 
-<script>
-    $(document).ready(function() {
-    // Get the custom_variants and custom_main_image_slider elements
-    var $variants = $('.product-form__input label');
-    var $mainImageSlider = $('.custom_main_image_slider');
-
-    // Add click event listener to each variant title
-    $variants.on('click', function() {
-      // Get the data-index attribute of the clicked variant title
-      var variantIndex = $(this).data('index');
-
-      // Change the main image slider to the clicked variant
-      $mainImageSlider.slick('slickGoTo', variantIndex);
-    });
-
-    // Initialize Slick Slider for custom_main_image_slider
-    $mainImageSlider.slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: false,
-      autoplaySpeed: 1000,
-      dots: false,
-      arrows: false,
-      centerMode: false,
-      asNavFor: '.custom_main_image_slider_vertical',
-      infinite: false,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            arrows: false,
-            dots: true,
-            centerMode: false,
-            slidesToShow: 1,
-          }
-        }
-      ]
-    });
-
-    // Initialize Slick Slider for custom_main_image_slider_vertical
-    $('.custom_main_image_slider_vertical').slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: false,
-      autoplaySpeed: 1000,
-      dots: false,
-      arrows: false,
-      centerMode: false,
-      centerPadding: '0px',
-      swipe: true,
-      touchMove: true,
-      vertical: true,
-      useTransform: false,
-      cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-      asNavFor: '.custom_main_image_slider',
-      focusOnSelect: true,
-      infinite: true,
-       adaptiveHeight: true,
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            arrows: false,
-            centerMode: true,
-            centerPadding: '40px',
-            slidesToShow: 3,
-            vertical: false,
-          }
-        }
-      ]
-    });
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.custom_main_image_slider').slick({
+    slidesToShow: 1,
+   slidesToScroll: 1,
+   autoplay: false,
+   autoplaySpeed: 1000,
+    dots: false,
+    arrows: false,
+    centerMode: false,
+    prevArrow:'<img class="custom_slider_arrow_pre" src="https://cdn.shopify.com/s/files/1/0791/2046/6222/files/prev--01.webp?v=1689405963"/>',
+    nextArrow:'<img class="custom_slider_arrow_next" src="https://cdn.shopify.com/s/files/1/0791/2046/6222/files/next--01.webp?v=1689405963"/>',
+    asNavFor: '.custom_main_image_slider_vertical',
+    infinite: false,
+    responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        dots: true,
+        centerMode: false,
+        slidesToShow: 1,
+      }
+    }
+  ]
+  });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('.custom_main_image_slider_vertical').slick({
+    slidesToShow: 3,
+   slidesToScroll: 1,
+   autoplay: false,
+   autoplaySpeed: 1000,
+    dots: false,
+    arrows: true,
+    centerMode: false,
+    swipe: true,
+    touchMove: true,
+    vertical: true,
+    useTransform: true,
+    cssEase: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+    prevArrow:'<img class="custom_slider_arrow_pre" src="https://cdn.shopify.com/s/files/1/0791/2046/6222/files/prev--01.webp?v=1689405963"/>',
+    nextArrow:'<img class="custom_slider_arrow_next" src="https://cdn.shopify.com/s/files/1/0791/2046/6222/files/next--01.webp?v=1689405963"/>',
+    asNavFor: '.custom_main_image_slider',
+    focusOnSelect: true,
+    infinite: false,
+    responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3,
+        vertical: false,
+      }
+    }
+  ]
+  });
   });
 </script>
 
 <style>
-    .custom_thumbnail_images{
-      display: flex;
-      flex-direction: row-reverse;
+  .custom_main_video{
+    height: 100px;
+  }
+  .custom_thumbnail_images{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+  }
+  .custom_main_image_slider{
+    width: 80%;
+    padding-left: 30px;
+  }
+  .custom_main_image_slider_vertical{
+    width: 20%;
+  }
+  .custom_thumbnail_images img{
+    width: 100%;
+  }
+  .slick-arrow{
+    width: 100%;
+    background: #F5F7F8;
+    padding: 10px 45px;
+  }
+  slider-component{
+    display:none !important;
+  }
+  .custom_main_image_slider_vertical .slick-current{
+    border: 1px solid #000 !important;
+  }
+  .custom_main_image_thumbnail{
+    margin-bottom: 15px;
+  }
+
+  @media screen and (min-width: 990px){
+    .product--large:not(.product--no-media) .product__media-wrapper {
+      max-width: 50% !important;
+      width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2) !important;
     }
+    .product--large:not(.product--no-media) .product__info-wrapper {
+      max-width: 50% !important;
+      width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2) !important;
+    }
+  }
+
+  @media only screen and (max-width:767px){
     .custom_main_image_slider{
-      width: 60%;
-      padding-left: 30px;
+      width: 100%;
+    }
+    .custom_thumbnail_images {
+      flex-direction: column;
+    }
+    .custom_main_image_slider_vertical {
+      width: 100%;
+    }
+    .custom_main_image_slider_vertical .slick-track{
+      display: flex !important;
     }
     .custom_main_image_slider_vertical{
-      width: 40%;
+      display:none;
     }
-    .custom_thumbnail_images img{
-      width: 100%;
-    }
-    .slick-arrow{
-      width: 100%;
-      background: #F5F7F8;
-      padding: 10px 45px;
-    }
-    slider-component{
-      display:none !important;
-    }
-    .custom_main_image_slider_vertical .slick-current{
-      border: 1px solid #000 !important;
-    }
-    .custom_main_image_thumbnail{
-      margin-bottom: 20px;
-    }
-  .custom_thumbnail_images {
-      display: flex;
-      flex-direction: row;
   }
-    .custom_main_image_slider {
-      width: 69%;
-      padding-left: 0px;
-  }
-    .custom_main_image_slider_vertical {
-       padding-left: 20px;
-    }
-    @media screen and (min-width: 990px){
-      .product--large:not(.product--no-media) .product__media-wrapper {
-        max-width: 50% !important;
-        width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2) !important;
-      }
-      .product--large:not(.product--no-media) .product__info-wrapper {
-        max-width: 50% !important;
-        width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2) !important;
-      }
-    }
-
-    @media only screen and (max-width:767px){
-      .custom_main_image_slider{
-        width: 100%;
-      }
-      .custom_thumbnail_images {
-        flex-direction: column;
-      }
-      .custom_main_image_slider_vertical {
-        width: 100%;
-      }
-      .custom_main_image_slider_vertical .slick-track{
-        display: flex !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        max-width: 100% !important;
-      }
-      .custom_main_image_slider_vertical{
-        display:block;
-      }
-      .custom_main_image_slider_vertical {
-      padding: 20px 0px 0px 0px !important;
-      width: 100%;
-  }
-      .custom_main_image_thumbnail {
-      margin-bottom: 15px;
-      margin-right: 10px;
-      padding: 0px;
-  }
-       .custom_main_image_slider_vertical .image_4{
-         margin-right: 0px;
-       }
-    }
-    /* .custom_main_image_slider_vertical .image_1{
-      display: none
-    } */
 </style>
