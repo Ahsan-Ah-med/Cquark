@@ -1,0 +1,79 @@
+<div id="sid-{{ section.id }}">
+  <div class="custom_whatsapp">
+    <a href="{{ section.settings.whatsapp_number }}" target="_blank">
+      {% if section.settings.whatsapp_image != blank %}
+        <img src="{{ section.settings.whatsapp_image | img_url: 'master' }}">
+      {% endif %}
+    </a>
+  </div>
+</div>
+
+<style>
+  #sid-{{ section.id }} .custom_whatsapp{
+    position: fixed;
+    bottom: 30px;
+    {% if section.settings.position == "left" %}
+    left: 30px;
+    {% elsif section.settings.position == "right" %}
+    right: 30px;
+    {% endif %}
+    z-index: 99;
+  }
+  #sid-{{ section.id }} .custom_whatsapp a {
+    display: flex;
+    width: 50px;
+  }
+  #sid-{{ section.id }} img{
+    width: 100%;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Whatsapp",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "whatsapp_image",
+      "label": "Whatsapp Image"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_number",
+      "label": "Whatsapp Number",
+      "info": "Enter Only Whatsapp Number For This Formate: https://wa.me/number"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Icon Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left Bottom"
+        },
+        {
+          "value": "right",
+          "label": "Right Bottom"
+        }
+      ],
+      "default": "left"
+    }
+
+
+
+  ],
+  "presets": [
+  {
+    "name": "Whatsapp"
+
+  }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
