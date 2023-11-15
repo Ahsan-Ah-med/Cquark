@@ -1,16 +1,19 @@
-<!-- Section File Name: custom-banner.liquid -->
-<!-- Section Name: Hero Banner -->
-<!-- Presets Name: Hero Banner -->
+<!-- Section File Name: custom-service-slider.liquid -->
+<!-- Section Name: Service Slider -->
+<!-- Presets Name: Service Slider -->
 
 <div id="sid-{{ section.id }}">
-  <div class="custom_hero_banner">
-    <div class="custom_banner_container"></div>
+  <div class="custom_service">
+    <div class="custom_service_container">
+      
+    </div>
   </div>
 </div>
 
 <style>
-  #sid-{{section.id}} .custom_hero_banner{
+  #sid-{{section.id}} .custom_service{
     width: 100%;
+    position: relative;
     {% if section.settings.bg_image %}
     background-size: cover;
     background-position: center;
@@ -19,13 +22,15 @@
     {% else %}
     color: {{section.settings.bg_color}};
     {% endif %}
+    {% if section.settings.bg_height_check == true %}
     {% if section.settings.show_height == true %}
     height: {{section.settings.bgs_height}}px;
     {% else %}
     padding-bottom: calc(100% / ({{section.settings.bg_width}} / {{section.settings.bg_height}}));
     {% endif %}
+    {% endif %}
   }
-  #sid-{{section.id}} .custom_banner_container{
+  #sid-{{section.id}} .custom_service_container{
     max-width: {{section.settings.maxWidth}}px;
     width: 100%;
     margin: 0 auto;
@@ -36,18 +41,20 @@
   }
 
   @media only screen and (max-width: 767px){
-    #sid-{{section.id}} .custom_banner_container{
+    #sid-{{section.id}} .custom_service_container{
       padding: {{ section.settings.padding_top_mb }}px {{ section.settings.padding_right_mb }}px {{ section.settings.padding_bottom_mb }}px {{ section.settings.padding_left_mb }}px;
     }
-    #sid-{{section.id}} .custom_hero_banner{
+    #sid-{{section.id}} .custom_service{
       {% if section.settings.bg_image_mb != blank %}
       background-image: url('{{ section.settings.bg_image_mb | img_url: 'master' }}');
       {% endif %}
+      {% if section.settings.bg_height_check == true %}
       {% if section.settings.show_height_mb == true %}
       height: {{section.settings.bgs_height_mb}}px;
       {% else %}
       padding-bottom: calc(100% / ({{section.settings.bg_width_mb}} / {{section.settings.bg_height_mb}}));
       height: 0;
+      {% endif %}
       {% endif %}
     }
   }
@@ -55,7 +62,7 @@
 
 {% schema %}
 {
-  "name": "Hero Banner",
+  "name": "Service Slider",
   "settings": [
     {
       "type": "header",
@@ -176,6 +183,12 @@
       "content": "Background Image Size Settings"
     },
     {
+      "type": "checkbox",
+      "id": "bg_height_check",
+      "label": "Show Image With Dimension",
+      "default": true
+    },
+    {
       "type": "header",
       "content": "Image Dimension"
     },
@@ -246,7 +259,7 @@
   ],
   "presets": [
   {
-    "name": "Hero Banner"
+    "name": "Service Slider"
 
   }
   ]
