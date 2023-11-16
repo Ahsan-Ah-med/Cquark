@@ -20,7 +20,7 @@
     background-repeat: no-repeat;
     background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
     {% else %}
-    color: {{section.settings.bg_color}};
+    background-color: {{section.settings.bg_color}};
     {% endif %}
     {% if section.settings.bg_height_check == true %}
     {% if section.settings.show_height == true %}
