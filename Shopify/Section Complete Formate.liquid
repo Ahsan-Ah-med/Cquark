@@ -31,7 +31,9 @@
     {% endif %}
   }
   #sid-{{section.id}} .custom_service_container{
+    {% if section.settings.full_width == false %}
     max-width: {{section.settings.maxWidth}}px;
+    {% endif %}
     width: 100%;
     margin: 0 auto;
     padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
@@ -155,6 +157,12 @@
       "unit": "px",
       "label": "Padding Left",
       "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Page Full Width",
+      "default": false
     },
     {
       "type": "number",
