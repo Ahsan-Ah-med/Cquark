@@ -49,13 +49,13 @@
     #sid-{{section.id}} .custom_service{
       {% if section.settings.bg_image_mb != blank %}
       background-image: url('{{ section.settings.bg_image_mb | img_url: 'master' }}');
-      {% endif %}
       {% if section.settings.bg_height_check == true %}
       {% if section.settings.show_height_mb == true %}
       height: {{section.settings.bgs_height_mb}}px;
       {% else %}
       padding-bottom: calc(100% / ({{section.settings.bg_width_mb}} / {{section.settings.bg_height_mb}}));
       height: 0;
+      {% endif %}
       {% endif %}
       {% endif %}
     }
