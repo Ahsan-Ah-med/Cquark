@@ -20,7 +20,7 @@
     background-repeat: no-repeat;
     background-image: url('{{ section.settings.bg_image | img_url: 'master' }}');
     {% else %}
-    color: {{section.settings.bg_color}};
+    background-color: {{section.settings.bg_color}};
     {% endif %}
     {% if section.settings.bg_height_check == true %}
     {% if section.settings.show_height == true %}
@@ -31,7 +31,9 @@
     {% endif %}
   }
   #sid-{{section.id}} .custom_service_container{
+    {% if section.settings.full_width == false %}
     max-width: {{section.settings.maxWidth}}px;
+    {% endif %}
     width: 100%;
     margin: 0 auto;
     padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
@@ -47,13 +49,13 @@
     #sid-{{section.id}} .custom_service{
       {% if section.settings.bg_image_mb != blank %}
       background-image: url('{{ section.settings.bg_image_mb | img_url: 'master' }}');
-      {% endif %}
       {% if section.settings.bg_height_check == true %}
       {% if section.settings.show_height_mb == true %}
       height: {{section.settings.bgs_height_mb}}px;
       {% else %}
       padding-bottom: calc(100% / ({{section.settings.bg_width_mb}} / {{section.settings.bg_height_mb}}));
       height: 0;
+      {% endif %}
       {% endif %}
       {% endif %}
     }
@@ -155,6 +157,12 @@
       "unit": "px",
       "label": "Padding Left",
       "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Page Full Width",
+      "default": false
     },
     {
       "type": "number",
