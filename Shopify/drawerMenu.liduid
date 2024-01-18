@@ -1,0 +1,237 @@
+<style>
+  /* #trade_menu{
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    background: #000000ab;
+    width: 100%;
+    height: 100vh;
+    display: none;
+  } */
+  #trade_menu a{
+    color: #f6f5eb;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    width: 100%;
+  }
+  #trade_menu .trade_menu{
+    position: fixed;
+    z-index: 999;
+    right: -200%;
+    top: 0;
+    background: #141931;
+    color: #fff;
+    height: 100vh;
+    max-width: 320px;
+    width: 100%;
+    overflow-y: auto;
+    transition: 1s;
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.2);
+  }
+  #trade_menu ul.child_link {
+    position: fixed;
+    width: 390px;
+    height: 100vh;
+    top: 0;
+    right: -100%;
+    background: #141931;
+    margin: 0;
+    transition: 1s;
+  }
+  #trade_menu ul.grandChild_link {
+    position: fixed;
+    width: 390px;
+    height: 100vh;
+    top: 0;
+    right: -100%;
+    background: #141931;
+    margin: 0;
+    transition: 1s;
+  }
+  #trade_menu .closeIcon{
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 9999;
+    position: absolute;
+    right: 10px;
+  }
+  #trade_menu ul{
+    padding: 48px 32px;
+  }
+  #trade_menu ul li{
+    padding: 13px 0;
+    border-bottom: 1px solid #ffffff40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #trade_menu ul li:last-child{
+    border-bottom:none;
+  }
+  #trade_menu .showMenu{
+    right: 0 !important;
+  }
+  #trade_menu .backArrow{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+  }
+  #trade_menu .tradeArrow{
+    cursor: pointer
+  }
+  #trade_menu .closeIcon svg{
+    cursor: pointer
+  }
+  #trade_menu .backArrow svg{
+    cursor: pointer
+  }
+  .trade_menu.showMenu::-webkit-scrollbar {
+    display: none;
+  }
+  #trade_menu .drawer_menu:hover{
+     background-color: rgba(255, 255, 255, 0.075); 
+  }
+  #trade_menu .drawer_menu{
+    background-color: transparent;
+    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    width: 100%;
+    display: block;
+    padding: 10px 20px;
+    text-align: center;
+    margin-top: 18px;
+    border-radius: 5px;
+    text-transform: uppercase;
+  }
+  #trade_menu {
+    position: relative;
+  }
+  #trade_menu #close_overlay{
+    width: 100%;
+    height: 100vh;
+    background: #1419318f;
+    position: fixed;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+  }
+</style>
+<div id="trade_menu">
+  <div id="close_overlay"></div>
+  <div class="trade_menu">
+    <div class="closeIcon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="auto" width="15" viewBox="0 0 384 512">
+        <path fill="#dbcec3" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+      </svg>
+    </div>
+    <nav role="navigation">
+      <ul class="parent_link">
+        {%- for link in section.settings.trade_menu.links -%}
+          <li>
+            <a
+              href="{{ link.url }}"
+              {% if link.active %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{ link.title }}
+            </a>
+            {%- if link.links != blank -%}
+              <img class="tradeArrow" src="https://cdn.shopify.com/s/files/1/1618/6251/files/next_1.png?v=1704892112">
+            {% endif %}
+            {%- if link.links != blank -%}
+              <ul class="child_link">
+                <div class="backArrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                    <path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                  </svg>
+                </div>
+                {%- for child_link in link.links -%}
+                  <li>
+                    <a
+                      href="{{ child_link.url }}"
+                      {% if child_link.active %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      {{ child_link.title }}
+                    </a>
+                    {%- if child_link.links != blank -%}
+                      <img
+                        class="tradeArrow"
+                        src="https://cdn.shopify.com/s/files/1/1618/6251/files/next_1.png?v=1704892112"
+                      >
+                    {% endif %}
+                    {%- if child_link.links != blank -%}
+                      <ul class="grandChild_link">
+                        <div class="backArrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                            <path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                          </svg>
+                        </div>
+                        {%- for grandchild_link in child_link.links -%}
+                          <li>
+                            <a
+                              href="{{ grandchild_link.url }}"
+                              {% if grandchild_link.active %}
+                                aria-current="page"
+                              {% endif %}
+                            >
+                              {{ grandchild_link.title }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+        {% if section.settings.btn_text != blank %}
+            <a class="drawer_menu" href="{{ section.settings.btn_link }}">
+              {{ section.settings.btn_text }}
+            </a>
+          {% endif %}
+      </ul>
+    </nav>
+  </div>
+</div>
+<script>
+  window.addEventListener('load', () => {
+  const nextArrow = document.querySelectorAll("#trade_menu .tradeArrow");
+  const backArrow = document.querySelectorAll('.backArrow');
+
+  nextArrow.forEach((e) => {
+      e.addEventListener('click', () => {
+          nextArrow.forEach((s) => {
+              s.nextElementSibling.classList.remove('showMenu')
+          });
+          e.nextElementSibling.classList.add('showMenu')
+      });
+  });
+  backArrow.forEach((e) => {
+      e.addEventListener('click', () => {
+          if (e.parentNode.classList.contains('showMenu')) {
+              e.parentNode.classList.remove('showMenu')
+          };
+      });
+  });
+  document.querySelector('.closeIcon').addEventListener('click', (e) => {
+    document.querySelector('.trade_menu').classList.remove('showMenu');
+    close_overlay.style.display = 'none';
+  });
+  document.querySelector('.menu').addEventListener('click', ()=>{
+    document.querySelector('.trade_menu').classList.add('showMenu');
+    close_overlay.style.display = 'block';
+  });
+  close_overlay.addEventListener('click', ()=>{
+    document.querySelector('.trade_menu').classList.remove('showMenu');
+    close_overlay.style.display = 'none';
+  });
+  });
+</script>
