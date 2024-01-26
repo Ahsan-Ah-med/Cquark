@@ -1,3 +1,32 @@
+function customAddToCartJS(qty, variantID, lineItem = null) {
+  var xhr = new XMLHttpRequest();
+  var url = "/cart/add.js";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          var parsedState = JSON.parse(xhr.responseText);
+          // write code when product added to cart successfully
+          console.log(parsedState);
+
+      }
+  };
+  var data = JSON.stringify(
+      lineItem != null ?
+          {
+              "quantity": qty,
+              "id": variantID,
+              "properties": lineItem
+          } : {
+              "quantity": qty,
+              "id": variantID,
+          }
+  );
+  xhr.send(data);
+}
+
+
+
 function addItemToCart(variant_id, qty) {
 
     data = {
