@@ -1,0 +1,302 @@
+<!-- Section File Name: custom-gallery.liquid -->
+<!-- Section Name: Gallery -->
+<!-- Presets Name: Gallery -->
+<div id="sid-{{ section.id }}">
+  <div class="image_gallery">
+    <div class="image_gallery_container">
+    <div class="heading">{{ section.settings.heading }}</div>
+      <div class="gallery">
+        {% for block in section.blocks %}
+          {% if block.settings.gallery_image != blank %}
+          <div class="innerbox innerBox-{% increment 0 %}">
+            <a
+              download="download"
+              target="_blank"
+              href="{{ block.settings.gallery_image | image_url }}"
+              class="download"
+            >
+              <svg viewBox="0 0 24 24" fill="#000" width="24" height="24">
+                <path d="M4.9937,15.9971 L4.9937,18.4971 C4.9937,18.7721 5.2177,18.9971 5.4937,18.9971 L5.4937,18.9971 L17.4937,18.9971 C17.7697,18.9971 17.9937,18.7721 17.9937,18.4971 L17.9937,18.4971 L17.9937,15.9971 L18.9937,15.9971 L18.9937,18.4971 C18.9937,19.3241 18.3207,19.9971 17.4937,19.9971 L17.4937,19.9971 L5.4937,19.9971 C4.6657,19.9971 3.9937,19.3241 3.9937,18.4971 L3.9937,18.4971 L3.9937,15.9971 L4.9937,15.9971 Z M11.9933,4 L11.9933,14.078 L15.0293,11.043 L15.7363,11.75 L11.4933,15.992 L7.2513,11.75 L7.9583,11.043 L10.9933,14.078 L10.9933,4 L11.9933,4 Z" fill-rule="evenodd"></path>
+              </svg>
+            </a>
+            <div
+              class="grouped_elements innerBox"
+              data-fancybox="gallery"
+              href="{{ block.settings.gallery_image | image_url }}"
+            >
+              <img src="{{ block.settings.gallery_image | image_url }}" width="100" height="auto/">
+            </div>
+          </div>
+        {% endif %}
+             {% if block.settings.gallery_image2 != blank %}
+          <div class="innerbox innerBox-{% increment 0 %}">
+            <a
+              download="download"
+              target="_blank"
+              href="{{ block.settings.gallery_image2 | image_url }}"
+              class="download"
+            >
+              <svg viewBox="0 0 24 24" fill="#000" width="24" height="24">
+                <path d="M4.9937,15.9971 L4.9937,18.4971 C4.9937,18.7721 5.2177,18.9971 5.4937,18.9971 L5.4937,18.9971 L17.4937,18.9971 C17.7697,18.9971 17.9937,18.7721 17.9937,18.4971 L17.9937,18.4971 L17.9937,15.9971 L18.9937,15.9971 L18.9937,18.4971 C18.9937,19.3241 18.3207,19.9971 17.4937,19.9971 L17.4937,19.9971 L5.4937,19.9971 C4.6657,19.9971 3.9937,19.3241 3.9937,18.4971 L3.9937,18.4971 L3.9937,15.9971 L4.9937,15.9971 Z M11.9933,4 L11.9933,14.078 L15.0293,11.043 L15.7363,11.75 L11.4933,15.992 L7.2513,11.75 L7.9583,11.043 L10.9933,14.078 L10.9933,4 L11.9933,4 Z" fill-rule="evenodd"></path>
+              </svg>
+            </a>
+            <div
+              class="grouped_elements innerBox"
+              data-fancybox="gallery"
+              href="{{ block.settings.gallery_image2 | image_url }}"
+            >
+              <img src="{{ block.settings.gallery_image2 | image_url }}" width="100" height="auto/">
+            </div>
+          </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+  #sid-{{section.id}} .image_gallery{
+    width: 100%;
+    position: relative;
+    background-color: {{section.settings.bg_color}};
+  }
+  #sid-{{section.id}} .image_gallery_container{
+    {% if section.settings.full_width == false %}
+    max-width: {{section.settings.maxWidth}}px;
+    {% endif %}
+    width: 100%;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
+  }
+  #sid-{{section.id}} .innerBox img{
+    width: 100%;
+    height: 100%;
+  }
+  #sid-{{section.id}} a[download]{
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    z-index: 1;
+    transition: 0.5s;
+    opacity: 1;
+  }
+  #sid-{{section.id}} .gallery > div{
+    position: relative;
+  }
+  #sid-{{section.id}} .heading p {
+    color: #aac7ef;
+    text-align: center;
+    font-weight: 600;
+    font-size: clamp(34px,(70 / 1440)* 100vw, 70px);
+  }
+  #sid-{{section.id}} .heading {
+    padding: 10px 20px;
+  }
+  #sid-{{section.id}} .innerbox {
+    width: 100%;
+    display: flex;
+    margin-bottom: 5px;
+  }
+  #sid-{{section.id}} .gallery {
+    columns: 4;
+    gap: 5px;
+  }
+  #sid-{{section.id}} {
+
+  }
+  @media only screen and (max-width: 990px){
+    #sid-{{section.id}} .gallery {
+      columns: 3;
+    }
+  }
+
+  @media only screen and (max-width: 767px){
+    #sid-{{section.id}} .image_gallery_container{
+      padding: {{ section.settings.padding_top_mb }}px {{ section.settings.padding_right_mb }}px {{ section.settings.padding_bottom_mb }}px {{ section.settings.padding_left_mb }}px;
+    }
+    #sid-{{section.id}} .image_gallery{
+
+    }
+  }
+  @media only screen and (max-width: 600px){
+    #sid-{{section.id}} .gallery {
+      columns: 2;
+    }
+  }
+</style>
+
+<script>
+  $(document).ready(function() {
+    Fancybox.bind("#sid-{{ section.id }} [data-fancybox]", {
+      overlayShow	:	true,
+      transitionIn	:	'elastic',
+      transitionOut	:	'elastic',
+      speedIn		:	600,
+      speedOut		:	200,
+      Carousel: {
+        infinite: false,
+        transition: "slide",
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Page Full Width",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "maxWidth",
+      "label": "Page Width",
+      "default": 1600
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    }
+
+
+
+  ],
+  "blocks":[
+    {
+      "name": "Gallery Image",
+      "type": "image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "gallery_image",
+          "label": "Gallery Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "gallery_image2",
+          "label": "Gallery Image"
+        }
+
+      ]
+    }
+  ],
+  "presets": [
+  {
+    "name": "Gallery"
+
+  }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
