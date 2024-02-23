@@ -6,7 +6,7 @@
     <div class="video_container">
       <video autoplay muted loop id="myVideo">
         <source
-          src="https://cdn.shopify.com/videos/c/vp/e98327f0330849df8894e5b578cf307d/e98327f0330849df8894e5b578cf307d.HD-1080p-7.2Mbps-24908051.mp4"
+          src="{% if collection.metafields.custom.background_video != blank %}{{ collection.metafields.custom.background_video | file_url }}{% else %}{{ section.settings.video_link }}{% endif %}"
           type="video/mp4"
         >
       </video>
@@ -28,9 +28,7 @@
     padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
     display: flex;
   }
-  #sid-{{section.id}} video#myVideo {
-    width: 100%;
-  }
+
   #sid-{{section.id}} {
     position: fixed;
     top: 0;
@@ -38,6 +36,11 @@
     z-index: -1;
     width: 100%;
     margin: 0 auto;
+  }
+  @media only screen and (min-width: 1600px){
+    #sid-{{section.id}} video#myVideo {
+      width: 100%;
+    }
   }
   @media only screen and (max-width: 767px){
     #sid-{{section.id}} .video_container{
@@ -148,7 +151,14 @@
       "id": "maxWidth",
       "label": "Page Width",
       "default": 1600
+    },
+    {
+      "type": "textarea",
+      "id": "video_link",
+      "label": "VIdeo Link",
+      "default": "https://cdn.shopify.com/videos/c/vp/e98327f0330849df8894e5b578cf307d/e98327f0330849df8894e5b578cf307d.HD-1080p-7.2Mbps-24908051.mp4"
     }
+
   ],
   "presets": [
     {
