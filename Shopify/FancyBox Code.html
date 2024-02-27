@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+          />
+  </head>
+  <body>
+    <p>
+      <a href="javascript:;" data-fancybox-trigger="gallery" data-fancybox-index="0">
+        <img src="https://lipsum.app/id/1/400x300" />
+      </a>
+    </p>
+    <div>
+      <a
+         data-fancybox="gallery"
+         data-src="https://lipsum.app/id/1/1024x768"
+         >
+        <img src="https://lipsum.app/id/1/100x75" />
+      </a>
+
+      <a data-fancybox="gallery" data-src="https://lipsum.app/id/2/1024x768">
+        <img src="https://lipsum.app/id/2/100x75" />
+      </a>
+
+      <a data-fancybox="gallery" data-src="https://lipsum.app/id/3/1024x768">
+        <img src="https://lipsum.app/id/3/100x75" />
+      </a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+      Fancybox.bind('[data-fancybox="gallery"]', {
+        //
+      });    
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
