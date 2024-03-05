@@ -1,0 +1,111 @@
+{% comment %} Product Media Gallery with thumbnail and variant image {% endcomment %}
+
+<div class="custom_main_image_silder_container">
+          <a class="left arrow" data-scroll-left="">
+            <img width="24" src="https://cdn.shopify.com/s/files/1/0681/8149/2029/files/left-arrow.png?v=1708966608">
+          </a>
+          <a class="right arrow" data-scroll-right="">
+            <img width="24" src="https://cdn.shopify.com/s/files/1/0681/8149/2029/files/right-arrow.png?v=1708966608">
+          </a>
+        
+        <ul class="custom_main_image_silder">
+            
+          {% for media in product.media %}
+                <li data-src="{% if media.media_type == 'video' %}{{ media.alt }}{% else %}{{ media.src | img_url:'original' }}{% endif %}" data-fancybox="gallery" class="custom_main_image_item" data-variantID="{% for variant in product.variants %}{% if media.image.id == variant.featured_media.id %}{{ variant.featured_media.id }}{% endif %}{% endfor %}" class="mediaImage" data-mediaID="{{ media.image.id }}">
+              {% if media.media_type == 'image' %}
+                <img src="{{ media.preview_image | image_url }}"/>
+              {% elsif media.media_type == 'video' %}
+                <video controls="controls" style="max-width: 100%; height: auto;">
+                  <source src="{{ media | video_tag }}
+                </video>
+              </li>
+              {% endif %}
+          {% endfor %}
+        </ul>
+          </div>
+
+          <div class="media-carousel" data-carousel>
+          <a class="left arrow" data-scroll-left="">
+<img width="24" src="https://cdn.shopify.com/s/files/1/0681/8149/2029/files/left-arrow.png?v=1708966608">
+  </a>
+          <a class="right arrow" data-scroll-right="">
+<img width="24" src="https://cdn.shopify.com/s/files/1/0681/8149/2029/files/right-arrow.png?v=1708966608">
+  </a>
+        <ul class="product__media-list grid" data-scroller role="list">
+          {% for media in product.media %}
+              <li class="product__media-item grid__item interest" data-variantID="{% for variant in product.variants %}{% if media.image.id == variant.featured_media.id %}{{ variant.featured_media.id }}{% endif %}{% endfor %}" class="mediaImage" data-mediaID="{{ media.image.id }}">
+                <img src="{{ media.preview_image | image_url }}"/>
+              </li>
+          {% endfor %}
+          </ul>
+      </div>
+
+{% comment %} variant picker code {% endcomment %}
+
+      {% if color_label contains downcase_option %}
+                          	<label data-variantid="{% for variant in product.variants %}{% if variant.title == value %}{{ variant.featured_media.id }}{% endif %}{% endfor %}" for="{{ section.id }}-{{ option.position  }}-{{ forloop.index0 }}"
+                                   style="{% for variant in product.variants %}{% if variant.title == value %}background-image:url('{{ variant.image | img_url:'40x' }}');{% endif %}{% endfor %}{% comment %}{% if color_swatch_image != blank %}background-image: url({{ color_swatch_image | img_url: '64x64' }});{% else %}background-color: {{ value | replace: ' ', '' | downcase }}; {% endif %}{% endcomment %}">
+                            </label>
+                          {% else %}
+                            <label data-variantid="{{ option.featured_media.id }}" for="{{ section.id }}-{{ option.position  }}-{{ forloop.index0 }}"{% if value_size < 3 %}class="square"{% endif %}>
+                              {{ value }}
+                            </label>
+                          {% endif%}
+
+{% comment %} variant picker code end {% endcomment %}
+
+{% comment %} Start JQuery for slider {% endcomment %}
+
+<script>
+$(document).ready(function(){
+    // fancybox code
+    $(document).ready(function() {
+    Fancybox.bind(".custom_main_image_silder [data-fancybox]", {
+      overlayShow	:	true,
+      transitionIn	:	'elastic',
+      transitionOut	:	'elastic',
+      speedIn		:	600,
+      speedOut		:	200,
+      Carousel: {
+        infinite: false,
+        transition: "slide",
+      },
+    });
+    });
+
+    // slick slider code
+
+  $('.custom_main_image_silder').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: $('.custom_main_image_silder_container .left'),
+    nextArrow: $('.custom_main_image_silder_container .right'),
+    asNavFor: '.product__media-list.grid',
+    infinite: false,
+    adaptiveHeight: true,
+    lazyLoad: 'ondemand',
+  });
+  $('.product__media-list.grid').slick({
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: $('.media-carousel .left'),
+    nextArrow: $('.media-carousel .right'),
+    asNavFor: '.custom_main_image_silder',
+    focusOnSelect: true,
+    infinite: false,
+  });
+
+  // Check variant media ID when click a variants  
+
+  document.querySelectorAll('variant-radios fieldset label[data-variantid]').forEach((e) => {
+    e.addEventListener('click', () => {
+        const varAttrVal = e.dataset.variantid;
+        const imageLoop = document.querySelector(`.custom_main_image_silder li[data-variantid="${varAttrVal}"]`)
+        // console.log(imageLoop.dataset.slickIndex);
+        $('.custom_main_image_silder').slick('slickGoTo', imageLoop.dataset.slickIndex );
+    });
+  });
+  });
+</script>
