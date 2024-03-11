@@ -1,0 +1,66 @@
+{% assign ras_tabs = product.description | split: '<h6>' %}
+
+{{ ras_tabs[0] }}
+<div class="accordion_container">
+  {% for tab in ras_tabs %}
+    {% if forloop.index0 > 0 %}
+     {% assign tabD = tab | split: '</h6>' %}
+  <div {% if forloop.index0 == 1 %}id="defaultOpen"{% endif %} class="accordion_head">{{ tabD[0] }}<span class="plusminus">+</span></div>
+  <div class="accordion_body" style="display: none;">
+        <p>{{ tabD[1] }}</p>
+  </div>
+  {% endif %}  
+  {% endfor %}
+</div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  //toggle the component with class accordion_body
+  $(".accordion_head").click(function() {
+    if ($('.accordion_body').is(':visible')) {
+      $(".accordion_body").slideUp(300);
+      $(".plusminus").text('+');
+    }
+    if ($(this).next(".accordion_body").is(':visible')) {
+      $(this).next(".accordion_body").slideUp(300);
+      $(this).children(".plusminus").text('+');
+    } else {
+      $(this).next(".accordion_body").slideDown(300);
+      $(this).children(".plusminus").text('-');
+    }
+  });
+});
+</script>
+
+<style type="text/css">
+.accordion_container {
+  width: 100%;
+}
+
+.accordion_head {
+    background-color: #f3f3f3;
+    color: #220037;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 0 1px 0;
+    padding: 7px 11px;
+    font-weight: normal;
+}
+
+.accordion_body {
+background: #fffcfc;
+    padding: 5px;
+}
+
+.accordion_body p {
+  padding: 18px 5px;
+  margin: 0px;
+}
+
+.plusminus {
+  float: right;
+}
+
+</style>

@@ -1,0 +1,97 @@
+<div class="custom_accordion_tabs">
+{% assign ras_tabs = product.description | split: '<h2 data-mce-fragment="1">' %}
+{% comment %}
+{{ ras_tabs[0] }}
+{% endcomment %}
+  <div class="accordion_heading">
+      <p>Description</p>
+    </div>
+<div class="accordion_container">
+  <div class="tabs_header">
+  {% for tab in ras_tabs %}
+     {% assign tabD = tab | split: '</h2>' %}
+  <div {% if forloop.index0 == 1 %}id="defaultOpen"{% endif %} class="accordion_head">{{ tabD[0] }}</div>
+  {% endfor %}
+  {% comment %}If You have any kind of data like metafields/section settings{% endcomment %}
+  <div {% if forloop.index0 == 1 %}id="defaultOpen"{% endif %} class="accordion_head">{{ product.metafields.custom.accordion_resource_tab_title | metafield_tag }}</div>
+  {% comment %}End Extra Data{% endcomment %}
+  </div>
+  <div class="tabs_bodys">
+  {% for tab in ras_tabs %}
+     {% assign tabD = tab | split: '</h2>' %}
+  <div class="accordion_body" style="display: none;">
+       {{ tabD[1] }}
+  </div>
+  {% endfor %}
+  {% comment %}If You have any kind of data like metafields/section settings{% endcomment %}
+  <div class="accordion_body" style="display: none;">
+    {% comment %}    
+    {{ product.metafields.custom.accordion_resource_tab_description | metafield_tag }}
+    {% endcomment %}
+    <div class="resource_heading">
+      {{ block.settings.heading }}
+    </div>
+    <div class="resource_top_images">
+      {% if block.settings.topImage1 != blank %}
+      <a href="{{ block.settings.topImage_link1 }}" class="topbox" target="_blank"> 
+        <div class="topImage">
+          <img src="{{ block.settings.topImage1 | image_url }}"/>
+        </div>
+        <p class="topImage_title">{{ block.settings.topImage_title1 }}</p>
+      </a>
+      {% endif %}
+      {% if block.settings.topImage2 != blank %}
+      <a href="{{ block.settings.topImage_link2 }}" class="topbox" target="_blank"> 
+        <div class="topImage">
+          <img src="{{ block.settings.topImage2 | image_url }}"/>
+        </div>
+        <p class="topImage_title">{{ block.settings.topImage_title2 }}</p>
+      </a>
+      {% endif %}
+      {% if block.settings.topImage3 != blank %}
+      <a href="{{ block.settings.topImage_link3 }}" class="topbox" target="_blank"> 
+        <div class="topImage">
+          <img src="{{ block.settings.topImage3 | image_url }}"/>
+        </div>
+        <p class="topImage_title">{{ block.settings.topImage_title3 }}</p>
+      </a>
+      {% endif %}
+      {% if block.settings.topImage4 != blank %}
+      <a href="{{ block.settings.topImage_link4 }}" class="topbox" target="_blank"> 
+        <div class="topImage">
+          <img src="{{ block.settings.topImage4 | image_url }}"/>
+        </div>
+        <p class="topImage_title">{{ block.settings.topImage_title4 }}</p>
+      </a>
+      {% endif %}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details1 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details2 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details3 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details4 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details5 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details6 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details7 }}
+    </div>
+    <div class="resource_details">
+      {{ block.settings.details8 }}
+    </div>
+    
+  </div>
+  </div>
+  {% comment %}End Extra Data{% endcomment %}
+</div>
+</div>
