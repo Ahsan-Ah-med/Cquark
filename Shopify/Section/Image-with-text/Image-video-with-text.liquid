@@ -1,0 +1,824 @@
+<!-- Section File Name: image-with-text.liquid -->
+<!-- Section Name: Image With Text -->
+<!-- Presets Name: Image With Text -->
+
+<div id="sid-{{ section.id }}">
+  <div class="image_with_text">
+    <div class="image_with_text_container">
+      <div class="heading">{{ section.settings.heading }}</div>
+      <div class="column_container">
+        <div class="columnOne">
+          {% if section.settings.columnImage != blank %}
+          <div class="columnImage">
+            <img src="{{ section.settings.columnImage | image_url }}" width="100" height=""/>
+          </div>
+          {% else %}
+          {% if section.settings.videoLink contains 'vimeo' %}
+              <div style="padding:177.78% 0 0 0;position:relative;">
+                <iframe
+                  src="{{ section.settings.videoLink }}"
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                  frameborder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  id="v{{ forloop.index }}"
+                ></iframe>
+              </div>
+            {% elsif section.settings.videoLink contains 'youtube'
+              or section.settings.videoLink contains 'youtu.be'
+            %}
+              {% assign youtubeLink = section.settings.videoLink | split: '/' %}
+              {% assign youtubeLink = youtubeLink.last | split: '=' %}
+              <div>
+                <iframe
+                  width="882"
+                  height="496"
+                  src="https://www.youtube.com/embed/{{ youtubeLink.last }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                  id="v{{ forloop.index }}"
+                ></iframe>
+              </div>
+            {% elsif section.settings.media != blank %}
+              {{
+                section.settings.media
+                | video_tag: image_size: '1100x', autoplay: true, loop: true, controls: true, muted: false
+              }}
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="columnTwo">
+          <div class="right_col_heading">{{ section.settings.column_heading }}</div>
+          <div class="right_col_para">{{ section.settings.column_para }}</div>
+          {% if section.settings.btn_text != blank %}
+            <a href="{{ section.settings.btn_link }}" class="column_btn">{{ section.settings.btn_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #sid-{{section.id}} .image_with_text{
+    width: 100%;
+    position: relative;
+    background-color: {{section.settings.bg_color}};
+  }
+  #sid-{{section.id}} .image_with_text_container{
+    {% if section.settings.full_width == false %}
+    max-width: {{section.settings.maxWidth}}px;
+    {% endif %}
+    width: 100%;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
+  }
+  #sid-{{section.id}} .heading * {
+    font-size: clamp({{ section.settings.heading_fz_mb }}px, ({{ section.settings.heading_fz }} / 1440) * 100vw, {{ section.settings.heading_fz }}px);
+    font-weight: {{section.settings.heading_fw}};
+    color: {{section.settings.heading_fc}};
+    text-align: {{section.settings.align_heading}};
+    text-transform: {{section.settings.headind_transform}};
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    line-height: 1;
+  }
+  #sid-{{section.id}} img {
+    width: 100%;
+  }
+  #sid-{{section.id}} .columnImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  #sid-{{section.id}} .column_container {
+    display: flex;
+    align-items: {{section.settings.inline_align}};
+    justify-content: center;
+    flex-direction: {{section.settings.column_reverse}};
+    gap: {{ section.settings.gap }}px;
+  }
+  #sid-{{section.id}} .columnOne {
+    width: 100%;
+    max-width: {{ section.settings.image_Col_Size }}%;
+  }
+  #sid-{{section.id}} .columnTwo {
+    width: 100%;
+    max-width: calc(100% - {{ section.settings.image_Col_Size }}%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: space-around;
+  }
+  #sid-{{section.id}} video {
+    width: 100%;
+  }
+  #sid-{{section.id}} .right_col_heading * {
+    font-size: clamp({{ section.settings.column_heading_fz_mb }}px, ({{ section.settings.column_heading_fz }} / 1440) * 100vw, {{ section.settings.column_heading_fz }}px);
+    font-weight: {{section.settings.column_heading_fw}};
+    color: {{section.settings.column_heading_fc}};
+    text-align: {{section.settings.column_align_heading}};
+    text-transform: {{section.settings.column_headind_transform}};
+    margin-bottom: {{ section.settings.column_margin_bottom }}px;
+    line-height: 1;
+  }
+  #sid-{{section.id}} .right_col_para * {
+    font-size: clamp({{ section.settings.column_para_fz_mb }}px, ({{ section.settings.column_para_fz }} / 1440) * 100vw, {{ section.settings.column_para_fz }}px);
+    font-weight: {{section.settings.column_para_fw}};
+    color: {{section.settings.column_para_fc}};
+    text-align: {{section.settings.column_align_para}};
+    text-transform: {{section.settings.column_para_transform}};
+    margin-bottom: {{ section.settings.column_para_margin_bottom }}px;
+    line-height: 1;
+  }
+  #sid-{{section.id}} .column_btn {
+    font-size: clamp({{ section.settings.btn_fz_mb }}px, ({{ section.settings.btn_fz }} / 1440) * 100vw, {{ section.settings.btn_fz }}px);
+    font-weight: {{section.settings.btn_fw}};
+    color: {{section.settings.btn_fc}};
+    text-transform: {{section.settings.btn_transform}};
+    line-height: 1;
+    background: {{section.settings.btn_bgc}};
+    padding: 11px 20px;
+  }
+  #sid-{{section.id}} {
+
+  }
+
+  @media only screen and (max-width: 767px){
+    #sid-{{section.id}} .image_with_text_container{
+      padding: {{ section.settings.padding_top_mb }}px {{ section.settings.padding_right_mb }}px {{ section.settings.padding_bottom_mb }}px {{ section.settings.padding_left_mb }}px;
+    }
+    #sid-{{section.id}} .column_container {
+      flex-direction: {{section.settings.column_reverse_mb}};
+    }
+    #sid-{{section.id}} .columnOne, #sid-{{section.id}} .columnTwo {
+      max-width: 100%;
+    }
+    #sid-{{section.id}} .heading * {
+      margin-bottom: {{ section.settings.margin_bottom_mb }}px;
+    }
+    #sid-{{section.id}} .right_col_heading * {
+      margin-bottom: {{ section.settings.column_margin_bottom_mb }}px;
+    }
+    #sid-{{section.id}} .right_col_para * {
+      margin-bottom: {{ section.settings.column_para_margin_bottom_mb }}px;
+    }
+    #sid-{{section.id}} .column_container {
+      gap: {{ section.settings.gap_mb }}px;
+    }
+    #sid-{{section.id}} .image_with_text{
+      
+    }
+  }
+</style>
+
+{% schema %}
+
+
+
+{
+  "name": "Image With Text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Page Full Width",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "maxWidth",
+      "label": "Page Width",
+      "default": 1500
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f6f6f6"
+    },
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_fz",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_fw",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Font Weight",
+      "default": 700
+    },
+    {
+      "type": "color",
+      "id": "heading_fc",
+      "label": "Color",
+      "default": "#13394B"
+    },
+    {
+      "type": "range",
+      "id": "heading_fz_mb",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size Mobile",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "align_heading",
+      "label": "Heading Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "headind_transform",
+      "label": "Text Transform",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "LOWERCASE"
+        },
+        {
+          "value": "capitalize",
+          "label": "CAPITALIZE"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Container Settings"
+    },
+    {
+      "type": "select",
+      "id": "column_reverse",
+      "label": "Directions",
+      "options": [
+        {
+          "value": "row",
+          "label": "Left Image & Right Text"
+        },
+        {
+          "value": "row-reverse",
+          "label": "Left Text & Right Image"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "select",
+      "id": "column_reverse_mb",
+      "label": "Directions Mobile",
+      "options": [
+        {
+          "value": "column",
+          "label": "Left Image & Right Text"
+        },
+        {
+          "value": "column-reverse",
+          "label": "Left Text & Right Image"
+        }
+      ],
+      "default": "column"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap Between Column",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "gap_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Gap Between Column Mobile",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "image_Col_Size",
+      "min": 30,
+      "max": 75,
+      "step": 1,
+      "unit": "%",
+      "label": "Image Column Size",
+      "default": 50,
+      "info": "This setting only work on desktop screen devices"
+    },
+    {
+      "type": "select",
+      "id": "inline_align",
+      "label": "Inline Alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        },
+        {
+          "value": "baseline",
+          "label": "Baseline"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Left Column Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "columnImage",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "media",
+      "label": "A Shopify-hosted video"
+    },
+    {
+      "type": "video_url",
+      "id": "videoLink",
+      "label": "Video Links",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Right Column Settings"
+    },
+    {
+      "type": "header",
+      "content": "Heading Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "column_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "column_heading_fz",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "column_heading_fw",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Font Weight",
+      "default": 700
+    },
+    {
+      "type": "color",
+      "id": "column_heading_fc",
+      "label": "Color",
+      "default": "#13394B"
+    },
+    {
+      "type": "range",
+      "id": "column_heading_fz_mb",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size Mobile",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "column_align_heading",
+      "label": "Heading Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "column_headind_transform",
+      "label": "Text Transform",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "LOWERCASE"
+        },
+        {
+          "value": "capitalize",
+          "label": "CAPITALIZE"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "column_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "column_margin_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Paragraph Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "column_para",
+      "label": "Paragraph"
+    },
+    {
+      "type": "range",
+      "id": "column_para_fz",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "column_para_fw",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Font Weight",
+      "default": 700
+    },
+    {
+      "type": "color",
+      "id": "column_para_fc",
+      "label": "Color",
+      "default": "#13394B"
+    },
+    {
+      "type": "range",
+      "id": "column_para_fz_mb",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size Mobile",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "column_align_para",
+      "label": "Heading Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "column_para_transform",
+      "label": "Text Transform",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "LOWERCASE"
+        },
+        {
+          "value": "capitalize",
+          "label": "CAPITALIZE"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "column_para_margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "column_para_margin_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Show All"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "btn_fz",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "btn_fw",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Font Weight",
+      "default": 400
+    },
+    {
+      "type": "color",
+      "id": "btn_fc",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "btn_fz_mb",
+      "min": 6,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size Mobile",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "btn_bgc",
+      "label": "Color",
+      "default": "#007fa6"
+    },
+    {
+      "type": "select",
+      "id": "btn_transform",
+      "label": "Text Transform",
+      "options": [
+        {
+          "value": "uppercase",
+          "label": "UPPERCASE"
+        },
+        {
+          "value": "lowercase",
+          "label": "LOWERCASE"
+        },
+        {
+          "value": "capitalize",
+          "label": "CAPITALIZE"
+        }
+      ],
+      "default": "uppercase"
+    }
+
+
+
+
+
+  ],
+  "presets": [
+  {
+    "name": "Image With Text"
+
+  }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
