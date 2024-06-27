@@ -2,7 +2,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
-<div class="{{ section.id }} custom_faqs">
+<!-- Section File Name: faqs.liquid -->
+<!-- Section Name: Faq's -->
+<!-- Presets Name: Faq's -->
+
+
+<div class="custom_faqs" id="sid-{{ section.id }}">
   <div class="custom_faq_container">
     <div class="custom_faq_div">
       <div class="custom_faq_heading">
@@ -33,53 +38,57 @@
   </div>
 </div>
 <style>
-  .custom_faq_container{
+  #sid-{{ section.id }} * {
+    margin: 0;
+    padding: 0;
+  }
+  #sid-{{ section.id }} .custom_faq_container{
     background-color: {{section.settings.background-color}};
   }
-  .custom_faq_container{
+  #sid-{{ section.id }} .custom_faq_container{
     padding: {{section.settings.top_padding}}px {{section.settings.right_padding}}px {{section.settings.bottom_padding}}px {{section.settings.left_padding}}px;
   }
-  .custom_faq_div{
+  #sid-{{ section.id }} .custom_faq_div{
     max-width: {{ section.settings.page_size }}px;
     margin: 0 auto;
     width: 100%;
   }
-  .custom_faq_heading h2 p{
+  #sid-{{ section.id }} .custom_faq_heading h2 p{
     color: {{ section.settings.heading_fc }};
     text-align: center;
-    font-family: Poppins;
+    
     font-size: {{ section.settings.heading_fz }}px;
     font-style: normal;
     font-weight: {{ section.settings.heading_fw }};
     line-height: 44px;
     letter-spacing: -0.72px;
   }
-  .custom_faq_heading h2 p strong{
+  #sid-{{ section.id }} .custom_faq_heading h2 p strong{
     color: {{ section.settings.heading_fc_bold }};
     font-weight: {{ section.settings.heading_fw }};
   }
-  .custom_faq_heading h3 p{
+  #sid-{{ section.id }} .custom_faq_heading h3 p{
     color: {{ section.settings.para_fc }};
     text-align: center;
-    font-family: Poppins;
+    
     font-size: {{ section.settings.para_fz }}px;
     font-style: normal;
     font-weight: {{ section.settings.para_fw }};
     line-height: 30px;
   }
-  .custom_faq_heading{
+  #sid-{{ section.id }} .custom_faq_heading{
     margin-bottom: {{ section.settings.below_para_space }}px;
   }
-  .hide {
+  #sid-{{ section.id }} .hide {
       display: none;
   }
 
-  .read_less_btn {
+  #sid-{{ section.id }} .read_less_btn {
       display: none;
   }
 
-  .read_less_btn,
-  .read_more_btn {
+  #sid-{{ section.id }} .read_less_btn,
+  #sid-{{ section.id }} .read_more_btn {
       border: none;
       background: transparent;
       color: white;
@@ -93,21 +102,21 @@
 
   /* accordion style code */
 
-  .accordion {
+  #sid-{{ section.id }} .accordion {
       margin: 1rem 0;
       padding: 0;
       list-style: none;
       border-top: none;
   }
 
-  .accordion-item {
-    border-bottom: 1px solid #49946D;
+  #sid-{{ section.id }} .accordion-item {
+    border-bottom: {{section.settings.border_width}}px solid {{section.settings.border_color}};
     list-style: none !important;
-    padding: 24px 0;
+    padding: {{ section.settings.row_gap }}px 0;
   }
 
   /* Panel */
-  .accordion-panel {
+  #sid-{{ section.id }} .accordion-panel {
     margin: 0;
     padding-bottom: 0;
     padding-top: 10px;
@@ -116,103 +125,106 @@
     word-spacing: 2px;
   }
 
-  .accordion-panel p {
+  #sid-{{ section.id }} .accordion-panel p {
     color: {{ section.settings.acco_ans_fc }};
-    font-family: Poppins;
+    
     font-size: {{ section.settings.acco_ans_fz }}px;
     font-style: normal;
     font-weight: {{ section.settings.acco_ans_fw }};
     line-height: 28px;
   }
-  .accordion-panel p strong{
+  #sid-{{ section.id }} .accordion-panel p strong{
     color: {{ section.settings.acco_ans_fc_bold }};
     font-weight: {{ section.settings.acco_ans_fw_bold }};
   }
 
   /* Active */
-  .accordion-item.is-active .accordion-thumb::before {
+  #sid-{{ section.id }} .accordion-item.is-active .accordion-thumb::before {
       transform: rotate(45deg);
   }
 
 
 
   /* faqs */
-  .accordion-panel .page-content {
+  #sid-{{ section.id }} .accordion-panel .page-content {
       padding-top: 10px;
       padding-bottom: 10px;
   }
 
-  .accordion-panel .page-width {
+  #sid-{{ section.id }} .accordion-panel .page-width {
       padding: 0px 0px
   }
 
-  .accordion-thumb p{
+  #sid-{{ section.id }} .accordion-thumb p{
     color: {{section.settings.acco_title_fc}};
-    font-family: Poppins;
+    
     font-size: {{ section.settings.acco_title_fz }}px;
     font-style: normal;
     font-weight: {{section.settings.acco_title_fw}};
     line-height: 28px;
   }
-  .accordion-thumb p strong{
+  #sid-{{ section.id }} .accordion-thumb p strong{
     color: {{section.settings.acco_title_fc_bold}};
     font-weight: {{section.settings.acco_title_fw_bold}};
   }
 
-  .accordion-thumb {
+  #sid-{{ section.id }} .accordion-thumb {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
   }
 
-  .acc_minus {
+  #sid-{{ section.id }} .acc_minus {
     transition: transform 0.2s ease-out;
     display: none;
     width: 24px;
     height: auto;
   }
 
-  .acc_plus {
+  #sid-{{ section.id }} .acc_plus {
     transition: transform 0.2s ease-out;
     display: block;
     width: 24px;
     height: auto;
   }
 
-  .accordion .is-active .acc_minus {
+  #sid-{{ section.id }} .accordion .is-active .acc_minus {
       display: block;
   }
 
-  .accordion .is-active .acc_plus {
+  #sid-{{ section.id }} .accordion .is-active .acc_plus {
       display: none;
   }
-  .accordion-panel_des p {
+  #sid-{{ section.id }} .accordion-panel_des p {
       height: 50px;
       overflow: hidden;
   }
 
   @media only screen and (max-width:767px) {
-    .custom_faq_container{
+    #sid-{{ section.id }} .custom_faq_container{
       padding: {{section.settings.top_padding_mb}}px {{section.settings.right_padding_mb}}px {{section.settings.bottom_padding_mb}}px {{section.settings.left_padding_mb}}px;
     }
-    .custom_faq_heading h2 p{
+    #sid-{{ section.id }} .custom_faq_heading h2 p{
       font-size: {{ section.settings.heading_fz_mb }}px;
     }
-    .custom_faq_heading h3 p{
+    #sid-{{ section.id }} .custom_faq_heading h3 p{
       font-size: {{ section.settings.para_fz_mb }}px;
     }
-    .custom_faq_heading{
+    #sid-{{ section.id }} .custom_faq_heading{
       margin-bottom: {{ section.settings.below_para_space_mb }}px;
     }
-    .accordion-item {
+    #sid-{{ section.id }} .accordion-item {
       padding: 16px 0;
     }
-    .accordion-panel p {
+    #sid-{{ section.id }} .accordion-panel p {
       font-size: {{ section.settings.acco_ans_fz_mb }}px;
     }
-    .accordion-thumb p{
+    #sid-{{ section.id }} .accordion-thumb p{
       font-size: {{ section.settings.acco_title_fz_mb }}px;
+    }
+    #sid-{{ section.id }} .acc_plus, .acc_minus{
+      width: 18px;
     }
   }
 </style>
@@ -220,9 +232,9 @@
 <script>
     $(function() {
          // (Optional) Active an item if it has the class "is-active"
-         $(".accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
+         $("#sid-{{ section.id }} .accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
 
-  	$(".accordion > .accordion-item").click(function() {
+  	$("#sid-{{ section.id }} .accordion > .accordion-item").click(function() {
          // Cancel the siblings
          $(this).siblings(".accordion-item").removeClass("is-active").children(".accordion-panel").slideUp();
      // Toggle the item
@@ -453,6 +465,16 @@
             "label": "Minus Icon"
         },
         {
+          "type": "range",
+          "id": "row_gap",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Accordion Row Gap",
+          "default": 15
+        },
+        {
           "type": "header",
           "content": "Question Settings"
         },
@@ -563,6 +585,26 @@
           "unit": "px",
           "label": "Font Weight On Bold",
           "default": 700
+        },
+        {
+          "type": "header",
+          "content": "Answer Settings"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color",
+          "default": "#ab3337"
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "px",
+          "label": "Border Width",
+          "default": 1,
         }
   ],
   "blocks":[
@@ -586,7 +628,7 @@
   ],
   "presets": [
     {
-      "name": "Custom Faq's"
+      "name": "Faq's"
 
     }
     ]
