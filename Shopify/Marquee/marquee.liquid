@@ -1,0 +1,250 @@
+<!-- Section Name: imageOnlySlider.liquid -->
+
+<div id="sid-{{ section.id }}">
+  <div class="imageOnlysecintion">
+    <div class="imgOnlyMainContainer">
+      <div class="imagesContainer">
+        {% assign image_blocks = section.blocks | where: 'type', 'image' %}
+        {% for block in image_blocks %}
+          {% if block.settings.blockImg != blank %}
+            <div class="imgContainer">
+              <img src="{{ block.settings.blockImg | img_url: 'master'}}" loading="lazy">
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #sid-{{ section.id }} .imageOnlysecintion{
+     {% comment %}max-width: {{ section.settings.containerSize }}px;{% endcomment %}
+    margin: 0 auto;
+    width: 100%;
+   }
+  #sid-{{ section.id }} .imgOnlyMainContainer{
+     margin: 0 auto;
+   }
+  #sid-{{ section.id }} .imagesContainer{
+      overflow: hidden;
+   }
+  #sid-{{ section.id }} .imgContainer{
+     margin: 0;
+     padding: 0;
+     display: flex;
+   }
+  #sid-{{ section.id }} .imgContainer img{
+     margin: 0;
+     padding: 0;
+     width: 100%;
+   }
+  #sid-{{ section.id }} .js-marquee {
+    display: flex;
+  }
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#sid-{{ section.id }} .imagesContainer').marquee({
+      //speed in milliseconds of the marquee
+      duration: {{section.settings.duration}},
+      //gap in pixels between the tickers
+      gap: {{section.settings.gap}},
+      //time in milliseconds before the marquee will start animating
+      delayBeforeStart: 0,
+      //'left' or 'right'
+      direction: '{{section.settings.direction}}',
+      //true or false - should the marquee be duplicated to show an effect of continues flow
+      duplicated: {{section.settings.duplicated}},
+      pauseOnHover: {{section.settings.pauseonhover}},
+      startVisible: true,
+  });
+  });
+
+</script>
+{% schema %}
+{
+  "name": "Image Only Slider",
+  "settings": [
+      {
+        "type": "number",
+        "id": "containerSize",
+        "label": "Container Size",
+        "default": 1440,
+        "info": "Value should be in pixels(px)"
+      },
+      {
+        "type": "image_picker",
+        "id": "iconImg",
+        "label": "social Icon"
+      },
+      {
+        "type": "select",
+        "id": "pauseonhover",
+        "label": "Pause On Hover",
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "duration",
+        "label": "Duration - Miliseconds",
+        "options": [
+          {
+            "value": "5000",
+            "label": "5000"
+          },
+          {
+            "value": "6000",
+            "label": "6000"
+          },
+          {
+            "value": "7000",
+            "label": "7000"
+          },
+          {
+            "value": "8000",
+            "label": "8000"
+          },
+          {
+            "value": "9000",
+            "label": "9000"
+          },
+          {
+            "value": "10000",
+            "label": "10000"
+          },
+          {
+            "value": "11000",
+            "label": "11000"
+          },
+          {
+            "value": "12000",
+            "label": "12000"
+          },
+          {
+            "value": "13000",
+            "label": "13000"
+          },
+          {
+            "value": "14000",
+            "label": "14000"
+          },
+          {
+            "value": "15000",
+            "label": "15000"
+          },
+          {
+            "value": "16000",
+            "label": "16000"
+          },
+          {
+            "value": "17000",
+            "label": "17000"
+          },
+          {
+            "value": "18000",
+            "label": "18000"
+          },
+          {
+            "value": "19000",
+            "label": "19000"
+          },
+          {
+            "value": "20000",
+            "label": "20000"
+          }
+        ],
+        "default": "10000"
+      },
+      {
+        "type": "range",
+        "id": "gap",
+        "min": 0,
+        "max": 500,
+        "step": 50,
+        "unit": "px",
+        "label": "Gap",
+        "default": 0
+      },
+      {
+        "type": "select",
+        "id": "direction",
+        "label": "Direction",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "duplicated",
+        "label": "Duplicated",
+        "options": [
+          {
+            "value": "true",
+            "label": "True"
+          },
+          {
+            "value": "false",
+            "label": "False"
+          }
+        ]
+      }
+  ],
+  "blocks" : [
+  {
+    "type": "image",
+    "name": "Image slide",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "blockImg",
+        "label": "Image"
+      }
+    ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "Image Only Slider",
+       "settings":{
+
+       },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
