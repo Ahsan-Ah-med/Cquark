@@ -1,3 +1,20 @@
+add in script tag this code and selector in your html 
+
+document.querySelectorAll('ul.list-menu.list-menu--inline > li').forEach((ele) => {
+    ele.addEventListener('mouseover', () => {
+        if (ele.querySelector('details')) {
+            ele.querySelector('details').open = true;   
+        }
+    });
+    ele.addEventListener('mouseleave', () => {
+        if (ele.querySelector('details')) {
+            ele.querySelector('details').open = false;
+        }
+    });
+});
+
+
+
 
 Add in div with class header__heading-logo-wrapper tag 
 
