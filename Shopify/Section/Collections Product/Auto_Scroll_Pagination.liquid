@@ -1,0 +1,50 @@
+// https://websensepro.com/blog/how-to-add-infinite-scroll-on-shopify/
+
+// 1- Download Scrollify
+// Download Scrollify from here
+// https://minionmade.github.io/scrollify/
+
+// And upload Ajaxinate.min.js to your Asset folder of theme
+
+// 2- Include Scrollify in main-collection-product-grid.liquid
+// Then add the following code to main-collection-product-grid.liquid
+
+{{ 'ajaxinate.min.js' | asset_url | script_tag }}
+
+// Add the following code before {% schema %} in main-collection-product-grid.liquid
+<script>
+const endlessCollection = new Ajaxinate({
+container: '#product-grid',
+pagination: '.infinite_next',
+});
+</script>
+
+// 3- Changing code in pagination.liquid file
+// Search for {%- if paginate.next -%} and add class="infinite_next" in <li>. So the code should look like below:
+
+{%- if paginate.next -%}
+          <li class="infinite_next">
+            <a
+              href="{{ paginate.next.url }}{{ anchor }}"
+              class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
+              aria-label="{{ 'general.pagination.next' | t }}"
+            >
+              {%- render 'icon-caret' -%}
+            </a>
+          </li>
+        {%- endif -%}
+
+// 4- Adding code in facet.js File
+
+// Search for static renderProductCount(html) and below that add the following code:
+
+const endlessCollection = new Ajaxinate({
+container: '#product-grid',
+pagination: '.infinite_next',
+});
+
+// 5- Adding code in component-pagination.css File
+
+.pagination__list{
+  display: none;
+}
