@@ -1,3 +1,30 @@
+{% comment %} Shopify Image and Video Liquid objects Start {% endcomment %}
+
+{% for media in product.media %}
+  <div data-src="{% if media.media_type == 'video' %}{{ media.alt }}{% else %}{{ media.src | img_url:'original' }}{% endif %}" data-fancybox="gallery" class="custom_main_image_item" data-variantID="{% for variant in product.variants %}{% if media.image.id == variant.featured_media.id %}{{ variant.featured_media.id }}{% endif %}{% endfor %}" class="mediaImage" data-mediaID="{{ media.image.id }}">
+  {% if media.media_type == 'image' %}
+      <!-- <img src="{{ media.preview_image | image_url }}"/> -->
+    <img
+      data-master="{{media.preview_image | image_url}}"
+      class="lazyloadsr4 sr4-lz--fadeIn"
+      data-src="{{ media.preview_image | image_url: width: 1 }}"
+      data-widths="[100,200,400,600,700,800,900,1000,1200,1400,1600]"
+      data-optimumx="2"
+      data-sizes="auto"
+      src="{% render 'img_svg',w:media.preview_image.width,h:media.preview_image.height %}"
+      width="{{ media.preview_image.width }}"
+      height="{{ media.preview_image.height }}"
+      alt="{{ media.preview_image.alt }}">
+    {% elsif media.media_type == 'video' %}
+      
+        {{ media | video_tag: loop: true, autoplay: true, muted: true, controls: true }}
+      
+  {% endif %}
+  </div>
+{% endfor %}
+
+{% comment %} Shopify Image and Video Liquid objects End {% endcomment %}
+
 {% comment %} Product Media Gallery with thumbnail and variant image {% endcomment %}
 
 <div class="custom_main_image_silder_container">
