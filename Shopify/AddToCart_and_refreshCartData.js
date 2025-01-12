@@ -21,3 +21,20 @@ function addtocart() {
         });
     }, 400);
 }
+// get cart data and then work your conditions
+const addArr = [{% for product in section.settings.cart_addon %}{{product.selected_or_first_available_variant.id}},{% endfor %}];
+function checkItemsInCart() {
+  fetch('/cart.json')
+  .then((data) => data.json())
+  .then((res) => {
+    res.items
+      .filter((match) => addArr.includes(match.id))
+      .forEach((ele) => {
+        console.log(ele);
+          document.querySelector(`.addom_items[data-variantid="${ele.id}"]`).setAttribute('style','display: none !important');
+        })
+      
+  })
+  .catch((err) => console.error("Error fetching cart data:", err));
+}
+checkItemsInCart()
