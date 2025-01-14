@@ -1,3 +1,9 @@
+// focal theme cart refresh code
+ document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {bubbles: true})); // update cart focal theme
+
+// sence theme cart refresh code
+document.querySelector('form.cart__contents input.quantity__input').dispatchEvent(new Event("change", { bubbles: true }));
+    
 function addtocart() {
     var items = [{ quantity: 5, id: 49769591210276 }];
     $.ajax({
