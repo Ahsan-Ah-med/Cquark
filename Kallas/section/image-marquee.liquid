@@ -1,0 +1,174 @@
+<!-- sections/image-marquee.liquid -->
+{{ 'section.css' | asset_url | stylesheet_tag }}
+{{ 'general-block.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign sid = section.id
+  assign se_stts = section.settings
+  assign se_blocks = section.blocks
+  assign stt_layout = se_stts.layout
+  assign stt_image_bg = se_stts.image_bg
+  if stt_layout == 'sr4-se-container' 
+    assign html_layout = '<div class="sr4-container">__</div></div>' | split:'__'
+  elsif stt_layout == 'sr4-container-wrap'
+    assign html_layout = '<div class="sr4-container">__</div>' | split:'__'
+  else
+    assign html_layout = '__' | split:'__'
+  endif
+
+  assign sr4_se_class = 'sr4_nt_se_' |append:sid
+  if se_stts.use_cus_css and se_stts.code_cus_css != blank
+    render 'se_cus_css',code_cus_css:se_stts.code_cus_css,sr4_se_class:sr4_se_class
+  endif 
+-%}
+
+<div class="sr4-section-inner sr4_nt_se_{{sid}} sr4_se_{{sid}} {{stt_layout}}{% if stt_image_bg != blank and stt_layout != 'sr4-se-container' %} sr4-has-imgbg lazyloadsr4{% endif %}" {% if stt_image_bg != blank and stt_layout != 'sr4-se-container' %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="2"{% endif %} {% render 'section_style',se_stts:se_stts -%} >
+    {{-html_layout[0]-}}
+    {%- if stt_layout == 'sr4-se-container' -%}<div class="sr4-container-inner{% if stt_image_bg != blank %} sr4-has-imgbg lazyloadsr4{% endif %}" {% if stt_image_bg != blank %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="2"{% endif %}>{% endif -%}
+   <div class="section-template--16641168277549__logo_scrolling_gUAR9P-padding color-background-1 ">
+  <marquee-scroll class="scrolling--text scrolling--text--left" style="--duration: 27s">
+    <div class="scrolling--item scrolling--animated">
+      {% for block in se_blocks %}
+        <div class="scrolling--item__inner imm h6 ">
+          <span class="scrolling--text__content">
+            <a href="">
+            <img src="{{ block.settings.image | image_url }}" width="100%" height="auto">
+            </a>            
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+  </marquee-scroll>
+</div>
+    {{-html_layout[1]-}}
+</div>
+<script>
+  const initSectionVisiable = function (elemnts) {
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (typeof elemnts.callback === "function") {
+            elemnts.callback();
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    },
+    { rootMargin: `0px 0px ${elemnts.margin}px 0px` }
+  );
+  observer.observe(elemnts.element);
+};
+customElements.get("marquee-scroll")||customElements.define("marquee-scroll",class extends HTMLElement{constructor(){super(),this.scrolling=this.querySelector(".scrolling--item "),initSectionVisiable({element:this,callback:this.initScroll.bind(this),margin:300})}initScroll(){if(this.childElementCount===1){this.scrolling.classList.add("scrolling--animated");for(let i=0;i<10;i++)this.clone=this.scrolling.cloneNode(!0),this.clone.setAttribute("aria-hidden",!0),this.appendChild(this.clone);new IntersectionObserver(entries=>{entries.forEach(entry=>{entry.isIntersecting?this.classList.remove("scrolling--text--paused"):this.classList.add("scrolling--text--paused")})},{rootMargin:"0px 0px 50px 0px"}).observe(this)}}});
+//# sourceMappingURL=/cdn/shop/t/33/assets/scrolling-text.js.map?v=33398273684122753101717874785
+</script>
+
+<style>
+  .scrolling--text{display:flex;align-items:center;overflow:hidden;background-color:rgb(var(--color-background));color:rgb(var(--color-foreground));justify-content:center}.scrolling--item{flex:0 0 auto;display:flex;align-items:center}.scrolling--item.scrolling--animated{animation-iteration-count:infinite;animation-timing-function:linear;animation-duration:var(--duration);animation-play-state:running;width:max-content;will-change:transform,width}.scrolling--text--left .scrolling--animated{animation-name:scrolling-left}.scrolling--text--right .scrolling--animated{animation-name:scrolling-right}@media screen and (hover: hover){.scrolling--text:hover .scrolling--animated{animation-play-state:paused}}.scrolling--text--paused .scrolling--animated{animation-play-state:paused}.scrolling--item__inner{margin:0 1.5rem;display:flex;align-items:center;flex-direction:column;row-gap:1rem;--icon-height: 2.6rem}.scrolling--text__content{white-space:nowrap}@media screen and (min-width: 750px){.scrolling--text .scrolling--item__inner{margin:0 2.5rem}}@keyframes scrolling-left{0%{transform:translateZ(0)}to{transform:translate3d(-100%,0,0)}}@keyframes scrolling-right{0%{transform:translate3d(-100%,0,0)}to{transform:translateZ(0)}}@supports (-webkit-text-stroke: .1rem rgba(var(--color-foreground))){.scrolling--item__text--stroke{color:#0000;-webkit-text-stroke-color:rgba(var(--color-foreground));-webkit-text-stroke-width:.1rem}}
+  .scrolling--text .scrolling--item__inner.imm {
+    max-width: 150px;
+  }
+/*# sourceMappingURL=/cdn/shop/t/33/assets/scrolling-text.css.map?v=179729362568241600731717874785 */
+</style>
+{% schema %}
+{
+  "name": "Image Marquee",
+  "tag": "section",
+  "class": "sr4-section sr4-section-all sr4-custom-liquid",
+  "settings": [
+      {
+        "type": "header",
+        "content": "2. Design options"
+      },
+      {
+        "type": "select","id": "layout","default": "sr4-container-wrap","label": "Layout",
+        "options": [
+            { "value": "sr4-se-container", "label": "Container"},
+            { "value": "sr4-container-wrap", "label": "Wrapped container"},
+            { "value": "sr4-container-fluid", "label": "Full width"}
+        ]
+      },
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background"
+      },
+      {
+        "type": "color_background",
+        "id": "cl_bg_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_bg",
+        "label": "Background image"
+      },
+      {
+          "type": "text",
+          "id": "mg",
+          "label": "Margin",
+          "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+          "default": ",,50px,",
+          "placeholder": ",,50px,"
+      },
+      {
+          "type": "text",
+          "id": "pd",
+          "label": "Padding",
+          "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+          "placeholder": "50px,,50px,"
+      },
+      {
+        "type": "header",
+        "content": "+ Design Tablet Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_tb",
+        "label": "Margin",
+        "placeholder": ",,50px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_tb",
+        "label": "Padding",
+        "placeholder": ",,50px,"
+      }, 
+      {
+        "type": "header",
+        "content": "+ Design mobile options"
+      },
+      {
+          "type": "text",
+          "id": "mg_mb",
+          "label": "Margin",
+          "default": ",,30px,",
+          "placeholder": ",,50px,"
+      },
+      {
+          "type": "text",
+          "id": "pd_mb",
+          "label": "Padding",
+          "placeholder": ",,50px,"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "Image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Marquee"
+    }
+  ]
+}
+{% endschema %}
