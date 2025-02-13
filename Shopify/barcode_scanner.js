@@ -75,6 +75,9 @@
     height: 100%;
     position: relative;
 }
+canvas.drawingBuffer {
+    display: none;
+}
   
   @keyframes scan {
     0%   {top:0}
