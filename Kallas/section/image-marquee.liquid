@@ -1,4 +1,4 @@
-<!-- sections/image-marquee.liquid -->
+<!-- sections/marquee-slider.liquid -->
 {{ 'section.css' | asset_url | stylesheet_tag }}
 {{ 'general-block.css' | asset_url | stylesheet_tag }}
 
@@ -31,8 +31,11 @@
       {% for block in se_blocks %}
         <div class="scrolling--item__inner imm h6 ">
           <span class="scrolling--text__content">
-            <a href="">
-            <img src="{{ block.settings.image | image_url }}" width="100%" height="auto">
+            <a href="{{ block.settings.link }}">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url }}" width="100%" height="auto">
+              {% endif %}
+              <div class="text_container">{{ block.settings.text }}</div>
             </a>            
           </span>
         </div>
@@ -43,7 +46,7 @@
     {{-html_layout[1]-}}
 </div>
 <script>
-  const initSectionVisiable = function (elemnts) {
+  const initSectionVisiable{{section.id | split: '_' | last }} = function (elemnts) {
   const observer = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -59,7 +62,7 @@
   );
   observer.observe(elemnts.element);
 };
-customElements.get("marquee-scroll")||customElements.define("marquee-scroll",class extends HTMLElement{constructor(){super(),this.scrolling=this.querySelector(".scrolling--item "),initSectionVisiable({element:this,callback:this.initScroll.bind(this),margin:300})}initScroll(){if(this.childElementCount===1){this.scrolling.classList.add("scrolling--animated");for(let i=0;i<10;i++)this.clone=this.scrolling.cloneNode(!0),this.clone.setAttribute("aria-hidden",!0),this.appendChild(this.clone);new IntersectionObserver(entries=>{entries.forEach(entry=>{entry.isIntersecting?this.classList.remove("scrolling--text--paused"):this.classList.add("scrolling--text--paused")})},{rootMargin:"0px 0px 50px 0px"}).observe(this)}}});
+customElements.get("marquee-scroll")||customElements.define("marquee-scroll",class extends HTMLElement{constructor(){super(),this.scrolling=this.querySelector(".scrolling--item "),initSectionVisiable{{section.id | split: '_' | last }}({element:this,callback:this.initScroll.bind(this),margin:300})}initScroll(){if(this.childElementCount===1){this.scrolling.classList.add("scrolling--animated");for(let i=0;i<10;i++)this.clone=this.scrolling.cloneNode(!0),this.clone.setAttribute("aria-hidden",!0),this.appendChild(this.clone);new IntersectionObserver(entries=>{entries.forEach(entry=>{entry.isIntersecting?this.classList.remove("scrolling--text--paused"):this.classList.add("scrolling--text--paused")})},{rootMargin:"0px 0px 50px 0px"}).observe(this)}}});
 //# sourceMappingURL=/cdn/shop/t/33/assets/scrolling-text.js.map?v=33398273684122753101717874785
 </script>
 
@@ -72,7 +75,7 @@ customElements.get("marquee-scroll")||customElements.define("marquee-scroll",cla
 </style>
 {% schema %}
 {
-  "name": "Image Marquee",
+  "name": "Marquee Slider",
   "tag": "section",
   "class": "sr4-section sr4-section-all sr4-custom-liquid",
   "settings": [
@@ -150,6 +153,23 @@ customElements.get("marquee-scroll")||customElements.define("marquee-scroll",cla
           "id": "pd_mb",
           "label": "Padding",
           "placeholder": ",,50px,"
+      },
+      {
+        "type": "header",
+        "content": "5. Custom css"
+      },
+      {
+        "id": "use_cus_css",
+        "type": "checkbox",
+        "label": "Use custom css",
+        "default":false,
+        "info": "If you want custom style for this section."
+      },
+      { 
+        "id": "code_cus_css",
+        "type": "textarea",
+        "label": "Code custom css",
+        "info": "Use selector .SectionID to style css"
       }
   ],
   "blocks": [
@@ -161,13 +181,23 @@ customElements.get("marquee-scroll")||customElements.define("marquee-scroll",cla
           "type": "image_picker",
           "id": "image",
           "label": "Logo"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Image Marquee"
+      "name": "Marquee Slider"
     }
   ]
 }
