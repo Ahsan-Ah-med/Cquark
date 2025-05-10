@@ -1,0 +1,69 @@
+<input type="checkbox" class="show_toggle" id="show_toggle" name="show_toggle"/>
+<div class="meta_full_des">{{product.metafields.custom.full_description | metafield_tag}}
+</div>
+
+<style>
+.meta_full_des h2 {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    color: #191513;
+}
+.meta_full_des p {
+    font-family: Figtree;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    color: #191513;
+}
+.meta_full_des ul {
+    list-style: disc;
+}
+.meta_full_des {
+    overflow: hidden;
+    max-height: 270px;
+    transition: max-height 0.5s ease-in-out;
+    position: relative;
+}
+input#show_toggle:checked + .meta_full_des {
+    max-height: 100vh;
+}
+input#show_toggle:after {
+        content: '';
+    background: url(https://cdn.shopify.com/s/files/1/0746/2125/5923/files/Frame_460.png?v=1746906321), #ffF;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 20px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.meta_full_des:after {
+    content: '';
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 74.52%);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 144px;
+}
+input#show_toggle {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 9;
+    cursor: pointer;
+}
+.sr4-code__liquid {
+    position: relative;
+}
+input#show_toggle:checked:after {
+    background: url(https://cdn.shopify.com/s/files/1/0746/2125/5923/files/Property_1_Variant2.png?v=1746906514), #fff;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
