@@ -26,7 +26,7 @@
     {{-html_layout[0]-}}
     {%- if stt_layout == 'sr4-se-container' -%}<div class="sr4-container-inner{% if stt_image_bg != blank %} sr4-has-imgbg lazyloadsr4{% endif %}" {% if stt_image_bg != blank %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="2"{% endif %}>{% endif -%}
    <div class="section-template--16641168277549__logo_scrolling_gUAR9P-padding color-background-1 ">
-  <marquee-scroll class="scrolling--text scrolling--text--left" style="--duration: 27s">
+  <marquee-scroll-{{section.id | split: '_' | last | replace: '-', '_' | downcase }} class="scrolling--text scrolling--text--left" style="--duration: 27s">
     <div class="scrolling--item scrolling--animated">
       {% for block in se_blocks %}
         <div class="scrolling--item__inner imm h6 ">
@@ -35,7 +35,7 @@
               {% if block.settings.image != blank %}
                 <img src="{{ block.settings.image | image_url }}" width="100%" height="auto">
               {% endif %}
-              <div class="text_container">{{ block.settings.text }}</div>
+              <div class="text_container" style="--text-color:{{ block.settings.color }}">{{ block.settings.text }}</div>
             </a>            
           </span>
         </div>
@@ -46,7 +46,7 @@
     {{-html_layout[1]-}}
 </div>
 <script>
-  const initSectionVisiable{{section.id | split: '_' | last }} = function (elemnts) {
+  const initSectionVisiable{{section.id | split: '_' | last | replace: '-', '_' }} = function (elemnts) {
   const observer = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -62,7 +62,7 @@
   );
   observer.observe(elemnts.element);
 };
-customElements.get("marquee-scroll")||customElements.define("marquee-scroll",class extends HTMLElement{constructor(){super(),this.scrolling=this.querySelector(".scrolling--item "),initSectionVisiable{{section.id | split: '_' | last }}({element:this,callback:this.initScroll.bind(this),margin:300})}initScroll(){if(this.childElementCount===1){this.scrolling.classList.add("scrolling--animated");for(let i=0;i<10;i++)this.clone=this.scrolling.cloneNode(!0),this.clone.setAttribute("aria-hidden",!0),this.appendChild(this.clone);new IntersectionObserver(entries=>{entries.forEach(entry=>{entry.isIntersecting?this.classList.remove("scrolling--text--paused"):this.classList.add("scrolling--text--paused")})},{rootMargin:"0px 0px 50px 0px"}).observe(this)}}});
+customElements.get("marquee-scroll-{{section.id | split: '_' | last | replace: '-', '_' | downcase }}")||customElements.define("marquee-scroll-{{section.id | split: '_' | last | replace: '-', '_' | downcase }}",class extends HTMLElement{constructor(){super(),this.scrolling=this.querySelector(".scrolling--item "),initSectionVisiable{{section.id | split: '_' | last | replace: '-', '_' }}({element:this,callback:this.initScroll.bind(this),margin:300})}initScroll(){if(this.childElementCount===1){this.scrolling.classList.add("scrolling--animated");for(let i=0;i<10;i++)this.clone=this.scrolling.cloneNode(!0),this.clone.setAttribute("aria-hidden",!0),this.appendChild(this.clone);new IntersectionObserver(entries=>{entries.forEach(entry=>{entry.isIntersecting?this.classList.remove("scrolling--text--paused"):this.classList.add("scrolling--text--paused")})},{rootMargin:"0px 0px 50px 0px"}).observe(this)}}});
 //# sourceMappingURL=/cdn/shop/t/33/assets/scrolling-text.js.map?v=33398273684122753101717874785
 </script>
 
@@ -70,6 +70,9 @@ customElements.get("marquee-scroll")||customElements.define("marquee-scroll",cla
   .scrolling--text{display:flex;align-items:center;overflow:hidden;background-color:rgb(var(--color-background));color:rgb(var(--color-foreground));justify-content:center}.scrolling--item{flex:0 0 auto;display:flex;align-items:center}.scrolling--item.scrolling--animated{animation-iteration-count:infinite;animation-timing-function:linear;animation-duration:var(--duration);animation-play-state:running;width:max-content;will-change:transform,width}.scrolling--text--left .scrolling--animated{animation-name:scrolling-left}.scrolling--text--right .scrolling--animated{animation-name:scrolling-right}@media screen and (hover: hover){.scrolling--text:hover .scrolling--animated{animation-play-state:paused}}.scrolling--text--paused .scrolling--animated{animation-play-state:paused}.scrolling--item__inner{margin:0 1.5rem;display:flex;align-items:center;flex-direction:column;row-gap:1rem;--icon-height: 2.6rem}.scrolling--text__content{white-space:nowrap}@media screen and (min-width: 750px){.scrolling--text .scrolling--item__inner{margin:0 2.5rem}}@keyframes scrolling-left{0%{transform:translateZ(0)}to{transform:translate3d(-100%,0,0)}}@keyframes scrolling-right{0%{transform:translate3d(-100%,0,0)}to{transform:translateZ(0)}}@supports (-webkit-text-stroke: .1rem rgba(var(--color-foreground))){.scrolling--item__text--stroke{color:#0000;-webkit-text-stroke-color:rgba(var(--color-foreground));-webkit-text-stroke-width:.1rem}}
   .scrolling--text .scrolling--item__inner.imm {
     max-width: 150px;
+  }
+  .text_container {
+    color: var(--text-color);
   }
 /*# sourceMappingURL=/cdn/shop/t/33/assets/scrolling-text.css.map?v=179729362568241600731717874785 */
 </style>
@@ -191,6 +194,12 @@ customElements.get("marquee-scroll")||customElements.define("marquee-scroll",cla
           "type": "url",
           "id": "link",
           "label": "Link"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text Color",
+          "default": "#1b3281"
         }
       ]
     }
