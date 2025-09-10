@@ -31,3 +31,52 @@
     </div>
   {% endif %}
 {% endfor %}
+
+<script>
+function addtocart(variantsId) {
+  var items = [{ id: variantsId, quantity: 1 }];
+  $.ajax({
+    type: "POST",
+    url: "/cart/add.js",
+    data: JSON.stringify({ items }),
+    contentType: "application/json",
+    dataType: "json",
+    success: function () {
+      // Fetch cart and open drawer immediately
+      jQuery.getJSON("/cart.js", function (cart) {
+        let cartData = cart.items;
+
+        document.dispatchEvent(
+          new CustomEvent("cart:build", { bubbles: true })
+        );
+        document.dispatchEvent(
+          new CustomEvent("cart:refresh", {
+            bubbles: true,
+            detail: cartData,
+          })
+        );
+        if ($("#sr4-mini_cart").length) {
+          sr4ThemeSP.Drawer.opend($("#sr4-mini_cart"));
+        } else if ($("#t4s-mini_cart").length) {
+          T4SThemeSP.Drawer.opend($("#t4s-mini_cart"));
+        } else {
+          console.log("drawer opening fail");
+        }
+      });
+
+      variants_id = [];
+    },
+    error: function (xhr) {
+      const response = JSON.parse(xhr.responseText);
+      console.log(response.message);
+      variants_id = [];
+      sr4ThemeSP.Notices(response.message);
+    },
+  });
+}
+document.querySelectorAll('[data-size-atc]').forEach((atc)=>{
+    atc.addEventListener('click',()=>{
+        addtocart(atc.dataset.variantId)
+    })
+})
+</script>
