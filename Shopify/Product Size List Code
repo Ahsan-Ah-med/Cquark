@@ -1,0 +1,33 @@
+{% assign keys = "Size,size" | split: ',' %}
+{% for key in keys %}
+  {% if product.options contains key %}
+    <div class="sr4-product-sizes">
+      <span class="sr4-truncate sr4-d-block sr4-w-100">
+        {% for size in size_variants %}
+          {% assign matched_variant = nil %}
+          {% for variant in product.variants %}
+            {% if variant.options contains size %}
+              {% assign matched_variant = variant %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign display_value = size %}
+
+          <span
+            {% if matched_variant %}
+              data-variant-id="{{ matched_variant.id }}"
+              data-variant-title="{{ matched_variant.title }}"
+              data-size-atc
+            {% endif %}
+            {% unless size_variants_avai contains size %}
+              class="sr4-product-sizes--sold-out"
+            {% endunless %}
+          >
+            {{ display_value }}
+          </span>
+        {% endfor %}
+      </span>
+    </div>
+  {% endif %}
+{% endfor %}
