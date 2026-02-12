@@ -41,7 +41,7 @@
         </div>
       {% endfor %}
     </div>
-  </marquee-scroll>
+  </marquee-scroll-{{section.id | split: '_' | last | replace: '-', '_' | downcase }}>
 </div>
     {{-html_layout[1]-}}
 </div>
